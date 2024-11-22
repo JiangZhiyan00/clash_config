@@ -22,194 +22,196 @@ dns:
     - tls://dns.google:853
 proxies:
   - {
-    name: LB_HK_reality_vision,
-    server: xui.jzy88.top,
-    type: vless,
-    port: 54322,
-    uuid: 12d409cd-110b-4aad-b270-b62d2e34b054,
-    network: tcp,
-    servername: jobs-content.staffbase.com,
-    flow: xtls-rprx-vision,
-    udp: true,
-    tls: true,
-    reality-opts:
-      {
-        public-key: UK7qxWWGfRQcQfwaGpHnqmmqqJBut4jxve8AeDDJ2UI,
-        short-id: ""
-      },
-    client-fingerprint: chrome,
-  }
+      name: LB_HK_reality_vision,
+      server: xui.jzy88.top,
+      type: vless,
+      port: 54322,
+      uuid: 12d409cd-110b-4aad-b270-b62d2e34b054,
+      network: tcp,
+      servername: jobs-content.staffbase.com,
+      flow: xtls-rprx-vision,
+      udp: true,
+      tls: true,
+      reality-opts:
+        {
+          public-key: UK7qxWWGfRQcQfwaGpHnqmmqqJBut4jxve8AeDDJ2UI,
+          short-id: "",
+        },
+      client-fingerprint: chrome,
+    }
   - {
-    name: LB_HK_vless_tls_vision,
-    server: xui.jzy88.top,
-    type: vless,
-    port: 54323,
-    uuid: defa44bc-c3f2-4858-fedf-2c5004cca960,
-    network: tcp,
-    servername: xui.jzy88.top,
-    flow: xtls-rprx-vision,
-    udp: true,
-    tls: true,
-    client-fingerprint: chrome,
-  }
+      name: LB_HK_vless_tls_vision,
+      server: xui.jzy88.top,
+      type: vless,
+      port: 54323,
+      uuid: defa44bc-c3f2-4858-fedf-2c5004cca960,
+      network: tcp,
+      servername: xui.jzy88.top,
+      flow: xtls-rprx-vision,
+      udp: true,
+      tls: true,
+      client-fingerprint: chrome,
+    }
   - {
-    name: LB_HK_vless_tls_grpc,
-    server: xui.jzy88.top,
-    type: vless,
-    port: 54324,
-    uuid: f5f76567-c205-4bb1-d0c1-905d95feb268,
-    network: grpc,
-    servername: xui.jzy88.top,
-    udp: true,
-    tls: true,
-    client-fingerprint: chrome,
-    grpc-opts: { grpc-service-name: grpc },
-  }
+      name: LB_HK_vless_tls_grpc,
+      server: xui.jzy88.top,
+      type: vless,
+      port: 54324,
+      uuid: f5f76567-c205-4bb1-d0c1-905d95feb268,
+      network: grpc,
+      servername: xui.jzy88.top,
+      udp: true,
+      tls: true,
+      client-fingerprint: chrome,
+      grpc-opts: { grpc-service-name: grpc },
+    }
   - {
-    name: Sgp_reality_grpc,
-    server: sgp.netnerdzone.xyz,
-    type: vless,
-    port: 54324,
-    uuid: 8515e13a-1b9d-4937-9ccd-f40160450053,
-    network: grpc,
-    servername: dl.google.com,
-    udp: true,
-    tls: true,
-    reality-opts:
-      {
-        public-key: Zpnyi99txKywIv3fnbsjvRh2avoZyFYa_Lnu_19wkHA,
-        short-id: 6ba85179e30d4fc2,
-      },
-    client-fingerprint: chrome,
-    grpc-opts: { grpc-service-name: grpc },
-  }
+      name: Sgp_reality_vision,
+      server: sgp.jzy88.top,
+      type: vless,
+      port: 54322,
+      uuid: 753164d4-db7b-44b1-8e17-7cd137929efa,
+      network: tcp,
+      servername: jobs-content.staffbase.com,
+      flow: xtls-rprx-vision,
+      udp: true,
+      tls: true,
+      reality-opts:
+        {
+          public-key: pHcARQlYQZITQuaqTmKhHLsrTN8qHk3Q7wFBwXP7b2E,
+          short-id: "",
+        },
+      client-fingerprint: chrome,
+    }
   - {
-    name: Sgp_reality_tcp,
-    server: sgp.netnerdzone.xyz,
-    type: vless,
-    port: 54324,
-    uuid: 8515e13a-1b9d-4937-9ccd-f40160450053,
-    network: tcp,
-    servername: dl.google.com,
-    flow: xtls-rprx-vision,
-    udp: true,
-    tls: true,
-    reality-opts:
-      {
-        public-key: Zpnyi99txKywIv3fnbsjvRh2avoZyFYa_Lnu_19wkHA,
-        short-id: 6ba85179e30d4fc2,
-      },
-    client-fingerprint: chrome,
-  }
+      name: Sgp_vless_tls_vision,
+      server: sgp.jzy88.top,
+      type: vless,
+      port: 54323,
+      uuid: a7b23dea-87d5-44d5-92fd-f616fe7bb806,
+      network: tcp,
+      servername: sgp.jzy88.top,
+      flow: xtls-rprx-vision,
+      udp: true,
+      tls: true,
+      client-fingerprint: chrome,
+    }
   - {
-    name: Sgp_SS,
-    server: sgp.netnerdzone.xyz,
-    port: 54322,
-    client-fingerprint: chrome,
-    type: ss,
-    cipher: aes-256-gcm,
-    password: wjlOxFYQ+q/6MuVDznEWVuGus9v9emKFTSyYE/f5Tmc=,
-    tfo: false,
-    udp: true,
-    plugin: obfs,
-    plugin-opts: { mode: http, tls: false, skip-cert-verify: true, path: / },
-  }
+      name: Sgp_vless_tls_grpc,
+      server: sgp.jzy88.top,
+      type: vless,
+      port: 54324,
+      uuid: 2a417a10-8262-4660-840d-5181b6103dfe,
+      network: grpc,
+      servername: sgp.jzy88.top,
+      udp: true,
+      tls: true,
+      client-fingerprint: chrome,
+      grpc-opts: { grpc-service-name: grpc },
+    }
   - {
-    name: HK_Shadowsocks,
-    server: proxy.netnerdzone.xyz,
-    port: 54322,
-    client-fingerprint: chrome,
-    type: ss,
-    cipher: aes-256-gcm,
-    password: wFAgJ4DVL9ZUJ3cY8aJemgtNWD5H93jNvqQJs3cra3d2,
-    tfo: false,
-    udp: true,
-    plugin: obfs,
-    plugin-opts: { mode: http, tls: false, skip-cert-verify: true, path: / },
-  }
+      name: HK_Shadowsocks,
+      server: proxy.netnerdzone.xyz,
+      port: 54322,
+      client-fingerprint: chrome,
+      type: ss,
+      cipher: aes-256-gcm,
+      password: wFAgJ4DVL9ZUJ3cY8aJemgtNWD5H93jNvqQJs3cra3d2,
+      tfo: false,
+      udp: true,
+      plugin: obfs,
+      plugin-opts: { mode: http, tls: false, skip-cert-verify: true, path: / },
+    }
   - {
-    name: HK_Vmess,
-    server: proxy.netnerdzone.xyz,
-    port: 54323,
-    client-fingerprint: chrome,
-    type: vmess,
-    uuid: 231f3d76-12cf-4ef4-aaa1-05a8bec0686a,
-    alterId: 0,
-    cipher: auto,
-    tls: false,
-    tfo: false,
-    skip-cert-verify: true,
-    udp: true,
-    network: http,
-  }
-  #  - { name: HK_vless_tls, server: fly.netnerdzone.xyz, port: 80, client-fingerprint: chrome, type: vless, uuid: c18c2d55-3782-4302-c196-38e974c0ac9a, skip-cert-verify: true, network: tcp, flow: xtls-rprx-vision, tls: true, udp: true }
-  #  - { name: HK_vless_ws, server: fly.netnerdzone.xyz, type: vless, port: 54322, uuid: 535c35da-7623-417c-fee8-1e55c33ab085, skip-cert-verify: true, udp: true, tls: true, network: ws, ws-opts: { path: / } }
-  #  - { name: HK_trojan_tls, server: fly.netnerdzone.xyz, port: 54323, client-fingerprint: chrome, type: trojan, password: JRqwdNBojO, udp: true, skip-cert-verify: true, network: tcp }
-  #  - { name: HK_vmess_tls, server: fly.netnerdzone.xyz, port: 54324, client-fingerprint: chrome, type: vmess, uuid: b5ccf2ca-1d62-463b-b30a-c9ff9a9d43cf, alterId: 0, cipher: auto, network: tcp, tls: true }
-  #  - { name: AIplus_Shadowsocks, server: proxy.aiplus.best, port: 54323, client-fingerprint: chrome, type: ss, cipher: aes-256-gcm, password: 7DbwvwLzvShx2o8MECjtP8xexqlOov8DRz05mplwMvsO, tfo: false, udp: true, plugin: obfs, plugin-opts: { mode: http, tls: false, skip-cert-verify: true, path: / } }
-  #  - { name: AIplus_Vmess, server: proxy.aiplus.best, port: 54325, client-fingerprint: chrome, type: vmess, uuid: d70763d5-6166-45c4-d439-2f3fb10f3145, alterId: 0, cipher: auto, tls: false, tfo: false, skip-cert-verify: true, udp: true }
+      name: HK_Vmess,
+      server: proxy.netnerdzone.xyz,
+      port: 54323,
+      client-fingerprint: chrome,
+      type: vmess,
+      uuid: 231f3d76-12cf-4ef4-aaa1-05a8bec0686a,
+      alterId: 0,
+      cipher: auto,
+      tls: false,
+      tfo: false,
+      skip-cert-verify: true,
+      udp: true,
+      network: http,
+    }
   - {
-    name: USA_Shadowsocks,
-    server: fly.netnerdzone.xyz,
-    port: 54322,
-    client-fingerprint: chrome,
-    type: ss,
-    cipher: aes-256-gcm,
-    password: dnkjsagfjkSHiq,
-    tfo: false,
-    udp: true,
-    plugin: obfs,
-    plugin-opts: { mode: http, tls: false, skip-cert-verify: true, path: / },
-  }
+      name: USA_Shadowsocks,
+      server: fly.netnerdzone.xyz,
+      port: 54322,
+      client-fingerprint: chrome,
+      type: ss,
+      cipher: aes-256-gcm,
+      password: dnkjsagfjkSHiq,
+      tfo: false,
+      udp: true,
+      plugin: obfs,
+      plugin-opts: { mode: http, tls: false, skip-cert-verify: true, path: / },
+    }
   - {
-    name: LB_HK_SS,
-    server: xui.jzy88.top,
-    port: 54325,
-    client-fingerprint: chrome,
-    type: ss,
-    cipher: aes-256-gcm,
-    password: KyteYLTlfSRHJUbAtVI9Vp2W89PJXwKWLkvfr9SXjPNG,
-    tfo: false,
-    udp: true,
-    plugin: obfs,
-    plugin-opts: { mode: http, tls: false, skip-cert-verify: true, path: / },
-  }
+      name: LB_HK_SS,
+      server: xui.jzy88.top,
+      port: 54325,
+      client-fingerprint: chrome,
+      type: ss,
+      cipher: aes-256-gcm,
+      password: KyteYLTlfSRHJUbAtVI9Vp2W89PJXwKWLkvfr9SXjPNG,
+      tfo: false,
+      udp: true,
+      plugin: obfs,
+      plugin-opts: { mode: http, tls: false, skip-cert-verify: true, path: / },
+    }
   - {
-    name: HY2_HK_LB,
-    server: www.jzy88.top,
-    port: 500,
-    type: hysteria2,
-    password: 123456abcd,
-    sni: www.jzy88.top,
-    skip-sert-verify: false,
-  }
+      name: Sgp_SS,
+      server: sgp.jzy88.top,
+      port: 54325,
+      client-fingerprint: chrome,
+      type: ss,
+      cipher: aes-256-gcm,
+      password: PB8nqz84oonIGWqCuBzR/b4k0JB1L8JWoDqgCXVTFDM=,
+      tfo: false,
+      udp: true,
+      plugin: obfs,
+      plugin-opts: { mode: http, tls: false, skip-cert-verify: true, path: / },
+    }
   - {
-    name: HY2_HK,
-    server: proxy.netnerdzone.xyz,
-    port: 54328,
-    type: hysteria2,
-    password: Jae7758521...,
-    sni: proxy.netnerdzone.xyz,
-    skip-sert-verify: false,
-  }
+      name: LB_HK_HY2,
+      server: www.jzy88.top,
+      port: 500,
+      type: hysteria2,
+      password: 123456abcd,
+      sni: www.jzy88.top,
+      skip-sert-verify: false,
+    }
   - {
-    name: HY2_US,
-    server: fly.netnerdzone.xyz,
-    port: 2001,
-    type: hysteria2,
-    password: Jae7758521...,
-    sni: fly.netnerdzone.xyz,
-    skip-sert-verify: false,
-  }
+      name: HY2_HK,
+      server: proxy.netnerdzone.xyz,
+      port: 54328,
+      type: hysteria2,
+      password: Jae7758521...,
+      sni: proxy.netnerdzone.xyz,
+      skip-sert-verify: false,
+    }
   - {
-    name: HY2_SGP,
-    server: sgp.netnerdzone.xyz,
-    port: 500,
-    type: hysteria2,
-    password: 123456abcd,
-    sni: sgp.netnerdzone.xyz,
-    skip-sert-verify: false,
-  }
+      name: HY2_US,
+      server: fly.netnerdzone.xyz,
+      port: 2001,
+      type: hysteria2,
+      password: Jae7758521...,
+      sni: fly.netnerdzone.xyz,
+      skip-sert-verify: false,
+    }
+  - {
+      name: Sgp_HY2,
+      server: sgp.jzy88.top,
+      port: 500,
+      type: hysteria2,
+      password: abcd123456,
+      sni: sgp.jzy88.top,
+      skip-sert-verify: false,
+    }
 proxy-groups:
   - name: 🚀 节点选择
     type: select
@@ -221,44 +223,44 @@ proxy-groups:
   - name: 🚀 手动切换
     type: select
     proxies:
+      - LB_HK_vless_tls_grpc
       - LB_HK_reality_vision
       - LB_HK_vless_tls_vision
-      - LB_HK_vless_tls_grpc
-      - Sgp_reality_grpc
-      - Sgp_reality_tcp
+      - LB_HK_SS
+      - LB_HK_HY2
+      - Sgp_vless_tls_grpc
+      - Sgp_reality_vision
+      - Sgp_vless_tls_vision
       - Sgp_SS
+      - Sgp_HY2
+
       - HY2_US
       - HY2_HK
       - HK_Shadowsocks
       - HK_Vmess
-      #  - AIplus_Shadowsocks
-      #  - AIplus_Vmess
       - USA_Shadowsocks
-      - HY2_HK_LB
-      - HY2_SGP
-      - LB_HK_SS
   - name: ♻️ 自动选择
     type: url-test
     url: http://www.gstatic.com/generate_204
     interval: 300
     tolerance: 50
     proxies:
+      - LB_HK_vless_tls_grpc
       - LB_HK_reality_vision
       - LB_HK_vless_tls_vision
-      - LB_HK_vless_tls_grpc
-      - Sgp_reality_grpc
-      - Sgp_reality_tcp
+      - LB_HK_SS
+      - LB_HK_HY2
+      - Sgp_vless_tls_grpc
+      - Sgp_reality_vision
+      - Sgp_vless_tls_vision
       - Sgp_SS
+      - Sgp_HY2
+
+      - HY2_US
+      - HY2_HK
       - HK_Shadowsocks
       - HK_Vmess
-      #  - AIplus_Shadowsocks
-      #  - AIplus_Vmess
       - USA_Shadowsocks
-      - HY2_HK
-      - HY2_US
-      - HY2_HK_LB
-      - HY2_SGP
-      - LB_HK_SS
   - name: 🛑 广告拦截
     type: select
     proxies:
@@ -317,22 +319,22 @@ proxy-groups:
     interval: 300
     tolerance: 50
     proxies:
+      - LB_HK_vless_tls_grpc
       - LB_HK_reality_vision
       - LB_HK_vless_tls_vision
-      - LB_HK_vless_tls_grpc
-      - Sgp_reality_grpc
-      - Sgp_reality_tcp
+      - LB_HK_SS
+      - LB_HK_HY2
+      - Sgp_vless_tls_grpc
+      - Sgp_reality_vision
+      - Sgp_vless_tls_vision
       - Sgp_SS
+      - Sgp_HY2
+
       - HY2_US
       - HY2_HK
       - HK_Shadowsocks
-      - USA_Shadowsocks
       - HK_Vmess
-      - HY2_HK_LB
-      - HY2_SGP
-      - LB_HK_SS
-    #  - AIplus_Shadowsocks
-    #  - AIplus_Vmess
+      - USA_Shadowsocks
 rules:
   - DOMAIN-SUFFIX,acl4.ssr,🎯 全球直连
   - DOMAIN-SUFFIX,ip6-localhost,🎯 全球直连

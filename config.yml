@@ -110,9 +110,53 @@ proxies:
       grpc-opts: { grpc-service-name: grpc },
     }
   - {
-      name: HK_Shadowsocks,
-      server: proxy.netnerdzone.xyz,
+      name: HK_reality_vision,
+      server: hk1.jzy88.top,
+      type: vless,
       port: 54322,
+      uuid: ee027e15-0ab6-4184-9d0a-86632a3b6e7b,
+      network: tcp,
+      servername: jobs-content.staffbase.com,
+      flow: xtls-rprx-vision,
+      udp: true,
+      tls: true,
+      reality-opts:
+        {
+          public-key: DwlWnHkQlc5bvrF7LTTA2QsVm3EYWPZZnjs_2O5NPVQ,
+          short-id: "",
+        },
+      client-fingerprint: chrome,
+    }
+  - {
+      name: HK_vless_tls_vision,
+      server: hk1.jzy88.top,
+      type: vless,
+      port: 54323,
+      uuid: 6732268e-cce8-474b-b744-6b9f08944113,
+      network: tcp,
+      servername: hk1.jzy88.top,
+      flow: xtls-rprx-vision,
+      udp: true,
+      tls: true,
+      client-fingerprint: chrome,
+    }
+  - {
+      name: HK_vless_tls_grpc,
+      server: hk1.jzy88.top,
+      type: vless,
+      port: 54324,
+      uuid: 85b7c135-1b6c-4bec-9da0-ca44beb1d0a9,
+      network: grpc,
+      servername: hk1.jzy88.top,
+      udp: true,
+      tls: true,
+      client-fingerprint: chrome,
+      grpc-opts: { grpc-service-name: grpc },
+    }
+  - {
+      name: HK_SS,
+      server: hk1.jzy88.top,
+      port: 54325,
       client-fingerprint: chrome,
       type: ss,
       cipher: aes-256-gcm,
@@ -120,25 +164,17 @@ proxies:
       tfo: false,
       udp: true,
       plugin: obfs,
-      plugin-opts: { mode: http, tls: false, skip-cert-verify: true, path: / },
+      plugin-opts:
+        {
+          mode: http,
+          tls: false,
+          skip-cert-verify: true,
+          path: /,
+          host: obs-jp.line-apps.com,
+        },
     }
   - {
-      name: HK_Vmess,
-      server: proxy.netnerdzone.xyz,
-      port: 54323,
-      client-fingerprint: chrome,
-      type: vmess,
-      uuid: 231f3d76-12cf-4ef4-aaa1-05a8bec0686a,
-      alterId: 0,
-      cipher: auto,
-      tls: false,
-      tfo: false,
-      skip-cert-verify: true,
-      udp: true,
-      network: http,
-    }
-  - {
-      name: USA_Shadowsocks,
+      name: USA_SS,
       server: fly.netnerdzone.xyz,
       port: 54322,
       client-fingerprint: chrome,
@@ -148,7 +184,14 @@ proxies:
       tfo: false,
       udp: true,
       plugin: obfs,
-      plugin-opts: { mode: http, tls: false, skip-cert-verify: true, path: / },
+      plugin-opts:
+        {
+          mode: http,
+          tls: false,
+          skip-cert-verify: true,
+          path: /,
+          host: obs-jp.line-apps.com,
+        },
     }
   - {
       name: LB_HK_SS,
@@ -161,7 +204,14 @@ proxies:
       tfo: false,
       udp: true,
       plugin: obfs,
-      plugin-opts: { mode: http, tls: false, skip-cert-verify: true, path: / },
+      plugin-opts:
+        {
+          mode: http,
+          tls: false,
+          skip-cert-verify: true,
+          path: /,
+          host: obs-jp.line-apps.com,
+        },
     }
   - {
       name: Sgp_SS,
@@ -174,7 +224,14 @@ proxies:
       tfo: false,
       udp: true,
       plugin: obfs,
-      plugin-opts: { mode: http, tls: false, skip-cert-verify: true, path: / },
+      plugin-opts:
+        {
+          mode: http,
+          tls: false,
+          skip-cert-verify: true,
+          path: /,
+          host: obs-jp.line-apps.com,
+        },
     }
   - {
       name: LB_HK_HY2,
@@ -186,7 +243,7 @@ proxies:
       skip-sert-verify: false,
     }
   - {
-      name: HY2_HK,
+      name: HK_HY2,
       server: proxy.netnerdzone.xyz,
       port: 54328,
       type: hysteria2,
@@ -195,7 +252,7 @@ proxies:
       skip-sert-verify: false,
     }
   - {
-      name: HY2_US,
+      name: USA_HY2,
       server: fly.netnerdzone.xyz,
       port: 2001,
       type: hysteria2,
@@ -233,12 +290,14 @@ proxy-groups:
       - Sgp_vless_tls_vision
       - Sgp_SS
       - Sgp_HY2
+      - HK_vless_tls_grpc
+      - HK_reality_vision
+      - HK_vless_tls_vision
+      - HK_SS
+      - HK_HY2
 
-      - HY2_US
-      - HY2_HK
-      - HK_Shadowsocks
-      - HK_Vmess
-      - USA_Shadowsocks
+      - USA_SS
+      - USA_HY2
   - name: ♻️ 自动选择
     type: url-test
     url: http://www.gstatic.com/generate_204
@@ -255,12 +314,14 @@ proxy-groups:
       - Sgp_vless_tls_vision
       - Sgp_SS
       - Sgp_HY2
+      - HK_vless_tls_grpc
+      - HK_reality_vision
+      - HK_vless_tls_vision
+      - HK_SS
+      - HK_HY2
 
-      - HY2_US
-      - HY2_HK
-      - HK_Shadowsocks
-      - HK_Vmess
-      - USA_Shadowsocks
+      - USA_SS
+      - USA_HY2
   - name: 🛑 广告拦截
     type: select
     proxies:
@@ -329,12 +390,14 @@ proxy-groups:
       - Sgp_vless_tls_vision
       - Sgp_SS
       - Sgp_HY2
+      - HK_vless_tls_grpc
+      - HK_reality_vision
+      - HK_vless_tls_vision
+      - HK_SS
+      - HK_HY2
 
-      - HY2_US
-      - HY2_HK
-      - HK_Shadowsocks
-      - HK_Vmess
-      - USA_Shadowsocks
+      - USA_SS
+      - USA_HY2
 rules:
   - DOMAIN-SUFFIX,acl4.ssr,🎯 全球直连
   - DOMAIN-SUFFIX,ip6-localhost,🎯 全球直连

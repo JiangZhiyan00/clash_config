@@ -312,7 +312,7 @@ proxies:
     skip-sert-verify: false,
   }
   - {
-    name: USA_hysteria2,
+    name: US_hysteria2,
     server: fly.netnerdzone.xyz,
     port: 2001,
     type: hysteria2,
@@ -363,7 +363,7 @@ proxy-groups:
       - LB_HK_hysteria2
       - Sgp_hysteria2
       - HK_hysteria2
-      - USA_hysteria2
+      - US_hysteria2
   - name: ♻️ 自动选择
     type: url-test
     url: http://www.gstatic.com/generate_204
@@ -393,7 +393,7 @@ proxy-groups:
       - LB_HK_hysteria2
       - Sgp_hysteria2
       - HK_hysteria2
-      - USA_hysteria2
+      - US_hysteria2
   - name: 🛑 广告拦截
     type: select
     proxies:
@@ -475,7 +475,7 @@ proxy-groups:
       - LB_HK_hysteria2
       - Sgp_hysteria2
       - HK_hysteria2
-      - USA_hysteria2
+      - US_hysteria2
 rules:
   - DOMAIN-SUFFIX,acl4.ssr,🎯 全球直连
   - DOMAIN-SUFFIX,ip6-localhost,🎯 全球直连

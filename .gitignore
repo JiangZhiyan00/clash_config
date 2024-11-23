@@ -5,3 +5,7 @@
 !config/**
 !emails/
 !emails/**
+!.github/
+!.github/**
+!.subscribe/
+!.subscribe/**

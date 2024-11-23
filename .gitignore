@@ -1,0 +1,7 @@
+*
+
+!.gitignore
+!config/
+!config/**
+!emails/
+!emails/**

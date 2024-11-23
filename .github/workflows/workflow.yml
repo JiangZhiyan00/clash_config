@@ -23,15 +23,15 @@ jobs:
         with:
           fetch-depth: 2  # 检出最后两个提交，以便可以比较 HEAD~1 和 HEAD
 
-      # 将订阅邮箱文件内容保存为环境变量
+      # 将订阅邮箱文件绝对路径保存为环境变量
       - name: Save Emails File Content as Environment Variable
         run: |
-          echo "EMAIL_BRANCHES=$(cat subscribe/emails.txt)" >> $GITHUB_ENV
+          echo "EMAILS_FILE_PATH=$(realpath subscribe/emails.txt)" >> $GITHUB_ENV
 
-      # 将clash配置文件内容保存为环境变量
+      # 将clash配置文件绝对路径保存为环境变量
       - name: Save Clash Config File Content as Environment Variable
         run: |
-          echo "CLASH_CONFIG_CONTENT=$(cat config/config.yml)" >> $GITHUB_ENV
+          echo "CLASH_CONFIG_FILE_PATH=$(realpath config/config.yml)" >> $GITHUB_ENV
 
       # 设置jdk
       - name: Set Up JDK 17
@@ -53,5 +53,5 @@ jobs:
         env:
           # 必要
           BRANCH_NAME: ${{ github.ref_name }}
-          EMAIL_BRANCHES: ${{ env.EMAIL_BRANCHES }}
-          CLASH_CONFIG_CONTENT: ${{ env.CLASH_CONFIG_CONTENT }}
+          EMAILS_FILE_PATH: ${{ env.EMAILS_FILE_PATH }}
+          CLASH_CONFIG_FILE_PATH: ${{ env.CLASH_CONFIG_FILE_PATH }}

@@ -61,7 +61,7 @@ jobs:
 
       # 执行邮件通知
       - name: Run ShadowRocket Config Email Sender
-        run: java -Duser.timezone=Asia/Shanghai -jar ./libs/clash-clash-email-sender.jar
+        run: java -Duser.timezone=Asia/Shanghai -jar ./libs/clash-config-email-sender.jar
         # 设置一些环境变量
         env:
           # 必要

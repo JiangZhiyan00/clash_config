@@ -1,12 +1,13 @@
-*
+### IntelliJ ###
+.idea/
+.idea/**
+*.iws
+*.iml
+*.ipr
 
-!.gitignore
-!config/
-!config/**
-!emails/
-!emails/**
-!.github/
-!.github/**
-!.subscribe/
-!.subscribe/**
-!.editconfig
+### VS Code ###
+.vscode/
+.vscode/**
+
+### Mac OS ###
+.DS_Store

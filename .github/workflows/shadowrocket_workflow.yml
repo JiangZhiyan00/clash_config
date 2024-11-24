@@ -1,10 +1,10 @@
-name: clash配置更新邮件通知
+name: shadowrocket配置更新邮件通知
 
 on:
   push:
     paths:
-      - "config/config.yml"  # 只在 config/config.yml 文件发生变化时触发
-      - "subscribe/emails.txt"  # 只在 subscribe/emails.txt 文件发生变化时触发
+      - "shadowrocket/config.json"  # 只在 clash/config.json 文件发生变化时触发
+      - "shadowrocket/emails.txt"  # 只在 clash/emails.txt 文件发生变化时触发
     branches:
       - main
       - jzy
@@ -24,7 +24,7 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
         with:
-          fetch-depth: 2  # 检出最后两个提交，以便可以比较 HEAD~1 和 HEAD
+          fetch-depth: 1  # 检出最后一次提交
 
       # 获取本次提交者信息
       - name: Get commit author
@@ -39,12 +39,12 @@ jobs:
       # 将订阅邮箱文件绝对路径保存为环境变量
       - name: Save Emails File Content as Environment Variable
         run: |
-          echo "EMAILS_FILE_PATH=$(realpath subscribe/emails.txt)" >> $GITHUB_ENV
+          echo "EMAILS_FILE_PATH=$(realpath shadowrocket/emails.txt)" >> $GITHUB_ENV
 
-      # 将clash配置文件绝对路径保存为环境变量
-      - name: Save Clash Config File Content as Environment Variable
+      # 将shadowrocket配置文件绝对路径保存为环境变量
+      - name: Save Clash Config File path as Environment Variable
         run: |
-          echo "CLASH_CONFIG_FILE_PATH=$(realpath config/config.yml)" >> $GITHUB_ENV
+          echo "SHADOW_ROCKET_CONFIG_FILE_PATH=$(realpath shadowrocket/config.json)" >> $GITHUB_ENV
 
       # 设置jdk
       - name: Set Up JDK 17
@@ -54,19 +54,20 @@ jobs:
           java-version: '17'
 
       # 下载相关jar包
-      - name: Download ai-code-review jar to libs directory
+      - name: Download clash-config-email-sender jar to libs directory
         run: |
           mkdir -p ./libs
           wget -O ./libs/clash-config-email-sender.jar https://github.com/JiangZhiyan00/clash-config-email-sender/releases/latest/download/clash-config-email-sender.jar
 
       # 执行邮件通知
-      - name: Run Clash Config Email Sender
-        run: java -Duser.timezone=Asia/Shanghai -jar ./libs/clash-config-email-sender.jar
+      - name: Run ShadowRocket Config Email Sender
+        run: java -Duser.timezone=Asia/Shanghai -jar ./libs/clash-clash-email-sender.jar
         # 设置一些环境变量
         env:
           # 必要
           BRANCH_NAME: ${{ github.ref_name }}
           EMAILS_FILE_PATH: ${{ env.EMAILS_FILE_PATH }}
-          CLASH_CONFIG_FILE_PATH: ${{ env.CLASH_CONFIG_FILE_PATH }}
+          SHADOW_ROCKET_CONFIG_FILE_PATH: ${{ env.SHADOW_ROCKET_CONFIG_FILE_PATH }}
           COMMIT_AUTHOR: ${{ env.COMMIT_AUTHOR }}
           COMMIT_MESSAGE: ${{ env.COMMIT_MESSAGE }}
+          CONFIG_TYPE: shadowrocket

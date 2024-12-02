@@ -24,7 +24,7 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
         with:
-          fetch-depth: 1  # 检出最后一次提交
+          fetch-depth: 5  # 检出最后一次提交
 
       # 获取本次提交者信息
       - name: Get commit author

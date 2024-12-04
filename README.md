@@ -14,8 +14,7 @@
       备用下载地址：[Clash Verge MacOS_Intel芯片安装包下载](https://proxy.jzy88.top/https://github.com/clash-verge-rev/clash-verge-rev/releases/download/v2.0.2/Clash.Verge_2.0.2_x64.dmg)
     - `Apple M 芯片`
       备用下载地址：[Clash Verge MacOS_M芯片安装包下载](https://proxy.jzy88.top/https://github.com/clash-verge-rev/clash-verge-rev/releases/download/v2.0.2/Clash.Verge_2.0.2_aarch64.dmg)
-+
-`Android`：[Karing Github官网下载](https://github.com/KaringX/karing/releases/download/v1.0.35.467/karing_1.0.35.467_android_arm64-v8a.apk)
++ `Android`：[Karing Github官网下载](https://github.com/KaringX/karing/releases/download/v1.0.35.467/karing_1.0.35.467_android_arm64-v8a.apk)
 ，备用下载地址：[Karing Android安装包下载](https://proxy.jzy88.top/https://github.com/KaringX/karing/releases/download/v1.0.35.467/karing_1.0.35.467_android_arm64-v8a.apk)
 + `IOS`：
     - [Karing 非中国区App Store下载](https://apps.apple.com/us/app/karing/id6472431552)
@@ -44,8 +43,9 @@
 
 <h4 id="KFpjH">3.1.Karing使用说明</h4>
 
-1.
-打开客户端，进入首页，新建clash订阅，填入你的订阅链接，设置更新间隔（多久自动更新一次配置），然后保存即可：![新建订阅链接](images/手机端_Karing新建订阅链接.png)
+1. 打开客户端，进入首页，新建clash订阅，填入你的订阅链接，设置更新间隔（多久自动更新一次配置），然后保存即可：
+
+   ![新建订阅链接](images/手机端_Karing新建订阅链接.png)
 
 2. 回到客户端首页，选择一种代理模式（默认规则模式，和电脑端含义相同），点击中间的开关按钮，变绿了即可正常使用，同时手机状态栏会显示`vpn`
    图标，过一会儿右下角会显示节点延迟，ios设备退出软件，代理会在后台继续运行，而<font style="background-color:#FBDE28;">
@@ -57,8 +57,9 @@
 
 <h4 id="CFpjD">3.2.Shadowrocket使用说明</h4>
 
-1. 打开客户端，进入首页，点击右上角加号添加节点，类型选择`Subscribe`
-   ，URL处填入你的订阅链接，然后保存即可：![新建订阅链接](images/手机端_Shadowrocket新建订阅链接.png)
+1. 打开客户端，进入首页，点击右上角加号添加节点，类型选择`Subscribe`，URL处填入你的订阅链接，然后保存即可：
+
+   ![新建订阅链接](images/手机端_Shadowrocket新建订阅链接.png)
 
 2. 回到客户端首页，选择全局路由（`配置`/`代理`/`直连`，建议选择`配置`），在下方选择一个正常（有延迟）节点，然后点击最上面的开关按钮，变蓝了即可正常使用，同时手机状态栏会显示
    `vpn`图标，下方节点会显示其延迟，退出软件，代理会在后台继续运行。Shadowrocket刷新配置需要手动点击节点列表上方的刷新按钮。

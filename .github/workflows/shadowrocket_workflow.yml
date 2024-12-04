@@ -7,13 +7,13 @@ on:
       - "shadowrocket/emails.txt"  # 只在 clash/emails.txt 文件发生变化时触发
     branches:
       - main
-      - jzy
-      - libin
+#      - jzy
+#      - libin
   pull_request:
     branches:
       - main
-      - jzy
-      - libin
+#      - jzy
+#      - libin
 
 jobs:
   run-script:

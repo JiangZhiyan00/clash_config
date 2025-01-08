@@ -48,11 +48,7 @@ proxies:
       flow: xtls-rprx-vision,
       udp: true,
       tls: true,
-      reality-opts:
-        {
-          public-key: UK7qxWWGfRQcQfwaGpHnqmmqqJBut4jxve8AeDDJ2UI,
-          short-id: "",
-        },
+      reality-opts: { public-key: UK7qxWWGfRQcQfwaGpHnqmmqqJBut4jxve8AeDDJ2UI, short-id: "" },
       client-fingerprint: chrome,
     }
   - {
@@ -66,11 +62,7 @@ proxies:
       flow: xtls-rprx-vision,
       udp: true,
       tls: true,
-      reality-opts:
-        {
-          public-key: g1f1wLjim5gOVGnI5LGUV0dL4iFXPoiepOPZfSxJe14,
-          short-id: "",
-        },
+      reality-opts: { public-key: g1f1wLjim5gOVGnI5LGUV0dL4iFXPoiepOPZfSxJe14, short-id: "" },
       client-fingerprint: chrome,
     }
   - {
@@ -136,11 +128,7 @@ proxies:
       flow: xtls-rprx-vision,
       udp: true,
       tls: true,
-      reality-opts:
-        {
-          public-key: pHcARQlYQZITQuaqTmKhHLsrTN8qHk3Q7wFBwXP7b2E,
-          short-id: "",
-        },
+      reality-opts: { public-key: pHcARQlYQZITQuaqTmKhHLsrTN8qHk3Q7wFBwXP7b2E, short-id: "" },
       client-fingerprint: chrome,
     }
   - {
@@ -180,11 +168,7 @@ proxies:
       flow: xtls-rprx-vision,
       udp: true,
       tls: true,
-      reality-opts:
-        {
-          public-key: DwlWnHkQlc5bvrF7LTTA2QsVm3EYWPZZnjs_2O5NPVQ,
-          short-id: "",
-        },
+      reality-opts: { public-key: DwlWnHkQlc5bvrF7LTTA2QsVm3EYWPZZnjs_2O5NPVQ, short-id: "" },
       client-fingerprint: chrome,
     }
   - {
@@ -224,14 +208,7 @@ proxies:
       tfo: false,
       udp: true,
       plugin: obfs,
-      plugin-opts:
-        {
-          mode: http,
-          tls: false,
-          skip-cert-verify: true,
-          path: /,
-          host: obs-jp.line-apps.com,
-        },
+      plugin-opts: { mode: http, tls: false, skip-cert-verify: true, path: /, host: obs-jp.line-apps.com },
     }
   - {
       name: US_ss,
@@ -244,14 +221,7 @@ proxies:
       tfo: false,
       udp: true,
       plugin: obfs,
-      plugin-opts:
-        {
-          mode: http,
-          tls: false,
-          skip-cert-verify: true,
-          path: /,
-          host: obs-jp.line-apps.com,
-        },
+      plugin-opts: { mode: http, tls: false, skip-cert-verify: true, path: /, host: obs-jp.line-apps.com },
     }
   - {
       name: LB_HK_ss,
@@ -264,14 +234,7 @@ proxies:
       tfo: false,
       udp: true,
       plugin: obfs,
-      plugin-opts:
-        {
-          mode: http,
-          tls: false,
-          skip-cert-verify: true,
-          path: /,
-          host: obs-jp.line-apps.com,
-        },
+      plugin-opts: { mode: http, tls: false, skip-cert-verify: true, path: /, host: obs-jp.line-apps.com },
     }
   - {
       name: Sgp_ss,
@@ -284,14 +247,7 @@ proxies:
       tfo: false,
       udp: true,
       plugin: obfs,
-      plugin-opts:
-        {
-          mode: http,
-          tls: false,
-          skip-cert-verify: true,
-          path: /,
-          host: obs-jp.line-apps.com,
-        },
+      plugin-opts: { mode: http, tls: false, skip-cert-verify: true, path: /, host: obs-jp.line-apps.com },
     }
   - {
       name: LB_HK_hysteria2,
@@ -4287,6 +4243,9 @@ rules:
   # 公司
   - DOMAIN-KEYWORD,huanzhiyc,🎯 全球直连
   - DOMAIN-KEYWORD,gearsnet,🎯 全球直连
+  - DOMAIN-KEYWORD,citrix,🎯 全球直连
+  # deepseek
+  - DOMAIN-KEYWORD,deepseek,🎯 全球直连
   - IP-CIDR,8.128.0.0/10,🎯 全球直连,no-resolve
   - IP-CIDR,8.208.0.0/12,🎯 全球直连,no-resolve
   - IP-CIDR,14.1.112.0/22,🎯 全球直连,no-resolve

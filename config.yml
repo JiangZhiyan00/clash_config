@@ -304,11 +304,11 @@ proxies:
     }
   - {
       name: HK_hysteria2,
-      server: proxy.netnerdzone.xyz,
+      server: hk1.jzy88.top,
       port: 54328,
       type: hysteria2,
       password: Jae7758521...,
-      sni: proxy.netnerdzone.xyz,
+      sni: hk1.jzy88.top,
       skip-sert-verify: false,
     }
   - {

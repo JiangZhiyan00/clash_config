@@ -48,31 +48,39 @@ proxies:
       flow: xtls-rprx-vision,
       udp: true,
       tls: true,
-      reality-opts: { public-key: UK7qxWWGfRQcQfwaGpHnqmmqqJBut4jxve8AeDDJ2UI, short-id: "" },
+      reality-opts:
+        {
+          public-key: UK7qxWWGfRQcQfwaGpHnqmmqqJBut4jxve8AeDDJ2UI,
+          short-id: "",
+        },
       client-fingerprint: chrome,
     }
   - {
       name: US_reality_vision,
-      server: fly.netnerdzone.xyz,
+      server: amp.jzy88.top,
       type: vless,
-      port: 443,
+      port: 54322,
       uuid: fee14d4e-18e8-42f8-fb09-ea56cc45dbb9,
       network: tcp,
       servername: www.thecardinalshop.com,
       flow: xtls-rprx-vision,
       udp: true,
       tls: true,
-      reality-opts: { public-key: g1f1wLjim5gOVGnI5LGUV0dL4iFXPoiepOPZfSxJe14, short-id: "" },
+      reality-opts:
+        {
+          public-key: 9rx7JwMO-KRZZEM9TQBO19BOAmmGjJyjN86ll2J7uVc,
+          short-id: "",
+        },
       client-fingerprint: chrome,
     }
   - {
       name: US_vless_tls_vision,
-      server: fly.netnerdzone.xyz,
+      server: amp.jzy88.top,
       type: vless,
       port: 54323,
       uuid: a9a729dd-cdcc-4bf1-ca21-a029d92d8d68,
       network: tcp,
-      servername: fly.netnerdzone.xyz,
+      servername: amp.jzy88.top,
       flow: xtls-rprx-vision,
       udp: true,
       tls: true,
@@ -80,12 +88,12 @@ proxies:
     }
   - {
       name: US_vless_tls_grpc,
-      server: fly.netnerdzone.xyz,
+      server: amp.jzy88.top,
       type: vless,
       port: 54324,
       uuid: c892a231-c293-4c54-ec5a-14a8d0f8afec,
       network: grpc,
-      servername: fly.netnerdzone.xyz,
+      servername: amp.jzy88.top,
       udp: true,
       tls: true,
       client-fingerprint: chrome,
@@ -128,7 +136,11 @@ proxies:
       flow: xtls-rprx-vision,
       udp: true,
       tls: true,
-      reality-opts: { public-key: pHcARQlYQZITQuaqTmKhHLsrTN8qHk3Q7wFBwXP7b2E, short-id: "" },
+      reality-opts:
+        {
+          public-key: pHcARQlYQZITQuaqTmKhHLsrTN8qHk3Q7wFBwXP7b2E,
+          short-id: "",
+        },
       client-fingerprint: chrome,
     }
   - {
@@ -168,7 +180,11 @@ proxies:
       flow: xtls-rprx-vision,
       udp: true,
       tls: true,
-      reality-opts: { public-key: DwlWnHkQlc5bvrF7LTTA2QsVm3EYWPZZnjs_2O5NPVQ, short-id: "" },
+      reality-opts:
+        {
+          public-key: DwlWnHkQlc5bvrF7LTTA2QsVm3EYWPZZnjs_2O5NPVQ,
+          short-id: "",
+        },
       client-fingerprint: chrome,
     }
   - {
@@ -208,11 +224,18 @@ proxies:
       tfo: false,
       udp: true,
       plugin: obfs,
-      plugin-opts: { mode: http, tls: false, skip-cert-verify: true, path: /, host: obs-jp.line-apps.com },
+      plugin-opts:
+        {
+          mode: http,
+          tls: false,
+          skip-cert-verify: true,
+          path: /,
+          host: obs-jp.line-apps.com,
+        },
     }
   - {
       name: US_ss,
-      server: fly.netnerdzone.xyz,
+      server: amp.jzy88.top,
       port: 54325,
       client-fingerprint: chrome,
       type: ss,
@@ -221,7 +244,14 @@ proxies:
       tfo: false,
       udp: true,
       plugin: obfs,
-      plugin-opts: { mode: http, tls: false, skip-cert-verify: true, path: /, host: obs-jp.line-apps.com },
+      plugin-opts:
+        {
+          mode: http,
+          tls: false,
+          skip-cert-verify: true,
+          path: /,
+          host: obs-jp.line-apps.com,
+        },
     }
   - {
       name: LB_HK_ss,
@@ -234,7 +264,14 @@ proxies:
       tfo: false,
       udp: true,
       plugin: obfs,
-      plugin-opts: { mode: http, tls: false, skip-cert-verify: true, path: /, host: obs-jp.line-apps.com },
+      plugin-opts:
+        {
+          mode: http,
+          tls: false,
+          skip-cert-verify: true,
+          path: /,
+          host: obs-jp.line-apps.com,
+        },
     }
   - {
       name: Sgp_ss,
@@ -247,7 +284,14 @@ proxies:
       tfo: false,
       udp: true,
       plugin: obfs,
-      plugin-opts: { mode: http, tls: false, skip-cert-verify: true, path: /, host: obs-jp.line-apps.com },
+      plugin-opts:
+        {
+          mode: http,
+          tls: false,
+          skip-cert-verify: true,
+          path: /,
+          host: obs-jp.line-apps.com,
+        },
     }
   - {
       name: LB_HK_hysteria2,
@@ -269,11 +313,11 @@ proxies:
     }
   - {
       name: US_hysteria2,
-      server: fly.netnerdzone.xyz,
+      server: amp.jzy88.top,
       port: 2001,
       type: hysteria2,
       password: Jae7758521...,
-      sni: fly.netnerdzone.xyz,
+      sni: amp.jzy88.top,
       skip-sert-verify: false,
     }
   - {

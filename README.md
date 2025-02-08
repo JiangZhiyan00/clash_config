@@ -8,14 +8,14 @@
 <font style="background:#DBF1B7;color:#2A4200">建议下载安装最新版本</font>
 
 + `Windows`：[Clash Verge官网下载](https://www.clashverge.dev/install.html#__tabbed_1_1)
-  ，备用下载地址：[Clash Verge Windows安装包下载](https://github.com/clash-verge-rev/clash-verge-rev/releases/download/v2.0.2/Clash.Verge_2.0.2_x64-setup.exe)
+  ，备用下载地址：[Clash Verge Windows安装包下载](https://proxy.jzy88.top/https://github.com/clash-verge-rev/clash-verge-rev/releases/download/v2.0.3/Clash.Verge_2.0.3_x64-setup.exe)
 + `MacOS`：[Clash Verge官网下载](https://www.clashverge.dev/install.html#__tabbed_1_3)
     - `Intel 芯片`
-      备用下载地址：[Clash Verge MacOS_Intel芯片安装包下载](https://proxy.jzy88.top/https://github.com/clash-verge-rev/clash-verge-rev/releases/download/v2.0.2/Clash.Verge_2.0.2_x64.dmg)
+      备用下载地址：[Clash Verge MacOS_Intel芯片安装包下载](https://proxy.jzy88.top/https://github.com/clash-verge-rev/clash-verge-rev/releases/download/v2.0.3/Clash.Verge_2.0.3_x64.dmg)
     - `Apple M 芯片`
-      备用下载地址：[Clash Verge MacOS_M芯片安装包下载](https://proxy.jzy88.top/https://github.com/clash-verge-rev/clash-verge-rev/releases/download/v2.0.2/Clash.Verge_2.0.2_aarch64.dmg)
-+ `Android`：[Karing Github官网下载](https://github.com/KaringX/karing/releases/download/v1.0.35.467/karing_1.0.35.467_android_arm64-v8a.apk)
-，备用下载地址：[Karing Android安装包下载](https://proxy.jzy88.top/https://github.com/KaringX/karing/releases/download/v1.0.35.467/karing_1.0.35.467_android_arm64-v8a.apk)
+      备用下载地址：[Clash Verge MacOS_M芯片安装包下载](https://proxy.jzy88.top/https://github.com/clash-verge-rev/clash-verge-rev/releases/download/v2.0.3/Clash.Verge_2.0.3_aarch64.dmg)
++ `Android`：[Karing Github官网下载](https://github.com/KaringX/karing/releases/download/v1.0.39.527/karing_1.0.39.527_android_arm64-v8a.apk)
+，备用下载地址：[Karing Android安装包下载](https://proxy.jzy88.top/https://github.com/KaringX/karing/releases/download/v1.0.39.527/karing_1.0.39.527_android_arm64-v8a.apk)
 + `IOS`：
     - [Karing 非中国区App Store下载](https://apps.apple.com/us/app/karing/id6472431552)
     - [Shadowrocket 非中国区App Store下载](https://apps.apple.com/us/app/shadowrocket/id932747118)

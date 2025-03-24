@@ -1,0 +1,466 @@
+{
+    "dns": {
+        "fakeip": {
+            "enabled": true,
+            "inet4_range": "198.18.0.0/15",
+            "inet6_range": "fc00::/18"
+        },
+        "independent_cache": true,
+        "rules": [
+            {
+                "outbound": [
+                    "any"
+                ],
+                "server": "local"
+            },
+            {
+                "disable_cache": true,
+                "geosite": [
+                    "category-ads-all"
+                ],
+                "server": "block"
+            },
+            {
+                "query_type": [
+                    "A",
+                    "AAAA"
+                ],
+                "rewrite_ttl": 1,
+                "server": "fakeip"
+            },
+            {
+                "clash_mode": "global",
+                "server": "remote"
+            },
+            {
+                "clash_mode": "direct",
+                "server": "local"
+            },
+            {
+                "geosite": "cn",
+                "server": "local"
+            }
+        ],
+        "servers": [
+            {
+                "address": "8.8.8.8",
+                "detour": "select",
+                "tag": "remote"
+            },
+            {
+                "address": "223.5.5.5",
+                "detour": "direct",
+                "tag": "local"
+            },
+            {
+                "address": "rcode://success",
+                "tag": "block"
+            },
+            {
+                "address": "fakeip",
+                "tag": "fakeip"
+            }
+        ],
+        "strategy": "prefer_ipv4"
+    },
+    "experimental": {
+        "clash_api": {
+            "external_controller": "127.0.0.1:9090",
+            "secret": ""
+        }
+    },
+    "inbounds": [
+        {
+            "auto_route": false,
+            "domain_strategy": "prefer_ipv4",
+            "endpoint_independent_nat": true,
+            "inet4_address": "172.19.0.1/30",
+            "inet6_address": "2001:0470:f9da:fdfa::1/64",
+            "mtu": 9000,
+            "strict_route": true,
+            "type": "tun"
+        },
+        {
+            "domain_strategy": "prefer_ipv4",
+            "listen": "127.0.0.1",
+            "listen_port": 2333,
+            "tag": "socks-in",
+            "type": "socks",
+            "users": []
+        },
+        {
+            "domain_strategy": "prefer_ipv4",
+            "listen": "127.0.0.1",
+            "listen_port": 2334,
+            "set_system_proxy": true,
+            "tag": "mixed-in",
+            "type": "mixed",
+            "users": []
+        }
+    ],
+    "log": {},
+    "outbounds": [
+        {
+            "tag": "select",
+            "type": "selector",
+            "default": "urltest",
+            "outbounds": [
+                "urltest",
+                "LB_HK_reality_vision",
+                "US_reality_vision",
+                "US_vless_tls_vision",
+                "US_vless_tls_grpc",
+                "LB_HK_vless_tls_vision",
+                "LB_HK_vless_tls_grpc",
+                "Sgp_reality_vision",
+                "Sgp_vless_tls_vision",
+                "Sgp_vless_tls_grpc",
+                "HK_reality_vision",
+                "HK_vless_tls_vision",
+                "HK_vless_tls_grpc",
+                "LB_HK_hysteria2",
+                "HK_hysteria2",
+                "US_hysteria2",
+                "Sgp_hysteria2"
+            ]
+        },
+        {
+            "server": "xui.jzy88.top",
+            "server_port": 443,
+            "tag": "LB_HK_reality_vision",
+            "tls": {
+                "enabled": true,
+                "server_name": "www.xiao-zu.com",
+                "utls": {
+                    "enabled": true,
+                    "fingerprint": "chrome"
+                },
+                "reality": {
+                    "enabled": true,
+                    "public_key": "UK7qxWWGfRQcQfwaGpHnqmmqqJBut4jxve8AeDDJ2UI"
+                }
+            },
+            "type": "vless",
+            "uuid": "12d409cd-110b-4aad-b270-b62d2e34b054",
+            "flow": "xtls-rprx-vision",
+            "packet_encoding": "xudp"
+        },
+        {
+            "server": "amp.jzy88.top",
+            "server_port": 54322,
+            "tag": "US_reality_vision",
+            "tls": {
+                "enabled": true,
+                "server_name": "www.thecardinalshop.com",
+                "utls": {
+                    "enabled": true,
+                    "fingerprint": "chrome"
+                },
+                "reality": {
+                    "enabled": true,
+                    "public_key": "9rx7JwMO-KRZZEM9TQBO19BOAmmGjJyjN86ll2J7uVc"
+                }
+            },
+            "type": "vless",
+            "uuid": "fee14d4e-18e8-42f8-fb09-ea56cc45dbb9",
+            "flow": "xtls-rprx-vision",
+            "packet_encoding": "xudp"
+        },
+        {
+            "server": "amp.jzy88.top",
+            "server_port": 54323,
+            "tag": "US_vless_tls_vision",
+            "tls": {
+                "enabled": true,
+                "server_name": "amp.jzy88.top",
+                "utls": {
+                    "enabled": true,
+                    "fingerprint": "chrome"
+                }
+            },
+            "type": "vless",
+            "uuid": "a9a729dd-cdcc-4bf1-ca21-a029d92d8d68",
+            "flow": "xtls-rprx-vision",
+            "packet_encoding": "xudp"
+        },
+        {
+            "server": "amp.jzy88.top",
+            "server_port": 54324,
+            "tag": "US_vless_tls_grpc",
+            "tls": {
+                "enabled": true,
+                "server_name": "amp.jzy88.top",
+                "utls": {
+                    "enabled": true,
+                    "fingerprint": "chrome"
+                }
+            },
+            "transport": {
+                "type": "grpc",
+                "service_name": "grpc"
+            },
+            "type": "vless",
+            "uuid": "c892a231-c293-4c54-ec5a-14a8d0f8afec",
+            "packet_encoding": "xudp"
+        },
+        {
+            "server": "xui.jzy88.top",
+            "server_port": 54323,
+            "tag": "LB_HK_vless_tls_vision",
+            "tls": {
+                "enabled": true,
+                "server_name": "xui.jzy88.top",
+                "utls": {
+                    "enabled": true,
+                    "fingerprint": "chrome"
+                }
+            },
+            "type": "vless",
+            "uuid": "defa44bc-c3f2-4858-fedf-2c5004cca960",
+            "flow": "xtls-rprx-vision",
+            "packet_encoding": "xudp"
+        },
+        {
+            "server": "xui.jzy88.top",
+            "server_port": 54324,
+            "tag": "LB_HK_vless_tls_grpc",
+            "tls": {
+                "enabled": true,
+                "server_name": "xui.jzy88.top",
+                "utls": {
+                    "enabled": true,
+                    "fingerprint": "chrome"
+                }
+            },
+            "transport": {
+                "type": "grpc",
+                "service_name": "grpc"
+            },
+            "type": "vless",
+            "uuid": "f5f76567-c205-4bb1-d0c1-905d95feb268",
+            "packet_encoding": "xudp"
+        },
+        {
+            "server": "sgp.jzy88.top",
+            "server_port": 443,
+            "tag": "Sgp_reality_vision",
+            "tls": {
+                "enabled": true,
+                "server_name": "saga.broadfarglobal.com",
+                "utls": {
+                    "enabled": true,
+                    "fingerprint": "chrome"
+                },
+                "reality": {
+                    "enabled": true,
+                    "public_key": "pHcARQlYQZITQuaqTmKhHLsrTN8qHk3Q7wFBwXP7b2E"
+                }
+            },
+            "type": "vless",
+            "uuid": "753164d4-db7b-44b1-8e17-7cd137929efa",
+            "flow": "xtls-rprx-vision",
+            "packet_encoding": "xudp"
+        },
+        {
+            "server": "sgp.jzy88.top",
+            "server_port": 54323,
+            "tag": "Sgp_vless_tls_vision",
+            "tls": {
+                "enabled": true,
+                "server_name": "sgp.jzy88.top",
+                "utls": {
+                    "enabled": true,
+                    "fingerprint": "chrome"
+                }
+            },
+            "type": "vless",
+            "uuid": "a7b23dea-87d5-44d5-92fd-f616fe7bb806",
+            "flow": "xtls-rprx-vision",
+            "packet_encoding": "xudp"
+        },
+        {
+            "server": "sgp.jzy88.top",
+            "server_port": 54324,
+            "tag": "Sgp_vless_tls_grpc",
+            "tls": {
+                "enabled": true,
+                "server_name": "sgp.jzy88.top",
+                "utls": {
+                    "enabled": true,
+                    "fingerprint": "chrome"
+                }
+            },
+            "transport": {
+                "type": "grpc",
+                "service_name": "grpc"
+            },
+            "type": "vless",
+            "uuid": "2a417a10-8262-4660-840d-5181b6103dfe",
+            "packet_encoding": "xudp"
+        },
+        {
+            "server": "hk1.jzy88.top",
+            "server_port": 54322,
+            "tag": "HK_reality_vision",
+            "tls": {
+                "enabled": true,
+                "server_name": "www.walletsiam.com",
+                "utls": {
+                    "enabled": true,
+                    "fingerprint": "chrome"
+                },
+                "reality": {
+                    "enabled": true,
+                    "public_key": "DwlWnHkQlc5bvrF7LTTA2QsVm3EYWPZZnjs_2O5NPVQ"
+                }
+            },
+            "type": "vless",
+            "uuid": "ee027e15-0ab6-4184-9d0a-86632a3b6e7b",
+            "flow": "xtls-rprx-vision",
+            "packet_encoding": "xudp"
+        },
+        {
+            "server": "hk1.jzy88.top",
+            "server_port": 54323,
+            "tag": "HK_vless_tls_vision",
+            "tls": {
+                "enabled": true,
+                "server_name": "hk1.jzy88.top",
+                "utls": {
+                    "enabled": true,
+                    "fingerprint": "chrome"
+                }
+            },
+            "type": "vless",
+            "uuid": "6732268e-cce8-474b-b744-6b9f08944113",
+            "flow": "xtls-rprx-vision",
+            "packet_encoding": "xudp"
+        },
+        {
+            "server": "hk1.jzy88.top",
+            "server_port": 54324,
+            "tag": "HK_vless_tls_grpc",
+            "tls": {
+                "enabled": true,
+                "server_name": "hk1.jzy88.top",
+                "utls": {
+                    "enabled": true,
+                    "fingerprint": "chrome"
+                }
+            },
+            "transport": {
+                "type": "grpc",
+                "service_name": "grpc"
+            },
+            "type": "vless",
+            "uuid": "85b7c135-1b6c-4bec-9da0-ca44beb1d0a9",
+            "packet_encoding": "xudp"
+        },
+        {
+            "password": "ZSr+zxg/+ku+P9VH/MtbgqfS",
+            "server": "xui.jzy88.top",
+            "server_port": 54329,
+            "tag": "LB_HK_hysteria2",
+            "tls": {
+                "enabled": true,
+                "server_name": "xui.jzy88.top"
+            },
+            "type": "hysteria2"
+        },
+        {
+            "password": "Jae7758521...",
+            "server": "hk1.jzy88.top",
+            "server_port": 54328,
+            "tag": "HK_hysteria2",
+            "tls": {
+                "enabled": true,
+                "server_name": "hk1.jzy88.top"
+            },
+            "type": "hysteria2"
+        },
+        {
+            "password": "Jae7758521...",
+            "server": "amp.jzy88.top",
+            "server_port": 2001,
+            "tag": "US_hysteria2",
+            "tls": {
+                "enabled": true,
+                "server_name": "amp.jzy88.top"
+            },
+            "type": "hysteria2"
+        },
+        {
+            "password": "9Hg9336P20lXfcF5fcwhJ1Re",
+            "server": "sgp.jzy88.top",
+            "server_port": 54329,
+            "tag": "Sgp_hysteria2",
+            "tls": {
+                "enabled": true,
+                "server_name": "sgp.jzy88.top"
+            },
+            "type": "hysteria2"
+        },
+        {
+            "tag": "urltest",
+            "type": "urltest",
+            "outbounds": [
+                "LB_HK_reality_vision",
+                "US_reality_vision",
+                "US_vless_tls_vision",
+                "US_vless_tls_grpc",
+                "LB_HK_vless_tls_vision",
+                "LB_HK_vless_tls_grpc",
+                "Sgp_reality_vision",
+                "Sgp_vless_tls_vision",
+                "Sgp_vless_tls_grpc",
+                "HK_reality_vision",
+                "HK_vless_tls_vision",
+                "HK_vless_tls_grpc",
+                "LB_HK_hysteria2",
+                "HK_hysteria2",
+                "US_hysteria2",
+                "Sgp_hysteria2"
+            ]
+        },
+        {
+            "tag": "direct",
+            "type": "direct"
+        },
+        {
+            "tag": "block",
+            "type": "block"
+        },
+        {
+            "tag": "dns-out",
+            "type": "dns"
+        }
+    ],
+    "route": {
+        "auto_detect_interface": true,
+        "rules": [
+            {
+                "geosite": "category-ads-all",
+                "outbound": "block"
+            },
+            {
+                "outbound": "dns-out",
+                "port": 53
+            },
+            {
+                "clash_mode": "direct",
+                "outbound": "direct"
+            },
+            {
+                "clash_mode": "global",
+                "outbound": "select"
+            },
+            {
+                "geoip": [
+                    "cn",
+                    "private"
+                ],
+                "outbound": "direct"
+            }
+        ]
+    }
+}

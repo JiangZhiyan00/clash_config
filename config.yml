@@ -15,10 +15,10 @@ dns:
   enhanced-mode: fake-ip
   fake-ip-range: 198.18.0.1/16
   default-nameserver:
+    - 8.8.8.8
+    - 1.1.1.1
     - 223.5.5.5
     - 114.114.114.114
-    - 1.1.1.1
-    - 8.8.8.8
     - 119.29.29.29
   nameserver:
     - https://dns.alidns.com/dns-query
@@ -37,138 +37,6 @@ dns:
       - 240.0.0.0/4
 
 proxies:
-  - {
-      name: LB_HK_reality_vision,
-      server: xui.jzy88.top,
-      type: vless,
-      port: 443,
-      uuid: 12d409cd-110b-4aad-b270-b62d2e34b054,
-      network: tcp,
-      servername: www.xiao-zu.com,
-      flow: xtls-rprx-vision,
-      udp: true,
-      tls: true,
-      reality-opts:
-        {
-          public-key: UK7qxWWGfRQcQfwaGpHnqmmqqJBut4jxve8AeDDJ2UI,
-          short-id: "",
-        },
-      client-fingerprint: chrome,
-    }
-  - {
-      name: US_reality_vision,
-      server: amp.jzy88.top,
-      type: vless,
-      port: 54322,
-      uuid: fee14d4e-18e8-42f8-fb09-ea56cc45dbb9,
-      network: tcp,
-      servername: www.thecardinalshop.com,
-      flow: xtls-rprx-vision,
-      udp: true,
-      tls: true,
-      reality-opts:
-        {
-          public-key: 9rx7JwMO-KRZZEM9TQBO19BOAmmGjJyjN86ll2J7uVc,
-          short-id: "",
-        },
-      client-fingerprint: chrome,
-    }
-  - {
-      name: US_vless_tls_vision,
-      server: amp.jzy88.top,
-      type: vless,
-      port: 54323,
-      uuid: a9a729dd-cdcc-4bf1-ca21-a029d92d8d68,
-      network: tcp,
-      servername: amp.jzy88.top,
-      flow: xtls-rprx-vision,
-      udp: true,
-      tls: true,
-      client-fingerprint: chrome,
-    }
-  - {
-      name: US_vless_tls_grpc,
-      server: amp.jzy88.top,
-      type: vless,
-      port: 54324,
-      uuid: c892a231-c293-4c54-ec5a-14a8d0f8afec,
-      network: grpc,
-      servername: amp.jzy88.top,
-      udp: true,
-      tls: true,
-      client-fingerprint: chrome,
-      grpc-opts: { grpc-service-name: grpc },
-    }
-  - {
-      name: LB_HK_vless_tls_vision,
-      server: xui.jzy88.top,
-      type: vless,
-      port: 54323,
-      uuid: defa44bc-c3f2-4858-fedf-2c5004cca960,
-      network: tcp,
-      servername: xui.jzy88.top,
-      flow: xtls-rprx-vision,
-      udp: true,
-      tls: true,
-      client-fingerprint: chrome,
-    }
-  - {
-      name: LB_HK_vless_tls_grpc,
-      server: xui.jzy88.top,
-      type: vless,
-      port: 54324,
-      uuid: f5f76567-c205-4bb1-d0c1-905d95feb268,
-      network: grpc,
-      servername: xui.jzy88.top,
-      udp: true,
-      tls: true,
-      client-fingerprint: chrome,
-      grpc-opts: { grpc-service-name: grpc },
-    }
-  - {
-      name: Sgp_reality_vision,
-      server: sgp.jzy88.top,
-      type: vless,
-      port: 54322,
-      uuid: 753164d4-db7b-44b1-8e17-7cd137929efa,
-      network: tcp,
-      servername: saga.broadfarglobal.com,
-      flow: xtls-rprx-vision,
-      udp: true,
-      tls: true,
-      reality-opts:
-        {
-          public-key: pHcARQlYQZITQuaqTmKhHLsrTN8qHk3Q7wFBwXP7b2E,
-          short-id: "",
-        },
-      client-fingerprint: chrome,
-    }
-  - {
-      name: Sgp_vless_tls_vision,
-      server: sgp.jzy88.top,
-      type: vless,
-      port: 54323,
-      uuid: a7b23dea-87d5-44d5-92fd-f616fe7bb806,
-      network: tcp,
-      servername: sgp.jzy88.top,
-      flow: xtls-rprx-vision,
-      udp: true,
-      tls: true,
-      client-fingerprint: chrome,
-    }
-  - {
-      name: Sgp_vless_tls_grpc,
-      server: sgp.jzy88.top,
-      type: vless,
-      port: 54324,
-      uuid: 2a417a10-8262-4660-840d-5181b6103dfe,
-      network: grpc,
-      servername: sgp.jzy88.top,
-      udp: true,
-      tls: true,
-      client-fingerprint: chrome,
-      grpc-opts: { grpc-service-name: grpc },
-    }
   - {
       name: US_ss,
       server: amp.jzy88.top,
@@ -229,33 +97,6 @@ proxies:
           host: obs-jp.line-apps.com,
         },
     }
-  - {
-      name: LB_HK_hysteria2,
-      server: xui.jzy88.top,
-      port: 54329,
-      type: hysteria2,
-      password: ZSr+zxg/+ku+P9VH/MtbgqfS,
-      sni: xui.jzy88.top,
-      skip-sert-verify: false,
-    }
-  - {
-      name: US_hysteria2,
-      server: amp.jzy88.top,
-      port: 2001,
-      type: hysteria2,
-      password: Jae7758521...,
-      sni: amp.jzy88.top,
-      skip-sert-verify: false,
-    }
-  - {
-      name: Sgp_hysteria2,
-      server: sgp.jzy88.top,
-      port: 54329,
-      type: hysteria2,
-      password: 9Hg9336P20lXfcF5fcwhJ1Re,
-      sni: sgp.jzy88.top,
-      skip-sert-verify: false,
-    }
 proxy-groups:
   - name: 🚀 节点选择
     type: select
@@ -267,23 +108,9 @@ proxy-groups:
   - name: 🚀 手动切换
     type: select
     proxies:
-      - Sgp_vless_tls_vision
-      - Sgp_reality_vision
-      - Sgp_vless_tls_grpc
       - Sgp_ss
-      - Sgp_hysteria2
-
-      - LB_HK_vless_tls_vision
-      - LB_HK_reality_vision
-      - LB_HK_vless_tls_grpc
       - LB_HK_ss
-      - LB_HK_hysteria2
-
-      - US_vless_tls_vision
-      - US_reality_vision
-      - US_vless_tls_grpc
       - US_ss
-      - US_hysteria2
 
   - name: ♻️ 自动选择
     type: url-test
@@ -291,23 +118,9 @@ proxy-groups:
     interval: 300
     tolerance: 50
     proxies:
-      - Sgp_vless_tls_vision
-      - Sgp_reality_vision
-      - Sgp_vless_tls_grpc
       - Sgp_ss
-      - Sgp_hysteria2
-
-      - LB_HK_vless_tls_vision
-      - LB_HK_reality_vision
-      - LB_HK_vless_tls_grpc
       - LB_HK_ss
-      - LB_HK_hysteria2
-
-      - US_vless_tls_vision
-      - US_reality_vision
-      - US_vless_tls_grpc
       - US_ss
-      - US_hysteria2
   - name: 🛑 广告拦截
     type: select
     proxies:
@@ -365,23 +178,9 @@ proxy-groups:
     interval: 300
     tolerance: 50
     proxies:
-      - Sgp_vless_tls_vision
-      - Sgp_reality_vision
-      - Sgp_vless_tls_grpc
       - Sgp_ss
-      - Sgp_hysteria2
-
-      - LB_HK_vless_tls_vision
-      - LB_HK_reality_vision
-      - LB_HK_vless_tls_grpc
       - LB_HK_ss
-      - LB_HK_hysteria2
-
-      - US_vless_tls_vision
-      - US_reality_vision
-      - US_vless_tls_grpc
       - US_ss
-      - US_hysteria2
 rules:
   - DOMAIN-SUFFIX,acl4.ssr,🎯 全球直连
   - DOMAIN-SUFFIX,ip6-localhost,🎯 全球直连

@@ -1,5 +1,5 @@
 <h2>配置使用说明</h2>
-> 更新于：2024年12月4日
+> 更新于：2025年4月2日
 >
 
 <h3 id="JCmiJ">1.下载并安装客户端</h3>
@@ -8,14 +8,14 @@
 <font style="background:#DBF1B7;color:#2A4200">建议下载安装最新版本</font>
 
 + `Windows`：[Clash Verge官网下载](https://www.clashverge.dev/install.html#__tabbed_1_1)
-  ，备用下载地址：[Clash Verge Windows安装包下载](https://proxy.jzy88.top/https://github.com/clash-verge-rev/clash-verge-rev/releases/download/v2.0.3/Clash.Verge_2.0.3_x64-setup.exe)
+  ，备用下载地址（文件名后缀`_x64.exe`）：[Clash Verge Windows安装包下载](https://proxy.jzy88.top/https://github.com/clash-verge-rev/clash-verge-rev/releases/latest)
 + `MacOS`：[Clash Verge官网下载](https://www.clashverge.dev/install.html#__tabbed_1_3)
     - `Intel 芯片`
-      备用下载地址：[Clash Verge MacOS_Intel芯片安装包下载](https://proxy.jzy88.top/https://github.com/clash-verge-rev/clash-verge-rev/releases/download/v2.0.3/Clash.Verge_2.0.3_x64.dmg)
+      备用下载地址（文件名后缀`_x64.dmg`）：[Clash Verge MacOS_Intel芯片安装包下载](https://proxy.jzy88.top/https://github.com/clash-verge-rev/clash-verge-rev/releases/latest)
     - `Apple M 芯片`
-      备用下载地址：[Clash Verge MacOS_M芯片安装包下载](https://proxy.jzy88.top/https://github.com/clash-verge-rev/clash-verge-rev/releases/download/v2.0.3/Clash.Verge_2.0.3_aarch64.dmg)
-+ `Android`：[Karing Github官网下载](https://github.com/KaringX/karing/releases/download/v1.0.39.527/karing_1.0.39.527_android_arm64-v8a.apk)
-，备用下载地址：[Karing Android安装包下载](https://proxy.jzy88.top/https://github.com/KaringX/karing/releases/download/v1.0.39.527/karing_1.0.39.527_android_arm64-v8a.apk)
+      备用下载地址（文件名后缀`_aarch64.dmg`）：[Clash Verge MacOS_M芯片安装包下载](https://proxy.jzy88.top/https://github.com/clash-verge-rev/clash-verge-rev/releases/latest)
++ `Android`（文件名后缀`_arm64-v8a.apk`）：[Karing Github官网下载](https://github.com/KaringX/karing/releases/latest)
+，备用下载地址：[Karing Android安装包下载](https://proxy.jzy88.top/https://github.com/KaringX/karing/releases/latest)
 + `IOS`：
     - [Karing 非中国区App Store下载](https://apps.apple.com/us/app/karing/id6472431552)
     - [Shadowrocket 非中国区App Store下载](https://apps.apple.com/us/app/shadowrocket/id932747118)

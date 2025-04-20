@@ -38,6 +38,23 @@ dns:
 
 proxies:
   - {
+      name: claw_ws_100G,
+      type: vless,
+      server: jpflenukrkuq.ap-northeast-1.clawcloudrun.com,
+      port: 443,
+      uuid: 080be9fa-f023-4768-961b-d70f42ca1fe6,
+      udp: true,
+      tls: true,
+      network: ws,
+      servername: jpflenukrkuq.ap-northeast-1.clawcloudrun.com,
+      ws-opts:
+        {
+          path: "/claw",
+          headers: { Host: jpflenukrkuq.ap-northeast-1.clawcloudrun.com },
+        },
+      client-fingerprint: chrome,
+    }
+  - {
       name: LB_HK_reality_vision,
       server: xui.jzy88.top,
       type: vless,
@@ -273,6 +290,8 @@ proxy-groups:
       - Sgp_ss
       - Sgp_hysteria2
 
+      - claw_ws_100G
+
       - LB_HK_vless_tls_vision
       - LB_HK_reality_vision
       - LB_HK_vless_tls_grpc
@@ -296,6 +315,8 @@ proxy-groups:
       - Sgp_vless_tls_grpc
       - Sgp_ss
       - Sgp_hysteria2
+
+      - claw_ws_100G
 
       - LB_HK_vless_tls_vision
       - LB_HK_reality_vision
@@ -357,8 +378,8 @@ proxy-groups:
   - name: 🐟 漏网之鱼
     type: select
     proxies:
-      - DIRECT
       - 🚀 节点选择
+      - DIRECT
   - name: 👍 高级节点
     type: url-test
     url: http://www.gstatic.com/generate_204
@@ -370,6 +391,8 @@ proxy-groups:
       - Sgp_vless_tls_grpc
       - Sgp_ss
       - Sgp_hysteria2
+
+      - claw_ws_100G
 
       - LB_HK_vless_tls_vision
       - LB_HK_reality_vision

@@ -38,21 +38,30 @@ dns:
 
 proxies:
   - {
-      name: claw_ws_100G,
+      name: SGP_Claw_vless_grpc_100G,
+      server: kiosgrjnfzvt.ap-southeast-1.clawcloudrun.com,
       type: vless,
-      server: jpflenukrkuq.ap-northeast-1.clawcloudrun.com,
       port: 443,
-      uuid: 080be9fa-f023-4768-961b-d70f42ca1fe6,
+      uuid: 2905d068-3052-4eae-b68e-ac9dfc7be412,
+      network: grpc,
+      servername: kiosgrjnfzvt.ap-southeast-1.clawcloudrun.com,
       udp: true,
       tls: true,
-      network: ws,
-      servername: jpflenukrkuq.ap-northeast-1.clawcloudrun.com,
-      ws-opts:
-        {
-          path: "/claw",
-          headers: { Host: jpflenukrkuq.ap-northeast-1.clawcloudrun.com },
-        },
       client-fingerprint: chrome,
+      grpc-opts: { grpc-service-name: grpc },
+    }
+  - {
+      name: JP_Claw_vless_grpc_100G,
+      server: hcdkfncxzkql.ap-northeast-1.clawcloudrun.com,
+      type: vless,
+      port: 443,
+      uuid: f7685dfb-8ffd-4eef-90c5-b3c00f6d801e,
+      network: grpc,
+      servername: hcdkfncxzkql.ap-northeast-1.clawcloudrun.com,
+      udp: true,
+      tls: true,
+      client-fingerprint: chrome,
+      grpc-opts: { grpc-service-name: grpc },
     }
   - {
       name: LB_HK_reality_vision,
@@ -290,7 +299,8 @@ proxy-groups:
       - Sgp_ss
       - Sgp_hysteria2
 
-      - claw_ws_100G
+      - SGP_Claw_vless_grpc_100G
+      - JP_Claw_vless_grpc_100G
 
       - LB_HK_vless_tls_vision
       - LB_HK_reality_vision
@@ -316,7 +326,8 @@ proxy-groups:
       - Sgp_ss
       - Sgp_hysteria2
 
-      - claw_ws_100G
+      - SGP_Claw_vless_grpc_100G
+      - JP_Claw_vless_grpc_100G
 
       - LB_HK_vless_tls_vision
       - LB_HK_reality_vision
@@ -392,7 +403,8 @@ proxy-groups:
       - Sgp_ss
       - Sgp_hysteria2
 
-      - claw_ws_100G
+      - SGP_Claw_vless_grpc_100G
+      - JP_Claw_vless_grpc_100G
 
       - LB_HK_vless_tls_vision
       - LB_HK_reality_vision

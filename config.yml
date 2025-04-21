@@ -38,7 +38,7 @@ dns:
 
 proxies:
   - {
-      name: Claw_vless_grpc_100G,
+      name: SGP_Claw_vless_grpc_100G,
       server: kiosgrjnfzvt.ap-southeast-1.clawcloudrun.com,
       type: vless,
       port: 443,

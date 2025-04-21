@@ -196,66 +196,6 @@ proxies:
       grpc-opts: { grpc-service-name: grpc },
     }
   - {
-      name: US_ss,
-      server: amp.jzy88.top,
-      port: 54325,
-      client-fingerprint: chrome,
-      type: ss,
-      cipher: aes-256-gcm,
-      password: nc4k4zm12G7cFGkdeusJv6Xx9L7Sws9XtMeeCUNJ5RBM,
-      tfo: false,
-      udp: true,
-      plugin: obfs,
-      plugin-opts:
-        {
-          mode: http,
-          tls: false,
-          skip-cert-verify: true,
-          path: /,
-          host: obs-jp.line-apps.com,
-        },
-    }
-  - {
-      name: LB_HK_ss,
-      server: xui.jzy88.top,
-      port: 54325,
-      client-fingerprint: chrome,
-      type: ss,
-      cipher: aes-256-gcm,
-      password: KyteYLTlfSRHJUbAtVI9Vp2W89PJXwKWLkvfr9SXjPNG,
-      tfo: false,
-      udp: true,
-      plugin: obfs,
-      plugin-opts:
-        {
-          mode: http,
-          tls: false,
-          skip-cert-verify: true,
-          path: /,
-          host: obs-jp.line-apps.com,
-        },
-    }
-  - {
-      name: Sgp_ss,
-      server: sgp.jzy88.top,
-      port: 54325,
-      client-fingerprint: chrome,
-      type: ss,
-      cipher: aes-256-gcm,
-      password: PB8nqz84oonIGWqCuBzR/b4k0JB1L8JWoDqgCXVTFDM=,
-      tfo: false,
-      udp: true,
-      plugin: obfs,
-      plugin-opts:
-        {
-          mode: http,
-          tls: false,
-          skip-cert-verify: true,
-          path: /,
-          host: obs-jp.line-apps.com,
-        },
-    }
-  - {
       name: LB_HK_hysteria2,
       server: xui.jzy88.top,
       port: 54329,
@@ -296,7 +236,6 @@ proxy-groups:
       - Sgp_vless_tls_vision
       - Sgp_reality_vision
       - Sgp_vless_tls_grpc
-      - Sgp_ss
       - Sgp_hysteria2
 
       - SGP_Claw_vless_grpc_100G
@@ -305,13 +244,11 @@ proxy-groups:
       - LB_HK_vless_tls_vision
       - LB_HK_reality_vision
       - LB_HK_vless_tls_grpc
-      - LB_HK_ss
       - LB_HK_hysteria2
 
       - US_vless_tls_vision
       - US_reality_vision
       - US_vless_tls_grpc
-      - US_ss
       - US_hysteria2
 
   - name: ♻️ 自动选择
@@ -323,7 +260,6 @@ proxy-groups:
       - Sgp_vless_tls_vision
       - Sgp_reality_vision
       - Sgp_vless_tls_grpc
-      - Sgp_ss
       - Sgp_hysteria2
 
       - SGP_Claw_vless_grpc_100G
@@ -332,13 +268,11 @@ proxy-groups:
       - LB_HK_vless_tls_vision
       - LB_HK_reality_vision
       - LB_HK_vless_tls_grpc
-      - LB_HK_ss
       - LB_HK_hysteria2
 
       - US_vless_tls_vision
       - US_reality_vision
       - US_vless_tls_grpc
-      - US_ss
       - US_hysteria2
   - name: 🛑 广告拦截
     type: select
@@ -400,7 +334,6 @@ proxy-groups:
       - Sgp_vless_tls_vision
       - Sgp_reality_vision
       - Sgp_vless_tls_grpc
-      - Sgp_ss
       - Sgp_hysteria2
 
       - SGP_Claw_vless_grpc_100G
@@ -409,13 +342,11 @@ proxy-groups:
       - LB_HK_vless_tls_vision
       - LB_HK_reality_vision
       - LB_HK_vless_tls_grpc
-      - LB_HK_ss
       - LB_HK_hysteria2
 
       - US_vless_tls_vision
       - US_reality_vision
       - US_vless_tls_grpc
-      - US_ss
       - US_hysteria2
 rules:
   - DOMAIN-SUFFIX,acl4.ssr,🎯 全球直连

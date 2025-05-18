@@ -453,7 +453,7 @@ proxy-groups:
       - Sgp_vless_tls_grpc
       - Sgp_ss
       - Sgp_hysteria2
-      - Sgp_HK_any_tls
+      - Sgp_any_tls
 
       - SGP_Claw_vless_grpc_100G
       - JP_Claw_vless_grpc_100G

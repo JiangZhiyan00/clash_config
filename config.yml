@@ -267,6 +267,14 @@ proxies:
       sni: sgp.jzy88.top,
       skip-sert-verify: false,
     }
+  - {
+      name: Sgp_Claw_hysteria2_100G,
+      type: hysteria2,
+      server: sgphui.jzy88.top,
+      port: "46514",
+      password: jiangzhiyan.jzy.666@abcd,
+      skip-cert-verify: true
+    }
 proxy-groups:
   - name: 🚀 节点选择
     type: select
@@ -286,6 +294,7 @@ proxy-groups:
 
       - SGP_Claw_vless_grpc_100G
       - JP_Claw_vless_grpc_100G
+      - Sgp_Claw_hysteria2_100G
 
       - LB_HK_vless_tls_vision
       - LB_HK_reality_vision
@@ -313,6 +322,7 @@ proxy-groups:
 
       - SGP_Claw_vless_grpc_100G
       - JP_Claw_vless_grpc_100G
+      - Sgp_Claw_hysteria2_100G
 
       - LB_HK_vless_tls_vision
       - LB_HK_reality_vision
@@ -390,6 +400,7 @@ proxy-groups:
 
       - SGP_Claw_vless_grpc_100G
       - JP_Claw_vless_grpc_100G
+      - Sgp_Claw_hysteria2_100G
 
       - LB_HK_vless_tls_vision
       - LB_HK_reality_vision

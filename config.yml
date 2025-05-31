@@ -330,7 +330,7 @@ proxies:
   - {
       name: Sgp_Claw_hysteria2_100G,
       type: hysteria2,
-      server: zhggqfthlpqc.ap-southeast-1.clawcloudrun.com,
+      server: sgphui.jzy88.top,
       port: "46514",
       password: jiangzhiyan.jzy.666@abcd,
       skip-cert-verify: true

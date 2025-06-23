@@ -321,7 +321,7 @@ proxies:
   - {
       name: Sgp_hysteria2,
       server: sgp.jzy88.top,
-      port: 54327,
+      port: 54328,
       type: hysteria2,
       password: jiangzhiyan.9Hg9336P20lXfcF5fcwhJ1Re,
       skip-sert-verify: true,

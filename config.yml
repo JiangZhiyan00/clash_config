@@ -209,7 +209,7 @@ proxies:
       tls: true,
       reality-opts:
         {
-          public-key: pHcARQlYQZITQuaqTmKhHLsrTN8qHk3Q7wFBwXP7b2E,
+          public-key: qfqtAGKwYj1PtpsKIbhkIe8Occd9pjN401Pyb8KJx1E,
           short-id: "",
         },
       client-fingerprint: chrome,
@@ -241,66 +241,6 @@ proxies:
       grpc-opts: { grpc-service-name: grpc },
     }
   - {
-      name: US_ss,
-      server: amp.jzy88.top,
-      port: 54325,
-      client-fingerprint: chrome,
-      type: ss,
-      cipher: aes-256-gcm,
-      password: nc4k4zm12G7cFGkdeusJv6Xx9L7Sws9XtMeeCUNJ5RBM,
-      tfo: false,
-      udp: true,
-      plugin: obfs,
-      plugin-opts:
-        {
-          mode: http,
-          tls: false,
-          skip-cert-verify: true,
-          path: /,
-          host: obs-jp.line-apps.com,
-        },
-    }
-  - {
-      name: LB_HK_ss,
-      server: xui.jzy88.top,
-      port: 54325,
-      client-fingerprint: chrome,
-      type: ss,
-      cipher: aes-256-gcm,
-      password: KyteYLTlfSRHJUbAtVI9Vp2W89PJXwKWLkvfr9SXjPNG,
-      tfo: false,
-      udp: true,
-      plugin: obfs,
-      plugin-opts:
-        {
-          mode: http,
-          tls: false,
-          skip-cert-verify: true,
-          path: /,
-          host: obs-jp.line-apps.com,
-        },
-    }
-  - {
-      name: Sgp_ss,
-      server: sgp.jzy88.top,
-      port: 54325,
-      client-fingerprint: chrome,
-      type: ss,
-      cipher: aes-256-gcm,
-      password: PB8nqz84oonIGWqCuBzR/b4k0JB1L8JWoDqgCXVTFDM=,
-      tfo: false,
-      udp: true,
-      plugin: obfs,
-      plugin-opts:
-        {
-          mode: http,
-          tls: false,
-          skip-cert-verify: true,
-          path: /,
-          host: obs-jp.line-apps.com,
-        },
-    }
-  - {
       name: LB_HK_hysteria2,
       server: xui.jzy88.top,
       port: 54329,
@@ -321,10 +261,11 @@ proxies:
   - {
       name: Sgp_hysteria2,
       server: sgp.jzy88.top,
-      port: 54328,
+      port: 54325,
       type: hysteria2,
       password: jiangzhiyan.9Hg9336P20lXfcF5fcwhJ1Re,
-      skip-sert-verify: true,
+      sni: sgp.jzy88.top,
+      skip-sert-verify: false,
     }
   - {
       name: Sgp_Claw_hysteria2_100G,
@@ -348,7 +289,6 @@ proxy-groups:
       - Sgp_vless_tls_vision
       - Sgp_reality_vision
       - Sgp_vless_tls_grpc
-      - Sgp_ss
       - Sgp_hysteria2
       - Sgp_any_tls
 
@@ -359,14 +299,12 @@ proxy-groups:
       - LB_HK_vless_tls_vision
       - LB_HK_reality_vision
       - LB_HK_vless_tls_grpc
-      - LB_HK_ss
       - LB_HK_hysteria2
       - LB_HK_any_tls
 
       - US_vless_tls_vision
       - US_reality_vision
       - US_vless_tls_grpc
-      - US_ss
       - US_hysteria2
       - US_any_tls
 
@@ -379,7 +317,6 @@ proxy-groups:
       - Sgp_vless_tls_vision
       - Sgp_reality_vision
       - Sgp_vless_tls_grpc
-      - Sgp_ss
       - Sgp_hysteria2
       - Sgp_any_tls
 
@@ -390,14 +327,12 @@ proxy-groups:
       - LB_HK_vless_tls_vision
       - LB_HK_reality_vision
       - LB_HK_vless_tls_grpc
-      - LB_HK_ss
       - LB_HK_hysteria2
       - LB_HK_any_tls
 
       - US_vless_tls_vision
       - US_reality_vision
       - US_vless_tls_grpc
-      - US_ss
       - US_hysteria2
       - US_any_tls
   - name: 🛑 广告拦截
@@ -460,7 +395,6 @@ proxy-groups:
       - Sgp_vless_tls_vision
       - Sgp_reality_vision
       - Sgp_vless_tls_grpc
-      - Sgp_ss
       - Sgp_hysteria2
       - Sgp_any_tls
 
@@ -471,14 +405,12 @@ proxy-groups:
       - LB_HK_vless_tls_vision
       - LB_HK_reality_vision
       - LB_HK_vless_tls_grpc
-      - LB_HK_ss
       - LB_HK_hysteria2
       - LB_HK_any_tls
 
       - US_vless_tls_vision
       - US_reality_vision
       - US_vless_tls_grpc
-      - US_ss
       - US_hysteria2
       - US_any_tls
 rules:

@@ -38,51 +38,6 @@ dns:
 
 proxies:
   - {
-      name: Sgp_any_tls,
-      server: sgp.jzy88.top,
-      type: anytls,
-      port: 54327,
-      password: Jzy666,
-      udp: true,
-      client-fingerprint: chrome,
-      idle-session-check-interval: 30,
-      idle-session-timeout: 30,
-      min-idle-session: 0,
-      sni: sgp.jzy88.top,
-      alpn: [h2, http/1.1],
-      skip-cert-verify: false,
-    }
-  - {
-      name: LB_HK_any_tls,
-      server: xui.jzy88.top,
-      type: anytls,
-      port: 54327,
-      password: Jzy666,
-      udp: true,
-      client-fingerprint: chrome,
-      idle-session-check-interval: 30,
-      idle-session-timeout: 30,
-      min-idle-session: 0,
-      sni: xui.jzy88.top,
-      alpn: [h2, http/1.1],
-      skip-cert-verify: false,
-    }
-  - {
-      name: US_any_tls,
-      server: amp.jzy88.top,
-      type: anytls,
-      port: 54327,
-      password: Jzy666,
-      udp: true,
-      client-fingerprint: chrome,
-      idle-session-check-interval: 30,
-      idle-session-timeout: 30,
-      min-idle-session: 0,
-      sni: amp.jzy88.top,
-      alpn: [h2, http/1.1],
-      skip-cert-verify: false,
-    }
-  - {
       name: SGP_Claw_vless_grpc_100G,
       server: kiosgrjnfzvt.ap-southeast-1.clawcloudrun.com,
       type: vless,
@@ -290,7 +245,6 @@ proxy-groups:
       - Sgp_reality_vision
       - Sgp_vless_tls_grpc
       - Sgp_hysteria2
-      - Sgp_any_tls
 
       - SGP_Claw_vless_grpc_100G
       - JP_Claw_vless_grpc_100G
@@ -300,13 +254,11 @@ proxy-groups:
       - LB_HK_reality_vision
       - LB_HK_vless_tls_grpc
       - LB_HK_hysteria2
-      - LB_HK_any_tls
 
       - US_vless_tls_vision
       - US_reality_vision
       - US_vless_tls_grpc
       - US_hysteria2
-      - US_any_tls
 
   - name: ♻️ 自动选择
     type: url-test
@@ -318,7 +270,6 @@ proxy-groups:
       - Sgp_reality_vision
       - Sgp_vless_tls_grpc
       - Sgp_hysteria2
-      - Sgp_any_tls
 
       - SGP_Claw_vless_grpc_100G
       - JP_Claw_vless_grpc_100G
@@ -328,13 +279,11 @@ proxy-groups:
       - LB_HK_reality_vision
       - LB_HK_vless_tls_grpc
       - LB_HK_hysteria2
-      - LB_HK_any_tls
 
       - US_vless_tls_vision
       - US_reality_vision
       - US_vless_tls_grpc
       - US_hysteria2
-      - US_any_tls
   - name: 🛑 广告拦截
     type: select
     proxies:
@@ -396,7 +345,6 @@ proxy-groups:
       - Sgp_reality_vision
       - Sgp_vless_tls_grpc
       - Sgp_hysteria2
-      - Sgp_any_tls
 
       - SGP_Claw_vless_grpc_100G
       - JP_Claw_vless_grpc_100G
@@ -406,13 +354,11 @@ proxy-groups:
       - LB_HK_reality_vision
       - LB_HK_vless_tls_grpc
       - LB_HK_hysteria2
-      - LB_HK_any_tls
 
       - US_vless_tls_vision
       - US_reality_vision
       - US_vless_tls_grpc
       - US_hysteria2
-      - US_any_tls
 rules:
   - DOMAIN-SUFFIX,acl4.ssr,🎯 全球直连
   - DOMAIN-SUFFIX,ip6-localhost,🎯 全球直连

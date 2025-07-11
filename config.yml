@@ -112,7 +112,7 @@ proxies:
       name: LB_HK_reality_vision,
       server: xui.jzy88.top,
       type: vless,
-      port: 443,
+      port: 54322,
       uuid: 12d409cd-110b-4aad-b270-b62d2e34b054,
       network: tcp,
       servername: www.xiao-zu.com,

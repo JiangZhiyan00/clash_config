@@ -70,7 +70,7 @@
 
 <h3 id="PasC5">4.订阅链接</h3>
 
-<font style="background:#DBF1B7;color:#2A4200">规则为：https://`域名`/`分支名`</font>
+<font style="background:#DBF1B7;color:#2A4200">规则为：https://域名/分支名</font>
 
 + `jzy(默认)` 分支订阅链接：[https://clash_config.jzy88.top/jzy](https://clash_config.jzy88.top/jzy)；
 + `main` 分支订阅链接：[https://clash_config.jzy88.top/main](https://clash_config.jzy88.top/main)。

@@ -1,5 +1,5 @@
 <h2>配置使用说明</h2>
-> 更新于：2025年4月2日
+> 更新于：2025年7月28日
 >
 
 <h3 id="JCmiJ">1.下载并安装客户端</h3>
@@ -67,3 +67,10 @@
    ![开启代理](images/手机端_Shadowrocket开启代理.png)
 
 现在Shadowrocket手机端就可以正常使用了。
+
+<h3 id="PasC5">4.订阅链接</h3>
+
+<font style="background:#DBF1B7;color:#2A4200">规则为：https://`域名`/`分支名`</font>
+
++ `jzy(默认)` 分支订阅链接：[https://clash_config.jzy88.top/jzy](https://clash_config.jzy88.top/jzy)；
++ `main` 分支订阅链接：[https://clash_config.jzy88.top/main](https://clash_config.jzy88.top/main)。

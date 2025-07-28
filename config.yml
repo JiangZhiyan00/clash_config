@@ -68,21 +68,6 @@ proxies:
       skip-cert-verify: false,
     }
   - {
-      name: US_any_tls,
-      server: amp.jzy88.top,
-      type: anytls,
-      port: 54327,
-      password: Jzy666,
-      udp: true,
-      client-fingerprint: chrome,
-      idle-session-check-interval: 30,
-      idle-session-timeout: 30,
-      min-idle-session: 0,
-      sni: amp.jzy88.top,
-      alpn: [h2, http/1.1],
-      skip-cert-verify: false,
-    }
-  - {
       name: SGP_Claw_vless_grpc_100G,
       server: kiosgrjnfzvt.ap-southeast-1.clawcloudrun.com,
       type: vless,
@@ -125,50 +110,6 @@ proxies:
           short-id: "",
         },
       client-fingerprint: chrome,
-    }
-  - {
-      name: US_reality_vision,
-      server: amp.jzy88.top,
-      type: vless,
-      port: 54322,
-      uuid: fee14d4e-18e8-42f8-fb09-ea56cc45dbb9,
-      network: tcp,
-      servername: www.thecardinalshop.com,
-      flow: xtls-rprx-vision,
-      udp: true,
-      tls: true,
-      reality-opts:
-        {
-          public-key: 9rx7JwMO-KRZZEM9TQBO19BOAmmGjJyjN86ll2J7uVc,
-          short-id: "",
-        },
-      client-fingerprint: chrome,
-    }
-  - {
-      name: US_vless_tls_vision,
-      server: amp.jzy88.top,
-      type: vless,
-      port: 54323,
-      uuid: a9a729dd-cdcc-4bf1-ca21-a029d92d8d68,
-      network: tcp,
-      servername: amp.jzy88.top,
-      flow: xtls-rprx-vision,
-      udp: true,
-      tls: true,
-      client-fingerprint: chrome,
-    }
-  - {
-      name: US_vless_tls_grpc,
-      server: amp.jzy88.top,
-      type: vless,
-      port: 54324,
-      uuid: c892a231-c293-4c54-ec5a-14a8d0f8afec,
-      network: grpc,
-      servername: amp.jzy88.top,
-      udp: true,
-      tls: true,
-      client-fingerprint: chrome,
-      grpc-opts: { grpc-service-name: grpc },
     }
   - {
       name: LB_HK_vless_tls_vision,
@@ -250,15 +191,6 @@ proxies:
       skip-sert-verify: false,
     }
   - {
-      name: US_hysteria2,
-      server: amp.jzy88.top,
-      port: 2001,
-      type: hysteria2,
-      password: Jae7758521...,
-      sni: amp.jzy88.top,
-      skip-sert-verify: false,
-    }
-  - {
       name: Sgp_hysteria2,
       server: sgp.jzy88.top,
       port: 54325,
@@ -302,12 +234,6 @@ proxy-groups:
       - LB_HK_hysteria2
       - LB_HK_any_tls
 
-      - US_vless_tls_vision
-      - US_reality_vision
-      - US_vless_tls_grpc
-      - US_hysteria2
-      - US_any_tls
-
   - name: ♻️ 自动选择
     type: url-test
     url: http://www.gstatic.com/generate_204
@@ -330,11 +256,6 @@ proxy-groups:
       - LB_HK_hysteria2
       - LB_HK_any_tls
 
-      - US_vless_tls_vision
-      - US_reality_vision
-      - US_vless_tls_grpc
-      - US_hysteria2
-      - US_any_tls
   - name: 🛑 广告拦截
     type: select
     proxies:
@@ -408,11 +329,6 @@ proxy-groups:
       - LB_HK_hysteria2
       - LB_HK_any_tls
 
-      - US_vless_tls_vision
-      - US_reality_vision
-      - US_vless_tls_grpc
-      - US_hysteria2
-      - US_any_tls
 rules:
   - DOMAIN-SUFFIX,acl4.ssr,🎯 全球直连
   - DOMAIN-SUFFIX,ip6-localhost,🎯 全球直连

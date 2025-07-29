@@ -53,6 +53,21 @@ proxies:
       skip-cert-verify: false,
     }
   - {
+      name: JP_any_tls,
+      server: jp3xui.jzy88.top,
+      type: anytls,
+      port: 54327,
+      password: Jzy@666,
+      udp: true,
+      client-fingerprint: chrome,
+      idle-session-check-interval: 30,
+      idle-session-timeout: 30,
+      min-idle-session: 0,
+      sni: jp3xui.jzy88.top,
+      alpn: [h2, http/1.1],
+      skip-cert-verify: false,
+    }
+  - {
       name: LB_HK_any_tls,
       server: xui.jzy88.top,
       type: anytls,
@@ -138,6 +153,50 @@ proxies:
       grpc-opts: { grpc-service-name: grpc },
     }
   - {
+      name: JP_reality_vision,
+      server: jp3xui.jzy88.top,
+      type: vless,
+      port: 54322,
+      uuid: 0f4617f1-0b46-4fe2-8599-561fa16ebf1f,
+      network: tcp,
+      servername: travelsky-etrip.com,
+      flow: xtls-rprx-vision,
+      udp: true,
+      tls: true,
+      reality-opts:
+        {
+          public-key: rsBEuijeVZpfTqXZK0bcnAMdDLeuGMkWVmmRJN1uT3A,
+          short-id: "a9c117813348",
+        },
+      client-fingerprint: chrome,
+    }
+  - {
+      name: JP_vless_tls_vision,
+      server: jp3xui.jzy88.top,
+      type: vless,
+      port: 54323,
+      uuid: 5360517f-1a97-4219-9399-8e6357ac1cbb,
+      network: tcp,
+      servername: jp3xui.jzy88.top,
+      flow: xtls-rprx-vision,
+      udp: true,
+      tls: true,
+      client-fingerprint: chrome,
+    }
+  - {
+      name: JP_vless_tls_grpc,
+      server: jp3xui.jzy88.top,
+      type: vless,
+      port: 54324,
+      uuid: d246bb5b-d834-4d1e-9966-226067e2b8d3,
+      network: grpc,
+      servername: jp3xui.jzy88.top,
+      udp: true,
+      tls: true,
+      client-fingerprint: chrome,
+      grpc-opts: { grpc-service-name: grpc },
+    }
+  - {
       name: Sgp_reality_vision,
       server: sgp.jzy88.top,
       type: vless,
@@ -200,12 +259,21 @@ proxies:
       skip-sert-verify: false,
     }
   - {
+      name: JP_hysteria2,
+      server: jp3xui.jzy88.top,
+      port: 54325,
+      type: hysteria2,
+      password: jiangzhiyan.Jzy@666,
+      sni: jp3xui.jzy88.top,
+      skip-sert-verify: false,
+    }
+  - {
       name: Sgp_Claw_hysteria2_100G,
       type: hysteria2,
       server: sgphui.jzy88.top,
       port: "46514",
       password: jiangzhiyan.jzy.666@abcd,
-      skip-cert-verify: true
+      skip-cert-verify: true,
     }
 proxy-groups:
   - name: 🚀 节点选择
@@ -223,6 +291,12 @@ proxy-groups:
       - Sgp_vless_tls_grpc
       - Sgp_hysteria2
       - Sgp_any_tls
+
+      - JP_vless_tls_vision
+      - JP_reality_vision
+      - JP_vless_tls_grpc
+      - JP_hysteria2
+      - JP_any_tls
 
       - SGP_Claw_vless_grpc_100G
       - JP_Claw_vless_grpc_100G
@@ -245,6 +319,12 @@ proxy-groups:
       - Sgp_vless_tls_grpc
       - Sgp_hysteria2
       - Sgp_any_tls
+
+      - JP_vless_tls_vision
+      - JP_reality_vision
+      - JP_vless_tls_grpc
+      - JP_hysteria2
+      - JP_any_tls
 
       - SGP_Claw_vless_grpc_100G
       - JP_Claw_vless_grpc_100G
@@ -318,6 +398,12 @@ proxy-groups:
       - Sgp_vless_tls_grpc
       - Sgp_hysteria2
       - Sgp_any_tls
+
+      - JP_vless_tls_vision
+      - JP_reality_vision
+      - JP_vless_tls_grpc
+      - JP_hysteria2
+      - JP_any_tls
 
       - SGP_Claw_vless_grpc_100G
       - JP_Claw_vless_grpc_100G
@@ -4144,6 +4230,9 @@ rules:
   - DOMAIN-KEYWORD,citrix,🎯 全球直连
   # deepseek
   - DOMAIN-KEYWORD,deepseek,🎯 全球直连
+  # easytier
+  - IP-CIDR,10.126.126.0/24,🎯 全球直连,no-resolve
+
   - IP-CIDR,8.128.0.0/10,🎯 全球直连,no-resolve
   - IP-CIDR,8.208.0.0/12,🎯 全球直连,no-resolve
   - IP-CIDR,14.1.112.0/22,🎯 全球直连,no-resolve

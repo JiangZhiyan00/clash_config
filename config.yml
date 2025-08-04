@@ -38,6 +38,24 @@ dns:
 
 proxies:
   - {
+      name: JP_tuic,
+      server: jp3xui.jzy88.top,
+      ip: 43.133.168.244,
+      type: tuic,
+      port: 2097,
+      password: vls2gynYgL,
+      uuid: 794c4308-8944-429e-ae62-f7af5e461fd0,
+      disable-sni: true,
+      reduce-rtt: true,
+      request-timeout: 9000,
+      udp-relay-mode: quic,
+      congestion-controller: bbr,
+      fast-open: true,
+      sni: jp3xui.jzy88.top,
+      alpn: [h3],
+      skip-cert-verify: false,
+    }
+  - {
       name: Sgp_any_tls,
       server: sgp.jzy88.top,
       type: anytls,
@@ -297,6 +315,7 @@ proxy-groups:
       - JP_vless_tls_grpc
       - JP_hysteria2
       - JP_any_tls
+      - JP_tuic
 
       - SGP_Claw_vless_grpc_100G
       - JP_Claw_vless_grpc_100G
@@ -325,6 +344,7 @@ proxy-groups:
       - JP_vless_tls_grpc
       - JP_hysteria2
       - JP_any_tls
+      - JP_tuic
 
       - SGP_Claw_vless_grpc_100G
       - JP_Claw_vless_grpc_100G
@@ -404,6 +424,7 @@ proxy-groups:
       - JP_vless_tls_grpc
       - JP_hysteria2
       - JP_any_tls
+      - JP_tuic
 
       - SGP_Claw_vless_grpc_100G
       - JP_Claw_vless_grpc_100G

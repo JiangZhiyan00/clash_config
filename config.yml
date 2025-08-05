@@ -18,7 +18,7 @@ dns:
   ipv6: false
   enhanced-mode: fake-ip
   fake-ip-range: 198.18.0.1/16
-  respect-rules: true
+  # respect-rules: true
   default-nameserver:
     - 223.5.5.5
     - 114.114.114.114
@@ -27,6 +27,9 @@ dns:
     - 119.29.29.29
   nameserver:
     - system
+    - https://dns.alidns.com/dns-query
+    - https://doh.pub/dns-query
+  proxy-server-nameserver:
     - https://dns.alidns.com/dns-query
     - https://doh.pub/dns-query
   fallback:

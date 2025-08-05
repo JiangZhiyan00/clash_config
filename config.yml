@@ -1,19 +1,24 @@
-port: 7890
-socks-port: 7891
+mixed-port: 7900
 allow-lan: true
 mode: rule
 log-level: warning
-external-controller: :9090
-ipv6: true
+# external-controller: :9090
+ipv6: false
+find-process-mode: strict
 unified-delay: true
+tcp-concurrent: true
 global-client-fingerprint: chrome
+profile:
+  store-selected: true
+  store-fake-ip: true
 dns:
   enabled: true
   prefer-h3: true
   listen: :53
-  ipv6: true
+  ipv6: false
   enhanced-mode: fake-ip
   fake-ip-range: 198.18.0.1/16
+  respect-rules: true
   default-nameserver:
     - 223.5.5.5
     - 114.114.114.114
@@ -21,6 +26,7 @@ dns:
     - 8.8.8.8
     - 119.29.29.29
   nameserver:
+    - system
     - https://dns.alidns.com/dns-query
     - https://doh.pub/dns-query
   fallback:
@@ -56,6 +62,24 @@ proxies:
       skip-cert-verify: false,
     }
   - {
+      name: SGP_aliyun_tuic,
+      server: sgp3xui.jzy88.top,
+      ip: 47.236.206.214,
+      type: tuic,
+      port: 2097,
+      password: JV74ivV30k,
+      uuid: 2d1d8df2-597e-4b59-c878-262fa1be80b5,
+      disable-sni: true,
+      reduce-rtt: true,
+      request-timeout: 9000,
+      udp-relay-mode: quic,
+      congestion-controller: bbr,
+      fast-open: true,
+      sni: sgp3xui.jzy88.top,
+      alpn: [h3],
+      skip-cert-verify: false,
+    }
+  - {
       name: Sgp_any_tls,
       server: sgp.jzy88.top,
       type: anytls,
@@ -83,6 +107,21 @@ proxies:
       min-idle-session: 0,
       sni: jp3xui.jzy88.top,
       alpn: [h2, http/1.1],
+      skip-cert-verify: false,
+    }
+  - {
+      name: SGP_aliyun_any_tls,
+      server: sgp3xui.jzy88.top,
+      type: anytls,
+      port: 54327,
+      password: JV74ivV30k,
+      udp: true,
+      client-fingerprint: chrome,
+      idle-session-check-interval: 30,
+      idle-session-timeout: 30,
+      min-idle-session: 0,
+      sni: sgp3xui.jzy88.top,
+      alpn: [h3, h2, http/1.1],
       skip-cert-verify: false,
     }
   - {
@@ -215,6 +254,50 @@ proxies:
       grpc-opts: { grpc-service-name: grpc },
     }
   - {
+      name: SGP_aliyun_reality_vision,
+      server: sgp3xui.jzy88.top,
+      type: vless,
+      port: 54322,
+      uuid: 83661b8b-9e05-48a1-adee-4ec84da9fb82,
+      network: tcp,
+      servername: xt2qmu.aliwork.com,
+      flow: xtls-rprx-vision,
+      udp: true,
+      tls: true,
+      reality-opts:
+        {
+          public-key: 1w1R9FYNIhdyesNYxGpXmkLGqS9wgLu4sRd5sl6XDjE,
+          short-id: "b4dc4a",
+        },
+      client-fingerprint: chrome,
+    }
+  - {
+      name: SGP_aliyun_vless_tls_vision,
+      server: sgp3xui.jzy88.top,
+      type: vless,
+      port: 54323,
+      uuid: 700084b6-a1d2-4199-842b-3229c1b2e50c,
+      network: tcp,
+      servername: sgp3xui.jzy88.top,
+      flow: xtls-rprx-vision,
+      udp: true,
+      tls: true,
+      client-fingerprint: chrome,
+    }
+  - {
+      name: SGP_aliyun_vless_tls_grpc,
+      server: sgp3xui.jzy88.top,
+      type: vless,
+      port: 54324,
+      uuid: cdd37253-5f9b-4dcb-8b01-ad60a29384b8,
+      network: grpc,
+      servername: sgp3xui.jzy88.top,
+      udp: true,
+      tls: true,
+      client-fingerprint: chrome,
+      grpc-opts: { grpc-service-name: grpc },
+    }
+  - {
       name: Sgp_reality_vision,
       server: sgp.jzy88.top,
       type: vless,
@@ -286,12 +369,34 @@ proxies:
       skip-sert-verify: false,
     }
   - {
+      name: SGP_aliyun_hysteria2,
+      server: 47.236.206.214,
+      port: 54325,
+      type: hysteria2,
+      password: JV74ivV30k,
+      sni: sgp3xui.jzy88.top,
+      skip-sert-verify: false,
+    }
+  - {
       name: Sgp_Claw_hysteria2_100G,
       type: hysteria2,
       server: sgphui.jzy88.top,
       port: "46514",
       password: jiangzhiyan.jzy.666@abcd,
       skip-cert-verify: true,
+    }
+  - {
+      name: Shanghai_direct,
+      server: dr.docspace.cn,
+      type: vless,
+      port: 54329,
+      uuid: 689511db-0e80-4bbe-8951-b6089f54b67f,
+      network: tcp,
+      servername: dr.docspace.cn,
+      flow: xtls-rprx-vision,
+      udp: true,
+      tls: true,
+      client-fingerprint: chrome,
     }
 proxy-groups:
   - name: 🚀 节点选择
@@ -316,6 +421,13 @@ proxy-groups:
       - JP_hysteria2
       - JP_any_tls
       - JP_tuic
+
+      - SGP_aliyun_tuic
+      - SGP_aliyun_any_tls
+      - SGP_aliyun_reality_vision
+      - SGP_aliyun_vless_tls_vision
+      - SGP_aliyun_vless_tls_grpc
+      - SGP_aliyun_hysteria2
 
       - SGP_Claw_vless_grpc_100G
       - JP_Claw_vless_grpc_100G
@@ -345,6 +457,13 @@ proxy-groups:
       - JP_hysteria2
       - JP_any_tls
       - JP_tuic
+
+      - SGP_aliyun_tuic
+      - SGP_aliyun_any_tls
+      - SGP_aliyun_reality_vision
+      - SGP_aliyun_vless_tls_vision
+      - SGP_aliyun_vless_tls_grpc
+      - SGP_aliyun_hysteria2
 
       - SGP_Claw_vless_grpc_100G
       - JP_Claw_vless_grpc_100G
@@ -425,6 +544,13 @@ proxy-groups:
       - JP_hysteria2
       - JP_any_tls
       - JP_tuic
+
+      - SGP_aliyun_tuic
+      - SGP_aliyun_any_tls
+      - SGP_aliyun_reality_vision
+      - SGP_aliyun_vless_tls_vision
+      - SGP_aliyun_vless_tls_grpc
+      - SGP_aliyun_hysteria2
 
       - SGP_Claw_vless_grpc_100G
       - JP_Claw_vless_grpc_100G

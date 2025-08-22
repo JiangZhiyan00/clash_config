@@ -83,21 +83,6 @@ proxies:
       skip-cert-verify: false,
     }
   - {
-      name: Sgp_any_tls,
-      server: sgp.jzy88.top,
-      type: anytls,
-      port: 54327,
-      password: Jzy666,
-      udp: true,
-      client-fingerprint: chrome,
-      idle-session-check-interval: 30,
-      idle-session-timeout: 30,
-      min-idle-session: 0,
-      sni: sgp.jzy88.top,
-      alpn: [h2, http/1.1],
-      skip-cert-verify: false,
-    }
-  - {
       name: JP_any_tls,
       server: jp3xui.jzy88.top,
       type: anytls,
@@ -301,65 +286,12 @@ proxies:
       grpc-opts: { grpc-service-name: grpc },
     }
   - {
-      name: Sgp_reality_vision,
-      server: sgp.jzy88.top,
-      type: vless,
-      port: 54322,
-      uuid: 753164d4-db7b-44b1-8e17-7cd137929efa,
-      network: tcp,
-      servername: saga.broadfarglobal.com,
-      flow: xtls-rprx-vision,
-      udp: true,
-      tls: true,
-      reality-opts:
-        {
-          public-key: qfqtAGKwYj1PtpsKIbhkIe8Occd9pjN401Pyb8KJx1E,
-          short-id: "",
-        },
-      client-fingerprint: chrome,
-    }
-  - {
-      name: Sgp_vless_tls_vision,
-      server: sgp.jzy88.top,
-      type: vless,
-      port: 54323,
-      uuid: a7b23dea-87d5-44d5-92fd-f616fe7bb806,
-      network: tcp,
-      servername: sgp.jzy88.top,
-      flow: xtls-rprx-vision,
-      udp: true,
-      tls: true,
-      client-fingerprint: chrome,
-    }
-  - {
-      name: Sgp_vless_tls_grpc,
-      server: sgp.jzy88.top,
-      type: vless,
-      port: 54324,
-      uuid: 2a417a10-8262-4660-840d-5181b6103dfe,
-      network: grpc,
-      servername: sgp.jzy88.top,
-      udp: true,
-      tls: true,
-      client-fingerprint: chrome,
-      grpc-opts: { grpc-service-name: grpc },
-    }
-  - {
       name: LB_HK_hysteria2,
       server: xui.jzy88.top,
       port: 54329,
       type: hysteria2,
       password: ZSr+zxg/+ku+P9VH/MtbgqfS,
       sni: xui.jzy88.top,
-      skip-sert-verify: false,
-    }
-  - {
-      name: Sgp_hysteria2,
-      server: sgp.jzy88.top,
-      port: 54325,
-      type: hysteria2,
-      password: jiangzhiyan.9Hg9336P20lXfcF5fcwhJ1Re,
-      sni: sgp.jzy88.top,
       skip-sert-verify: false,
     }
   - {
@@ -412,12 +344,6 @@ proxy-groups:
   - name: 🚀 手动切换
     type: select
     proxies:
-      - Sgp_vless_tls_vision
-      - Sgp_reality_vision
-      - Sgp_vless_tls_grpc
-      - Sgp_hysteria2
-      - Sgp_any_tls
-
       - JP_vless_tls_vision
       - JP_reality_vision
       - JP_vless_tls_grpc
@@ -448,12 +374,6 @@ proxy-groups:
     interval: 300
     tolerance: 50
     proxies:
-      - Sgp_vless_tls_vision
-      - Sgp_reality_vision
-      - Sgp_vless_tls_grpc
-      - Sgp_hysteria2
-      - Sgp_any_tls
-
       - JP_vless_tls_vision
       - JP_reality_vision
       - JP_vless_tls_grpc
@@ -535,12 +455,6 @@ proxy-groups:
     interval: 300
     tolerance: 50
     proxies:
-      - Sgp_vless_tls_vision
-      - Sgp_reality_vision
-      - Sgp_vless_tls_grpc
-      - Sgp_hysteria2
-      - Sgp_any_tls
-
       - JP_vless_tls_vision
       - JP_reality_vision
       - JP_vless_tls_grpc

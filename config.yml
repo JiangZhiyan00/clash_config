@@ -113,21 +113,6 @@ proxies:
       skip-cert-verify: false,
     }
   - {
-      name: LB_HK_any_tls,
-      server: xui.jzy88.top,
-      type: anytls,
-      port: 54327,
-      password: Jzy666,
-      udp: true,
-      client-fingerprint: chrome,
-      idle-session-check-interval: 30,
-      idle-session-timeout: 30,
-      min-idle-session: 0,
-      sni: xui.jzy88.top,
-      alpn: [h2, http/1.1],
-      skip-cert-verify: false,
-    }
-  - {
       name: SGP_Claw_vless_grpc_100G,
       server: kiosgrjnfzvt.ap-southeast-1.clawcloudrun.com,
       type: vless,
@@ -148,50 +133,6 @@ proxies:
       uuid: f7685dfb-8ffd-4eef-90c5-b3c00f6d801e,
       network: grpc,
       servername: hcdkfncxzkql.ap-northeast-1.clawcloudrun.com,
-      udp: true,
-      tls: true,
-      client-fingerprint: chrome,
-      grpc-opts: { grpc-service-name: grpc },
-    }
-  - {
-      name: LB_HK_reality_vision,
-      server: xui.jzy88.top,
-      type: vless,
-      port: 54322,
-      uuid: 12d409cd-110b-4aad-b270-b62d2e34b054,
-      network: tcp,
-      servername: www.xiao-zu.com,
-      flow: xtls-rprx-vision,
-      udp: true,
-      tls: true,
-      reality-opts:
-        {
-          public-key: UK7qxWWGfRQcQfwaGpHnqmmqqJBut4jxve8AeDDJ2UI,
-          short-id: "",
-        },
-      client-fingerprint: chrome,
-    }
-  - {
-      name: LB_HK_vless_tls_vision,
-      server: xui.jzy88.top,
-      type: vless,
-      port: 54323,
-      uuid: defa44bc-c3f2-4858-fedf-2c5004cca960,
-      network: tcp,
-      servername: xui.jzy88.top,
-      flow: xtls-rprx-vision,
-      udp: true,
-      tls: true,
-      client-fingerprint: chrome,
-    }
-  - {
-      name: LB_HK_vless_tls_grpc,
-      server: xui.jzy88.top,
-      type: vless,
-      port: 54324,
-      uuid: f5f76567-c205-4bb1-d0c1-905d95feb268,
-      network: grpc,
-      servername: xui.jzy88.top,
       udp: true,
       tls: true,
       client-fingerprint: chrome,
@@ -286,15 +227,6 @@ proxies:
       grpc-opts: { grpc-service-name: grpc },
     }
   - {
-      name: LB_HK_hysteria2,
-      server: xui.jzy88.top,
-      port: 54329,
-      type: hysteria2,
-      password: ZSr+zxg/+ku+P9VH/MtbgqfS,
-      sni: xui.jzy88.top,
-      skip-sert-verify: false,
-    }
-  - {
       name: JP_hysteria2,
       server: jp3xui.jzy88.top,
       port: 54325,
@@ -362,12 +294,6 @@ proxy-groups:
       - JP_Claw_vless_grpc_100G
       - Sgp_Claw_hysteria2_100G
 
-      - LB_HK_vless_tls_vision
-      - LB_HK_reality_vision
-      - LB_HK_vless_tls_grpc
-      - LB_HK_hysteria2
-      - LB_HK_any_tls
-
   - name: ♻️ 自动选择
     type: url-test
     url: http://www.gstatic.com/generate_204
@@ -391,12 +317,6 @@ proxy-groups:
       - SGP_Claw_vless_grpc_100G
       - JP_Claw_vless_grpc_100G
       - Sgp_Claw_hysteria2_100G
-
-      - LB_HK_vless_tls_vision
-      - LB_HK_reality_vision
-      - LB_HK_vless_tls_grpc
-      - LB_HK_hysteria2
-      - LB_HK_any_tls
 
   - name: 🛑 广告拦截
     type: select
@@ -472,12 +392,6 @@ proxy-groups:
       - SGP_Claw_vless_grpc_100G
       - JP_Claw_vless_grpc_100G
       - Sgp_Claw_hysteria2_100G
-
-      - LB_HK_vless_tls_vision
-      - LB_HK_reality_vision
-      - LB_HK_vless_tls_grpc
-      - LB_HK_hysteria2
-      - LB_HK_any_tls
 
 rules:
   - DOMAIN-SUFFIX,acl4.ssr,🎯 全球直连

@@ -26,7 +26,7 @@ dns:
     - 8.8.8.8
     - 119.29.29.29
   nameserver:
-    - system
+    # - system
     - https://dns.alidns.com/dns-query
     - https://doh.pub/dns-query
   proxy-server-nameserver:
@@ -44,7 +44,8 @@ dns:
     geoip-code: CN
     ipcidr:
       - 240.0.0.0/4
-
+  fake-ip-filter:
+    - geosite:cn
 proxies:
   - {
       name: JP_tuic,

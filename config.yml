@@ -232,7 +232,7 @@ proxies:
       server: jp3xui.jzy88.top,
       port: 54325,
       type: hysteria2,
-      password: jiangzhiyan.Jzy@666,
+      password: vls2gynYgL,
       sni: jp3xui.jzy88.top,
       skip-sert-verify: false,
     }

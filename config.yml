@@ -140,6 +140,19 @@ proxies:
       grpc-opts: { grpc-service-name: grpc },
     }
   - {
+      name: US_Claw_vless_grpc_100G,
+      server: ytsbgugjyatk.us-east-1.clawcloudrun.com,
+      type: vless,
+      port: 443,
+      uuid: e39631db-8702-4f87-97c7-b2f6903ef103,
+      network: grpc,
+      servername: ytsbgugjyatk.us-east-1.clawcloudrun.com,
+      udp: true,
+      tls: true,
+      client-fingerprint: chrome,
+      grpc-opts: { grpc-service-name: grpc },
+    }
+  - {
       name: JP_reality_vision,
       server: jp3xui.jzy88.top,
       type: vless,
@@ -294,6 +307,7 @@ proxy-groups:
       - SGP_Claw_vless_grpc_100G
       - JP_Claw_vless_grpc_100G
       - Sgp_Claw_hysteria2_100G
+      - US_Claw_vless_grpc_100G
 
   - name: ♻️ 自动选择
     type: url-test
@@ -318,6 +332,7 @@ proxy-groups:
       - SGP_Claw_vless_grpc_100G
       - JP_Claw_vless_grpc_100G
       - Sgp_Claw_hysteria2_100G
+      - US_Claw_vless_grpc_100G
 
   - name: 🛑 广告拦截
     type: select
@@ -393,6 +408,7 @@ proxy-groups:
       - SGP_Claw_vless_grpc_100G
       - JP_Claw_vless_grpc_100G
       - Sgp_Claw_hysteria2_100G
+      - US_Claw_vless_grpc_100G
 
 rules:
   - DOMAIN-SUFFIX,acl4.ssr,🎯 全球直连

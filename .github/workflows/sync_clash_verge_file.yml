@@ -54,18 +54,10 @@ jobs:
         run: |
           VERSION=${{ steps.version.outputs.version }}
           BASE_URL="https://github.com/clash-verge-rev/clash-verge-rev/releases/download/v$VERSION"
-
-          WIN_URL="$BASE_URL/Clash.Verge_${VERSION}_x64-setup.exe"
-          MAC_INTEL_URL="$BASE_URL/Clash.Verge_${VERSION}_x64.dmg"
-          MAC_M_URL="$BASE_URL/Clash.Verge_${VERSION}_aarch64.dmg"
-
-          echo "Windows 下载地址:   $WIN_URL"
-          echo "Mac Intel 下载地址: $MAC_INTEL_URL"
-          echo "Mac M 下载地址:     $MAC_M_URL"
-
-          curl -L -o clash_verge_windows.exe   "$WIN_URL"
-          curl -L -o clash_verge_mac_intel.dmg "$MAC_INTEL_URL"
-          curl -L -o clash_verge_mac_m.dmg     "$MAC_M_URL"
+          
+          curl -L -o clash_verge_windows.exe   "$BASE_URL/Clash.Verge_${VERSION}_x64-setup.exe"
+          curl -L -o clash_verge_mac_intel.dmg "$BASE_URL/Clash.Verge_${VERSION}_x64.dmg"
+          curl -L -o clash_verge_mac_m.dmg     "$BASE_URL/Clash.Verge_${VERSION}_aarch64.dmg"
 
       - name: 上传到 WebDAV（重试5次）
         if: steps.compare.outputs.changed == 'true'
@@ -73,7 +65,7 @@ jobs:
           for FILE in clash_verge_*; do
             for i in {1..5}; do
               echo "上传 $FILE (第 $i 次尝试)..."
-              curl -T "$FILE" -u "${{ secrets.WEBDAV_USER }}:${{ secrets.WEBDAV_PASS }}" "https://webdav.opendoc.dpdns.org/$FILE" && break
+              curl -T "$FILE" -u "${{ secrets.WEBDAV_USER }}:${{ secrets.WEBDAV_PASS }}" "https://webdav.opendoc.dpdns.org/clash_verge_install/$FILE"" && break
               echo "上传失败，重试中..."
               sleep 5
             done

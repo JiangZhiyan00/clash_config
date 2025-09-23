@@ -84,6 +84,24 @@ proxies:
       skip-cert-verify: false,
     }
   - {
+      name: US_Claw_tuic_100G,
+      server: udp.us-east-1.clawcloudrun.com,
+      ip: 47.90.179.106,
+      type: tuic,
+      port: 37494,
+      password: icST67YucQ,
+      uuid: a13a2a85-ffef-4ab8-8ec7-7806847fb0f8,
+      disable-sni: true,
+      reduce-rtt: true,
+      request-timeout: 9000,
+      udp-relay-mode: quic,
+      congestion-controller: bbr,
+      fast-open: true,
+      sni: udp.us-east-1.clawcloudrun.com,
+      alpn: [h3],
+      skip-cert-verify: true,
+    }
+  - {
       name: JP_any_tls,
       server: jp3xui.jzy88.top,
       type: anytls,
@@ -259,14 +277,6 @@ proxies:
       skip-sert-verify: false,
     }
   - {
-      name: Sgp_Claw_hysteria2_100G,
-      type: hysteria2,
-      server: sgphui.jzy88.top,
-      port: "46514",
-      password: jiangzhiyan.jzy.666@abcd,
-      skip-cert-verify: true,
-    }
-  - {
       name: Shanghai_direct,
       server: dr.docspace.cn,
       type: vless,
@@ -290,24 +300,24 @@ proxy-groups:
   - name: 🚀 手动切换
     type: select
     proxies:
-      - JP_vless_tls_vision
+      - SGP_aliyun_tuic
+      - SGP_aliyun_reality_vision
+      - SGP_aliyun_hysteria2
+      - SGP_aliyun_any_tls
+      - SGP_aliyun_vless_tls_grpc
+      - SGP_aliyun_vless_tls_vision
+
+      - JP_tuic
       - JP_reality_vision
-      - JP_vless_tls_grpc
       - JP_hysteria2
       - JP_any_tls
-      - JP_tuic
+      - JP_vless_tls_grpc
+      - JP_vless_tls_vision
 
-      - SGP_aliyun_tuic
-      - SGP_aliyun_any_tls
-      - SGP_aliyun_reality_vision
-      - SGP_aliyun_vless_tls_vision
-      - SGP_aliyun_vless_tls_grpc
-      - SGP_aliyun_hysteria2
-
+      - US_Claw_tuic_100G
+      - US_Claw_vless_grpc_100G
       - SGP_Claw_vless_grpc_100G
       - JP_Claw_vless_grpc_100G
-      - Sgp_Claw_hysteria2_100G
-      - US_Claw_vless_grpc_100G
 
   - name: ♻️ 自动选择
     type: url-test
@@ -315,24 +325,24 @@ proxy-groups:
     interval: 300
     tolerance: 50
     proxies:
-      - JP_vless_tls_vision
+      - SGP_aliyun_tuic
+      - SGP_aliyun_reality_vision
+      - SGP_aliyun_hysteria2
+      - SGP_aliyun_any_tls
+      - SGP_aliyun_vless_tls_grpc
+      - SGP_aliyun_vless_tls_vision
+
+      - JP_tuic
       - JP_reality_vision
-      - JP_vless_tls_grpc
       - JP_hysteria2
       - JP_any_tls
-      - JP_tuic
+      - JP_vless_tls_grpc
+      - JP_vless_tls_vision
 
-      - SGP_aliyun_tuic
-      - SGP_aliyun_any_tls
-      - SGP_aliyun_reality_vision
-      - SGP_aliyun_vless_tls_vision
-      - SGP_aliyun_vless_tls_grpc
-      - SGP_aliyun_hysteria2
-
+      - US_Claw_tuic_100G
+      - US_Claw_vless_grpc_100G
       - SGP_Claw_vless_grpc_100G
       - JP_Claw_vless_grpc_100G
-      - Sgp_Claw_hysteria2_100G
-      - US_Claw_vless_grpc_100G
 
   - name: 🛑 广告拦截
     type: select
@@ -391,24 +401,24 @@ proxy-groups:
     interval: 300
     tolerance: 50
     proxies:
-      - JP_vless_tls_vision
+      - SGP_aliyun_tuic
+      - SGP_aliyun_reality_vision
+      - SGP_aliyun_hysteria2
+      - SGP_aliyun_any_tls
+      - SGP_aliyun_vless_tls_grpc
+      - SGP_aliyun_vless_tls_vision
+
+      - JP_tuic
       - JP_reality_vision
-      - JP_vless_tls_grpc
       - JP_hysteria2
       - JP_any_tls
-      - JP_tuic
+      - JP_vless_tls_grpc
+      - JP_vless_tls_vision
 
-      - SGP_aliyun_tuic
-      - SGP_aliyun_any_tls
-      - SGP_aliyun_reality_vision
-      - SGP_aliyun_vless_tls_vision
-      - SGP_aliyun_vless_tls_grpc
-      - SGP_aliyun_hysteria2
-
+      - US_Claw_tuic_100G
+      - US_Claw_vless_grpc_100G
       - SGP_Claw_vless_grpc_100G
       - JP_Claw_vless_grpc_100G
-      - Sgp_Claw_hysteria2_100G
-      - US_Claw_vless_grpc_100G
 
 rules:
   - DOMAIN-SUFFIX,acl4.ssr,🎯 全球直连
@@ -417,6 +427,14 @@ rules:
   - DOMAIN-SUFFIX,lan,🎯 全球直连
   - DOMAIN-SUFFIX,local,🎯 全球直连
   - DOMAIN-SUFFIX,localhost,🎯 全球直连
+  # 公司
+  - DOMAIN-KEYWORD,huanzhiyc,🎯 全球直连
+  - DOMAIN-KEYWORD,gearsnet,🎯 全球直连
+  - DOMAIN-KEYWORD,citrix,🎯 全球直连
+  # deepseek
+  - DOMAIN-KEYWORD,deepseek,🎯 全球直连
+  # easytier
+  - IP-CIDR,10.126.126.0/24,🎯 全球直连,no-resolve
   - IP-CIDR,0.0.0.0/8,🎯 全球直连,no-resolve
   - IP-CIDR,10.0.0.0/8,🎯 全球直连,no-resolve
   - IP-CIDR,100.64.0.0/10,🎯 全球直连,no-resolve
@@ -4219,14 +4237,6 @@ rules:
   - DOMAIN-SUFFIX,zhipin.com,🎯 全球直连
   - DOMAIN-SUFFIX,zhongsou.com,🎯 全球直连
   - DOMAIN-SUFFIX,zhuihd.com,🎯 全球直连
-  # 公司
-  - DOMAIN-KEYWORD,huanzhiyc,🎯 全球直连
-  - DOMAIN-KEYWORD,gearsnet,🎯 全球直连
-  - DOMAIN-KEYWORD,citrix,🎯 全球直连
-  # deepseek
-  - DOMAIN-KEYWORD,deepseek,🎯 全球直连
-  # easytier
-  - IP-CIDR,10.126.126.0/24,🎯 全球直连,no-resolve
 
   - IP-CIDR,8.128.0.0/10,🎯 全球直连,no-resolve
   - IP-CIDR,8.208.0.0/12,🎯 全球直连,no-resolve

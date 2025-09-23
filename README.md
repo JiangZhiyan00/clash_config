@@ -1,5 +1,5 @@
 <h2>配置使用说明</h2>
-> 更新于：2025年7月28日
+> 更新于：2025年09月23日
 >
 
 <h3 id="JCmiJ">1.下载并安装客户端</h3>
@@ -8,12 +8,12 @@
 <font style="background:#DBF1B7;color:#2A4200">建议下载安装最新版本</font>
 
 + `Windows`：[Clash Verge官网下载](https://www.clashverge.dev/install.html#__tabbed_1_1)
-  ，备用下载地址（文件名后缀`_x64.exe`）：[Clash Verge Windows安装包下载](https://proxy.jzy88.top/https://github.com/clash-verge-rev/clash-verge-rev/releases/latest)
+  ，备用下载地址（文件名后缀`_x64.exe`）：[Clash Verge Windows安装包下载](https://webdav.opendoc.dpdns.org/clash_verge_install/clash_verge_windows.exe)
 + `MacOS`：[Clash Verge官网下载](https://www.clashverge.dev/install.html#__tabbed_1_3)
     - `Intel 芯片`
-      备用下载地址（文件名后缀`_x64.dmg`）：[Clash Verge MacOS_Intel芯片安装包下载](https://proxy.jzy88.top/https://github.com/clash-verge-rev/clash-verge-rev/releases/latest)
+      备用下载地址（文件名后缀`_x64.dmg`）：[Clash Verge MacOS_Intel芯片安装包下载](https://webdav.opendoc.dpdns.org/clash_verge_install/clash_verge_mac_intel.dmg)
     - `Apple M 芯片`
-      备用下载地址（文件名后缀`_aarch64.dmg`）：[Clash Verge MacOS_M芯片安装包下载](https://proxy.jzy88.top/https://github.com/clash-verge-rev/clash-verge-rev/releases/latest)
+      备用下载地址（文件名后缀`_aarch64.dmg`）：[Clash Verge MacOS_M芯片安装包下载](https://webdav.opendoc.dpdns.org/clash_verge_install/clash_verge_mac_m.dmg)
 + `Android`（文件名后缀`_arm64-v8a.apk`）：[Karing Github官网下载](https://github.com/KaringX/karing/releases/latest)
 ，备用下载地址：[Karing Android安装包下载](https://proxy.jzy88.top/https://github.com/KaringX/karing/releases/latest)
 + `IOS`：
@@ -72,5 +72,5 @@
 
 <font style="background:#DBF1B7;color:#2A4200">规则为：https://域名/分支名</font>
 
-+ `jzy(默认)` 分支订阅链接：[https://clash_config.jzy88.top/jzy](https://clash_config.jzy88.top/jzy)；
-+ `main` 分支订阅链接：[https://clash_config.jzy88.top/main](https://clash_config.jzy88.top/main)。
++ `jzy(默认)` 分支订阅链接：<a href="https://clash_config.jzy88.top/jzy" target="_blank">https://clash_config.jzy88.top/jzy</a>；
++ `main` 分支订阅链接：<a href="https://clash_config.jzy88.top/main" target="_blank">https://clash_config.jzy88.top/main</a>。

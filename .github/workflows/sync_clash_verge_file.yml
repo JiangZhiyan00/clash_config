@@ -65,7 +65,7 @@ jobs:
           for FILE in clash_verge_*; do
             for i in {1..5}; do
               echo "上传 $FILE (第 $i 次尝试)..."
-              curl -T "$FILE" -u "${{ secrets.WEBDAV_USER }}:${{ secrets.WEBDAV_PASS }}" "https://webdav.opendoc.dpdns.org/clash_verge_install/$FILE"" && break
+              curl -T "$FILE" -u "${{ secrets.WEBDAV_USER }}:${{ secrets.WEBDAV_PASS }}" "https://webdav.opendoc.dpdns.org/clash_verge_install/$FILE" && break
               echo "上传失败，重试中..."
               sleep 5
             done
@@ -75,3 +75,4 @@ jobs:
         if: steps.compare.outputs.changed == 'true'
         run: |
           echo "${{ steps.version.outputs.version }}" > .last_version
+

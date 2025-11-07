@@ -71,7 +71,7 @@ jobs:
 
               HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" -T "$FILE" \
                 -u "${{ secrets.WEBDAV_USER }}:${{ secrets.WEBDAV_PASS }}" \
-                "https://webdav.opendoc.dpdns.org/clash_verge_install/$FILE")
+                "https://${{ vars.WEBDAV_HOST }}/clash_verge_install/$FILE")
               
               if [[ "$HTTP_CODE" =~ ^2 ]]; then
                 echo "上传成功，HTTP 状态码: $HTTP_CODE"

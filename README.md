@@ -8,12 +8,12 @@
 <font style="background:#DBF1B7;color:#2A4200">建议下载安装最新版本</font>
 
 + `Windows`：[Clash Verge官网下载](https://www.clashverge.dev/install.html#__tabbed_1_1)
-  ，备用下载地址（文件名后缀`_x64.exe`）：[Clash Verge Windows安装包下载](https://webdav.jzy88.top/clash_verge_install/clash_verge_windows.exe)
+  ，备用下载地址（文件名后缀`_x64.exe`）：[Clash Verge Windows安装包下载](https://webdav.jzy88.top:8011/clash_verge_install/clash_verge_windows.exe)
 + `MacOS`：[Clash Verge官网下载](https://www.clashverge.dev/install.html#__tabbed_1_3)
     - `Intel 芯片`
-      备用下载地址（文件名后缀`_x64.dmg`）：[Clash Verge MacOS_Intel芯片安装包下载](https://webdav.jzy88.top/clash_verge_install/clash_verge_mac_intel.dmg)
+      备用下载地址（文件名后缀`_x64.dmg`）：[Clash Verge MacOS_Intel芯片安装包下载](https://webdav.jzy88.top:8011/clash_verge_install/clash_verge_mac_intel.dmg)
     - `Apple M 芯片`
-      备用下载地址（文件名后缀`_aarch64.dmg`）：[Clash Verge MacOS_M芯片安装包下载](https://webdav.jzy88.top/clash_verge_install/clash_verge_mac_m.dmg)
+      备用下载地址（文件名后缀`_aarch64.dmg`）：[Clash Verge MacOS_M芯片安装包下载](https://webdav.jzy88.top:8011/clash_verge_install/clash_verge_mac_m.dmg)
 + `Android`（文件名后缀`_arm64-v8a.apk`）：[Karing Github官网下载](https://github.com/KaringX/karing/releases/latest)
 ，备用下载地址：[Karing Android安装包下载](https://proxy.jzy88.top/https://github.com/KaringX/karing/releases/latest)
 + `IOS`：

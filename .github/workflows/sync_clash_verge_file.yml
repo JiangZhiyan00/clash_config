@@ -69,7 +69,7 @@ jobs:
             for i in {1..5}; do
               echo "上传 $FILE 到 clash_verge_install (第 $i 次尝试)..."
 
-              HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" -T "$FILE" \
+              HTTP_CODE=$(curl -k -s -o /dev/null -w "%{http_code}" -T "$FILE" \
                 -u "${{ secrets.WEBDAV_USER }}:${{ secrets.WEBDAV_PASS }}" \
                 "${{ vars.WEBDAV_BASE_URL }}/clash_verge_install/$FILE")
               

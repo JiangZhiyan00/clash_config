@@ -14,7 +14,8 @@ jobs:
 
       - name: 获取 latest.json
         run: |
-          curl -L -o latest.json https://github.com/clash-verge-rev/clash-verge-rev/releases/latest/download/latest.json
+          # curl -L -o latest.json https://github.com/clash-verge-rev/clash-verge-rev/releases/latest/download/latest.json
+          curl -L -o latest.json https://github.com/clash-verge-rev/clash-verge-rev/releases/download/autobuild/latest.json
           cat latest.json
 
       - name: 解析版本号
@@ -53,8 +54,8 @@ jobs:
         if: steps.compare.outputs.changed == 'true'
         run: |
           VERSION=${{ steps.version.outputs.version }}
-          BASE_URL="https://github.com/clash-verge-rev/clash-verge-rev/releases/download/v$VERSION"
-          
+          # BASE_URL="https://github.com/clash-verge-rev/clash-verge-rev/releases/download/v$VERSION"
+          BASE_URL="https://github.com/clash-verge-rev/clash-verge-rev/releases/download/autobuild"
           curl -L -o clash_verge_windows.exe   "$BASE_URL/Clash.Verge_${VERSION}_x64-setup.exe"
           curl -L -o clash_verge_mac_intel.dmg "$BASE_URL/Clash.Verge_${VERSION}_x64.dmg"
           curl -L -o clash_verge_mac_m.dmg     "$BASE_URL/Clash.Verge_${VERSION}_aarch64.dmg"

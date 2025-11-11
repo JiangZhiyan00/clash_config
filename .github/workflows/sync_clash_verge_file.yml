@@ -23,27 +23,40 @@ jobs:
         run: |
           VERSION=$(jq -r '.version' latest.json)
           echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "当前最新版本: $VERSION"
 
-      - name: 恢复上次版本号
+      - name: 恢复上次版本号缓存
         id: cache-restore
-        uses: actions/cache@v4
+        uses: actions/cache/restore@v4
         with:
           path: .last_version
-          key: clash-verge-version
+          key: clash-verge-version-${{ github.run_id }}
+          restore-keys: |
+            clash-verge-version-
 
       - name: 读取上次版本号
         id: prev
         run: |
-          PREV_VERSION=$(cat .last_version 2>/dev/null || echo "none")
+          if [ -f .last_version ]; then
+            PREV_VERSION=$(cat .last_version)
+          else
+            PREV_VERSION="none"
+          fi
           echo "prev=$PREV_VERSION" >> $GITHUB_OUTPUT
+          echo "缓存的版本: $PREV_VERSION"
 
       - name: 比较版本号
         id: compare
         run: |
-          if [ "${{ steps.version.outputs.version }}" = "${{ steps.prev.outputs.prev }}" ]; then
+          CURRENT="${{ steps.version.outputs.version }}"
+          PREVIOUS="${{ steps.prev.outputs.prev }}"
+          
+          if [ "$CURRENT" = "$PREVIOUS" ]; then
             echo "changed=false" >> $GITHUB_OUTPUT
+            echo "版本一致 ($CURRENT)，无需更新"
           else
             echo "changed=true" >> $GITHUB_OUTPUT
+            echo "检测到新版本: $PREVIOUS -> $CURRENT"
           fi
 
       - name: 无更新时退出
@@ -94,7 +107,15 @@ jobs:
             fi
           done
 
-      - name: 保存新版本号到 cache
+      - name: 更新版本号文件
         if: steps.compare.outputs.changed == 'true'
         run: |
           echo "${{ steps.version.outputs.version }}" > .last_version
+          echo "已更新版本号为: ${{ steps.version.outputs.version }}"
+
+      - name: 保存新版本号到缓存
+        if: steps.compare.outputs.changed == 'true'
+        uses: actions/cache/save@v4
+        with:
+          path: .last_version
+          key: clash-verge-version-${{ github.run_id }}

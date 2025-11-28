@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - "config.yml"
+      - ".github/workflows/clash_config_convert.yml"
   workflow_dispatch:
 
 jobs:
@@ -22,7 +23,7 @@ jobs:
           node-version: "lts/*"
 
       - name: 安装依赖
-        run: npm ci
+        run: npm install
         working-directory: ./clash/converter
 
       - name: 创建输出目录

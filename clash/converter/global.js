@@ -83,14 +83,14 @@ const rules = [
 // 地区定义 (Icons 更新为 GitHub Raw)
 const regionDefinitions = [
   {
-    name: "HK香港",
-    regex: /港|🇭🇰|hk|hongkong|hong kong/i,
-    icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Hong_Kong.png",
+    name: "SG新加坡",
+    regex: /新加坡|🇸🇬|sg|singapore/i,
+    icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Singapore.png",
   },
   {
-    name: "US美国",
-    regex: /(?!.*aus)(?=.*(美|🇺🇸|us(?!t)|usa|american|united states)).*/i,
-    icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/United_States.png",
+    name: "TW台湾省",
+    regex: /台湾|🇹🇼|tw|taiwan|tai wan/i,
+    icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/China.png",
   },
   {
     name: "JP日本",
@@ -103,19 +103,14 @@ const regionDefinitions = [
     icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Korea.png",
   },
   {
-    name: "SG新加坡",
-    regex: /新加坡|🇸🇬|sg|singapore/i,
-    icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Singapore.png",
+    name: "US美国",
+    regex: /(?!.*aus)(?=.*(美|🇺🇸|us(?!t)|usa|american|united states)).*/i,
+    icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/United_States.png",
   },
   {
-    name: "CN中国大陆",
-    regex: /中国|🇨🇳|cn|china/i,
-    icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/China_Map.png",
-  },
-  {
-    name: "TW台湾省",
-    regex: /台湾|🇹🇼|tw|taiwan|tai wan/i,
-    icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/China.png",
+    name: "HK香港",
+    regex: /港|🇭🇰|hk|hongkong|hong kong/i,
+    icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Hong_Kong.png",
   },
   {
     name: "GB英国",
@@ -147,6 +142,11 @@ const regionDefinitions = [
     regex: /澳大利亚|🇦🇺|au|australia|sydney/i,
     icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Australia.png",
   },
+  {
+    name: "CN中国大陆",
+    regex: /中国|🇨🇳|cn|china|shanghai|beijing/i,
+    icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/China_Map.png",
+  },
 ];
 const excludeHighPercentage = true;
 const globalRatioLimit = 2;
@@ -154,14 +154,16 @@ const globalRatioLimit = 2;
 // DNS 配置
 const chinaDNS = [
   "https://223.5.5.5/dns-query", // 阿里DOH
-  "https://doh.pub/dns-query", // 腾讯DOH
+  "https://120.53.53.53/dns-query", // 腾讯DoH
+  "https://doh.360.cn/dns-query", // 360安全DoH
 ];
 
 const foreignDNS = [
-  "https://208.67.222.222/dns-query", // OpenDNS
-  "https://77.88.8.8/dns-query", // YandexDNS
-  "https://1.1.1.1/dns-query", // CloudflareDNS
-  "https://8.8.4.4/dns-query", // GoogleDNS
+  "https://1.1.1.1/dns-query", // Cloudflare
+  "https://8.8.8.8/dns-query", // Google DoH
+  "https://1.0.0.1/dns-query", // Cloudflare 备用节点
+  "https://8.8.4.4/dns-query", // Google 备用
+  "https://208.67.222.222/dns-query", // OpenDNS 有过滤，作为末级 fallback
 ];
 const dnsConfig = {
   enable: true,
@@ -410,7 +412,7 @@ const serviceConfigs = [
     key: "google",
     name: "谷歌服务",
     icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Google_Search.png",
-    url: "http://www.google.com/generate_204",
+    url: "http://www.gstatic.com/generate_204",
     rules: ["GEOSITE,google,谷歌服务"],
   },
   {
@@ -447,7 +449,6 @@ const serviceConfigs = [
 ];
 
 // --- 3. 主入口 ---
-
 function main(config) {
   if (!enable) return config;
 

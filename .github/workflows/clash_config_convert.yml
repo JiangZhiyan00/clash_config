@@ -5,6 +5,7 @@ on:
     paths:
       - "config.yml"
       - ".github/workflows/clash_config_convert.yml"
+      - "clash/converter/global.js"
   workflow_dispatch:
 
 jobs:

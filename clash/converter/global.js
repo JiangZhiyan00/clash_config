@@ -210,7 +210,7 @@ const ruleProviderCommon = {
 const groupBaseOption = {
   interval: 300,
   timeout: 3000,
-  url: "https://cp.cloudflare.com/generate_204",
+  url: "http://www.gstatic.com/generate_204",
   lazy: true,
   "max-failed-times": 3,
   hidden: false,
@@ -578,6 +578,12 @@ function main(config) {
   regionDefinitions.forEach((r) => {
     const groupData = regionGroups[r.name];
     if (groupData.proxies.length > 0) {
+      // 根据地区选择测速 URL
+      let testUrl = "http://www.gstatic.com/generate_204"; // 默认 Google
+      if (r.name === "CN中国大陆") {
+        testUrl = "http://connectivitycheck.platform.hicloud.com/generate_204"; // 华为
+      }
+
       generatedRegionGroups.push({
         ...groupBaseOption,
         name: r.name,
@@ -585,6 +591,7 @@ function main(config) {
         tolerance: 50,
         icon: r.icon,
         proxies: groupData.proxies,
+        url: testUrl,
       });
     }
   });
@@ -676,7 +683,7 @@ function main(config) {
       name: "国内网站",
       type: "select",
       proxies: ["直连", "默认节点", ...regionGroupNames],
-      url: "http://wifi.vivo.com.cn/generate_204",
+      url: "http://connectivitycheck.platform.hicloud.com/generate_204",
       icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/StreamingCN.png",
     }
   );
@@ -690,5 +697,5 @@ function main(config) {
   return config;
 }
 
-// 导出 main 函数供 Node.js 使用
+// 导出 main 函数供 Node.js 使用（ES6 模块语法）
 export default main;

@@ -1,5 +1,5 @@
 <h2>配置使用说明</h2>
-> 更新于：2025年11月07日
+> 更新于：2025年11月28日
 >
 
 <h3 id="JCmiJ">1.下载并安装客户端</h3>
@@ -72,6 +72,6 @@
 
 <font style="background:#DBF1B7;color:#2A4200">规则为：https://域名/分支名</font>
 
-+ `jzy(默认)` 分支订阅链接：<a href="https://clash_config.jzy88.top/jzy" target="_blank">https://clash_config.jzy88.top/jzy</a>；
-+ `main` 分支订阅链接：<a href="https://clash_config.jzy88.top/main" target="_blank">https://clash_config.jzy88.top/main</a>；
++ `main(默认)` 分支订阅链接：<a href="https://clash_config.jzy88.top" target="_blank">https://clash_config.jzy88.top/main</a>；
++ `jzy` 分支订阅链接：<a href="https://clash_config.jzy88.top/jzy" target="_blank">https://clash_config.jzy88.top/jzy</a>；
 + 免费优选ip订阅链接：<a href="https://url.v1.mk/sub?target=clash&url=https%3A%2F%2Ffree.jzy88.top%2F60156344-dbc3-4614-8177-fd337539a473%2Fsub&insert=false" target="_blank">https://url.v1.mk/sub?target=clash&url=https%3A%2F%2Ffree.jzy88.top%2F60156344-dbc3-4614-8177-fd337539a473%2Fsub&insert=false</a>。

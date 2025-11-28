@@ -278,7 +278,7 @@ proxies:
 proxy-groups:
   - interval: 300
     timeout: 3000
-    url: https://cp.cloudflare.com/generate_204
+    url: http://www.gstatic.com/generate_204
     lazy: true
     max-failed-times: 3
     hidden: false
@@ -649,7 +649,7 @@ proxy-groups:
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/JP.png
   - interval: 300
     timeout: 3000
-    url: https://cp.cloudflare.com/generate_204
+    url: http://www.gstatic.com/generate_204
     lazy: true
     max-failed-times: 3
     hidden: false
@@ -666,7 +666,7 @@ proxy-groups:
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Download.png
   - interval: 300
     timeout: 3000
-    url: https://cp.cloudflare.com/generate_204
+    url: http://www.gstatic.com/generate_204
     lazy: true
     max-failed-times: 3
     hidden: false
@@ -681,7 +681,7 @@ proxy-groups:
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Streaming!CN.png
   - interval: 300
     timeout: 3000
-    url: http://wifi.vivo.com.cn/generate_204
+    url: http://connectivitycheck.platform.hicloud.com/generate_204
     lazy: true
     max-failed-times: 3
     hidden: false
@@ -696,7 +696,7 @@ proxy-groups:
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/StreamingCN.png
   - interval: 300
     timeout: 3000
-    url: https://cp.cloudflare.com/generate_204
+    url: http://www.gstatic.com/generate_204
     lazy: true
     max-failed-times: 3
     hidden: false
@@ -709,7 +709,7 @@ proxy-groups:
       - US_Claw_vless_grpc_100G
   - interval: 300
     timeout: 3000
-    url: https://cp.cloudflare.com/generate_204
+    url: http://www.gstatic.com/generate_204
     lazy: true
     max-failed-times: 3
     hidden: false
@@ -727,7 +727,7 @@ proxy-groups:
       - JP_hysteria2
   - interval: 300
     timeout: 3000
-    url: https://cp.cloudflare.com/generate_204
+    url: http://www.gstatic.com/generate_204
     lazy: true
     max-failed-times: 3
     hidden: false
@@ -745,7 +745,7 @@ proxy-groups:
       - SGP_aliyun_hysteria2
   - interval: 300
     timeout: 3000
-    url: https://cp.cloudflare.com/generate_204
+    url: http://www.gstatic.com/generate_204
     lazy: true
     max-failed-times: 3
     hidden: false

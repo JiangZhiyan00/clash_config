@@ -27,15 +27,15 @@ jobs:
         working-directory: ./clash/converter
 
       - name: 创建输出目录
-        run: mkdir -p dist
+        run: mkdir -p clash/converter/dist
 
       - name: 转换配置文件
-        run: node clash/converter/convert.js config.yml dist/config.yml
+        run: node clash/converter/convert.js config.yml clash/converter/dist/config_converted.yml
 
       - name: 提交转换后的文件
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          git add dist/config.yml
+          git add clash/converter/dist/config_converted.yml
           git diff --quiet && git diff --staged --quiet || git commit -m "🚀 自动更新转换后的配置文件"
           git push

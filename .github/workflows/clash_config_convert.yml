@@ -1,0 +1,40 @@
+name: 转换Clash配置并提交
+
+on:
+  push:
+    paths:
+      - "config.yml"
+  workflow_dispatch:
+
+jobs:
+  convert-and-commit:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+
+      - name: 设置 Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: "lts/*"
+
+      - name: 安装依赖
+        run: npm ci
+        working-directory: ./clash/converter
+
+      - name: 创建输出目录
+        run: mkdir -p dist
+
+      - name: 转换配置文件
+        run: node clash/converter/convert.js config.yml dist/config.yml
+
+      - name: 提交转换后的文件
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add dist/config.yml
+          git diff --quiet && git diff --staged --quiet || git commit -m "🚀 自动更新转换后的配置文件"
+          git push

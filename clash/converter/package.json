@@ -1,0 +1,13 @@
+{
+  "name": "clash-config-converter",
+  "version": "1.0.0",
+  "description": "Clash 配置文件转换工具",
+  "type": "module",
+  "main": "global.js",
+  "scripts": {
+    "convert": "node convert.js"
+  },
+  "dependencies": {
+    "js-yaml": "^4.1.0"
+  }
+}

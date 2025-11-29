@@ -159,11 +159,11 @@ const chinaDNS = [
 ];
 
 const foreignDNS = [
-  "https://1.1.1.1/dns-query", // Cloudflare
-  "https://8.8.8.8/dns-query", // Google DoH
-  "https://1.0.0.1/dns-query", // Cloudflare 备用节点
-  "https://8.8.4.4/dns-query", // Google 备用
-  "https://208.67.222.222/dns-query", // OpenDNS 有过滤，作为末级 fallback
+  "1.1.1.1",         // Cloudflare
+  "8.8.8.8",         // Google
+  "223.5.5.5",       // 阿里 DNS Do53
+  "1.0.0.1",         // Cloudflare 备用
+  "8.8.4.4",         // Google 备用
 ];
 const dnsConfig = {
   enable: true,

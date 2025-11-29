@@ -153,9 +153,9 @@ const globalRatioLimit = 2;
 
 // DNS 配置
 const chinaDNS = [
-  "https://223.5.5.5/dns-query", // 阿里DOH
-  "https://120.53.53.53/dns-query", // 腾讯DoH
-  "https://doh.360.cn/dns-query", // 360安全DoH
+  "223.5.5.5",       // 阿里 DNS Do53
+  "119.29.29.29",    // 腾讯 DNS Do53
+  "114.114.114.114", // 114 DNS Do53
 ];
 
 const foreignDNS = [

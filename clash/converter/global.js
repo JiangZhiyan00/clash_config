@@ -34,7 +34,7 @@ const ruleOptions = {
   pixiv: true, // Pixiv
   hbo: true, // HBO
   "media-cn@!cn": true, // 港澳台媒体
-  biliintl: true, // 哔哩哔哩东南亚
+  biliintl: false, // 哔哩哔哩东南亚
   tvb: true, // TVB
   hulu: true, // Hulu
   primevideo: true, // 亚马逊prime video

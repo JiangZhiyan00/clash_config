@@ -101,7 +101,7 @@ proxies:
       - h3
     skip-cert-verify: true
     tls: true
-  - name: SGP_aliyun_tuic
+  - name: SGP_tuic
     server: sgp3xui.jzy88.top
     type: tuic
     port: 2097
@@ -145,7 +145,7 @@ proxies:
       - h3
     skip-cert-verify: true
     tls: true
-  - name: SGP_aliyun_any_tls
+  - name: SGP_any_tls
     server: sgp3xui.jzy88.top
     type: anytls
     port: 54327
@@ -230,7 +230,7 @@ proxies:
     client-fingerprint: chrome
     grpc-opts:
       grpc-service-name: grpc
-  - name: SGP_aliyun_reality_vision
+  - name: SGP_reality_vision
     server: sgp3xui.jzy88.top
     type: vless
     port: 54322
@@ -244,7 +244,7 @@ proxies:
       public-key: 1w1R9FYNIhdyesNYxGpXmkLGqS9wgLu4sRd5sl6XDjE
       short-id: b4dc4a
     client-fingerprint: chrome
-  - name: SGP_aliyun_vless_tls_vision
+  - name: SGP_vless_tls_vision
     server: sgp3xui.jzy88.top
     type: vless
     port: 54323
@@ -255,7 +255,7 @@ proxies:
     udp: true
     tls: true
     client-fingerprint: chrome
-  - name: SGP_aliyun_vless_tls_grpc
+  - name: SGP_vless_tls_grpc
     server: sgp3xui.jzy88.top
     type: vless
     port: 54324
@@ -281,7 +281,7 @@ proxies:
     down: 9999999999
     up: 9999999999
     tls: true
-  - name: SGP_aliyun_hysteria2
+  - name: SGP_hysteria2
     server: sgp3xui.jzy88.top
     servername: sgp3xui.jzy88.top
     port: 54325
@@ -764,13 +764,13 @@ proxy-groups:
     tolerance: 50
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Singapore.png
     proxies:
-      - SGP_aliyun_tuic
-      - SGP_aliyun_any_tls
+      - SGP_tuic
+      - SGP_any_tls
       - SGP_Claw_vless_grpc_100G
-      - SGP_aliyun_reality_vision
-      - SGP_aliyun_vless_tls_vision
-      - SGP_aliyun_vless_tls_grpc
-      - SGP_aliyun_hysteria2
+      - SGP_reality_vision
+      - SGP_vless_tls_vision
+      - SGP_vless_tls_grpc
+      - SGP_hysteria2
   - interval: 300
     timeout: 3000
     url: http://www.gstatic.com/generate_204

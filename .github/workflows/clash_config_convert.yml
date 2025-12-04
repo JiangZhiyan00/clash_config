@@ -40,3 +40,9 @@ jobs:
           git add clash/converter/dist/config_converted.yml
           git diff --quiet && git diff --staged --quiet || git commit -m "🚀 自动更新转换后的配置文件"
           git push
+
+      - name: 刷新 CDN 缓存
+        run: |
+          BRANCH="${{ github.ref_name }}"
+          curl -X GET "https://purge.jsdelivr.net/gh/JiangZhiyan00/clash_config@${BRANCH}/clash/converter/dist/config_converted.yml"
+          curl -X GET "https://purge.jsdelivr.net/npm/JiangZhiyan00/clash_config@${BRANCH}/clash/converter/dist/config_converted.yml"

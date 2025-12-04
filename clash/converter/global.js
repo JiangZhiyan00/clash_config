@@ -152,6 +152,14 @@ const excludeHighPercentage = true;
 const globalRatioLimit = 2;
 
 // DNS 配置
+// 用于解析 DoH/TLS 服务器本身的 bootstrap DNS（必须有）
+const defaultDNS = [
+  "223.5.5.5", // 阿里
+  "119.29.29.29", // 腾讯
+  "1.1.1.1", //Cloudflare
+  "8.8.8.8", //Google
+];
+
 const chinaDNS = [
   "https://223.5.5.5/dns-query", // 阿里DOH
   "https://120.53.53.53/dns-query", // 腾讯DoH
@@ -190,16 +198,22 @@ const dnsConfig = {
     "geosite:category-bank-jp",
     "geosite:category-bank-cn@!cn",
   ],
-  nameserver: foreignDNS,
-  fallback: chinaDNS,
+  "default-nameserver": defaultDNS,
+  nameserver: chinaDNS,
+  fallback: foreignDNS,
   "fallback-filter": {
     geoip: true,
+    "geoip-code": "CN",
   },
-  "proxy-server-nameserver": foreignDNS,
+  "proxy-server-nameserver": ["223.5.5.5", "1.1.1.1", ...foreignDNS],
   "nameserver-policy": {
-    "geosite:private": "system",
-    "geosite:tld-cn,cn,steam@cn,category-games@cn,microsoft@cn,apple@cn":
-      chinaDNS,
+    "geosite:private": ["system"],
+    "geosite:cn": chinaDNS,
+    "geosite:tld-cn": chinaDNS,
+    "geosite:microsoft@cn": chinaDNS,
+    "geosite:apple@cn": chinaDNS,
+    "geosite:steam@cn": chinaDNS,
+    "geisite:category-games@cn": chinaDNS,
   },
 };
 

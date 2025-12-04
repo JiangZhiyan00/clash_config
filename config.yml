@@ -60,7 +60,7 @@ proxies:
       tls: true,
     }
   - {
-      name: SGP_aliyun_tuic,
+      name: SGP_tuic,
       server: sgp3xui.jzy88.top,
       type: tuic,
       port: 2097,
@@ -101,7 +101,7 @@ proxies:
       tls: true,
     }
   - {
-      name: SGP_aliyun_any_tls,
+      name: SGP_any_tls,
       server: sgp3xui.jzy88.top,
       type: anytls,
       port: 54327,
@@ -195,7 +195,7 @@ proxies:
       grpc-opts: { grpc-service-name: grpc },
     }
   - {
-      name: SGP_aliyun_reality_vision,
+      name: SGP_reality_vision,
       server: sgp3xui.jzy88.top,
       type: vless,
       port: 54322,
@@ -213,7 +213,7 @@ proxies:
       client-fingerprint: chrome,
     }
   - {
-      name: SGP_aliyun_vless_tls_vision,
+      name: SGP_vless_tls_vision,
       server: sgp3xui.jzy88.top,
       type: vless,
       port: 54323,
@@ -226,7 +226,7 @@ proxies:
       client-fingerprint: chrome,
     }
   - {
-      name: SGP_aliyun_vless_tls_grpc,
+      name: SGP_vless_tls_grpc,
       server: sgp3xui.jzy88.top,
       type: vless,
       port: 54324,
@@ -252,7 +252,7 @@ proxies:
       tls: true,
     }
   - {
-      name: SGP_aliyun_hysteria2,
+      name: SGP_hysteria2,
       server: sgp3xui.jzy88.top,
       servername: sgp3xui.jzy88.top,
       port: 54325,
@@ -287,12 +287,12 @@ proxy-groups:
   - name: 🚀 手动切换
     type: select
     proxies:
-      - SGP_aliyun_tuic
-      - SGP_aliyun_reality_vision
-      - SGP_aliyun_hysteria2
-      - SGP_aliyun_any_tls
-      - SGP_aliyun_vless_tls_grpc
-      - SGP_aliyun_vless_tls_vision
+      - SGP_tuic
+      - SGP_reality_vision
+      - SGP_hysteria2
+      - SGP_any_tls
+      - SGP_vless_tls_grpc
+      - SGP_vless_tls_vision
 
       - JP_tuic
       - JP_reality_vision
@@ -312,12 +312,12 @@ proxy-groups:
     interval: 300
     tolerance: 50
     proxies:
-      - SGP_aliyun_tuic
-      - SGP_aliyun_reality_vision
-      - SGP_aliyun_hysteria2
-      - SGP_aliyun_any_tls
-      - SGP_aliyun_vless_tls_grpc
-      - SGP_aliyun_vless_tls_vision
+      - SGP_tuic
+      - SGP_reality_vision
+      - SGP_hysteria2
+      - SGP_any_tls
+      - SGP_vless_tls_grpc
+      - SGP_vless_tls_vision
 
       - JP_tuic
       - JP_reality_vision
@@ -388,12 +388,12 @@ proxy-groups:
     interval: 300
     tolerance: 50
     proxies:
-      - SGP_aliyun_tuic
-      - SGP_aliyun_reality_vision
-      - SGP_aliyun_hysteria2
-      - SGP_aliyun_any_tls
-      - SGP_aliyun_vless_tls_grpc
-      - SGP_aliyun_vless_tls_vision
+      - SGP_tuic
+      - SGP_reality_vision
+      - SGP_hysteria2
+      - SGP_any_tls
+      - SGP_vless_tls_grpc
+      - SGP_vless_tls_vision
 
       - JP_tuic
       - JP_reality_vision

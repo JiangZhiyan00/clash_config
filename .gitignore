@@ -12,4 +12,11 @@
 ### Mac OS ###
 .DS_Store
 
+### Local history ###
 .history/
+
+### Node.js ###
+**/node_modules
+**/package-lock.json
+**/pnpm-lock.yaml
+**/yarn.lock

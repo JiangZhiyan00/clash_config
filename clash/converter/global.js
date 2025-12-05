@@ -654,6 +654,13 @@ function main(config) {
         groupProxies = ["REJECT", "直连", "默认节点"];
       } else if (svc.key === "biliintl" || svc.key === "bahamut") {
         groupProxies = ["默认节点", "直连", ...regionGroupNames];
+      } else if (svc.key === "japan" && regionGroupNames.includes("JP日本")) {
+        groupProxies = [
+          "JP日本",
+          "默认节点",
+          ...regionGroupNames.filter((n) => n !== "JP日本"),
+          "直连",
+        ];
       } else {
         groupProxies = ["默认节点", ...regionGroupNames, "直连"];
       }

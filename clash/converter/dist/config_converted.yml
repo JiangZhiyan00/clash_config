@@ -680,9 +680,9 @@ proxy-groups:
     name: 日本网站
     type: select
     proxies:
+      - JP日本
       - 默认节点
       - SG新加坡
-      - JP日本
       - US美国
       - CN中国大陆
       - 直连

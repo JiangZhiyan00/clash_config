@@ -74,4 +74,4 @@
 
 + `main(默认)` 分支订阅链接：<a href="https://clash_config.jzy88.top" target="_blank">https://clash_config.jzy88.top/main</a>；
 + `jzy` 分支订阅链接：<a href="https://clash_config.jzy88.top/jzy" target="_blank">https://clash_config.jzy88.top/jzy</a>；
-+ 免费优选ip订阅链接：<a href="https://url.v1.mk/sub?target=clash&url=https%3A%2F%2Ffree.jzy88.top%2F60156344-dbc3-4614-8177-fd337539a473%2Fsub&insert=false" target="_blank">https://url.v1.mk/sub?target=clash&url=https%3A%2F%2Ffree.jzy88.top%2F60156344-dbc3-4614-8177-fd337539a473%2Fsub&insert=false</a>。
++ 免费优选ip订阅链接(不保证可用性)：<a href="https://url.v1.mk/sub?target=clash&url=https%3A%2F%2Ffree.jzy88.top%2F60156344-dbc3-4614-8177-fd337539a473%2Fsub&insert=false&config=https%3A%2F%2Fraw.githubusercontent.com%2FbyJoey%2Ftest%2Frefs%2Fheads%2Fmain%2Ftist.ini&emoji=true&list=false&xudp=false&udp=false&tfo=false&expand=true&scv=false&fdn=false&new_name=true" target="_blank">免费优选ip订阅链接</a>。

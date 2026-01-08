@@ -116,18 +116,37 @@ proxies:
     tls: true
   - name: US_Claw_tuic_100G
     server: udp.us-east-1.clawcloudrun.com
-    ip: 47.90.179.106
     type: tuic
     port: 37494
     password: icST67YucQ
     uuid: a13a2a85-ffef-4ab8-8ec7-7806847fb0f8
-    disable-sni: true
-    reduce-rtt: true
-    request-timeout: 9000
-    udp-relay-mode: quic
     congestion-controller: bbr
-    fast-open: true
-    sni: udp.us-east-1.clawcloudrun.com
+    alpn:
+      - http/1.1
+      - h2
+      - h3
+    skip-cert-verify: true
+    tls: true
+  - name: SGP_Claw_tuic_100G
+    server: udp.ap-southeast-1.clawcloudrun.com
+    type: tuic
+    port: 37527
+    password: 8RisC5DBVq
+    uuid: 294da2e0-b1cc-40f7-8451-17ea56658619
+    congestion-controller: bbr
+    alpn:
+      - http/1.1
+      - h2
+      - h3
+    skip-cert-verify: true
+    tls: true
+  - name: JP_Claw_tuic_100G
+    server: udp.ap-northeast-1.clawcloudrun.com
+    type: tuic
+    port: 41021
+    password: frgJNNBOMc
+    uuid: 9b68bac2-545d-4de1-bbb0-cb5f5b27e9f2
+    congestion-controller: bbr
     alpn:
       - http/1.1
       - h2
@@ -157,30 +176,6 @@ proxies:
       - h3
     skip-cert-verify: true
     tls: true
-  - name: SGP_Claw_vless_grpc_100G
-    server: kiosgrjnfzvt.ap-southeast-1.clawcloudrun.com
-    type: vless
-    port: 443
-    uuid: 2905d068-3052-4eae-b68e-ac9dfc7be412
-    network: grpc
-    servername: kiosgrjnfzvt.ap-southeast-1.clawcloudrun.com
-    udp: true
-    tls: true
-    client-fingerprint: chrome
-    grpc-opts:
-      grpc-service-name: grpc
-  - name: JP_Claw_vless_grpc_100G
-    server: hcdkfncxzkql.ap-northeast-1.clawcloudrun.com
-    type: vless
-    port: 443
-    uuid: f7685dfb-8ffd-4eef-90c5-b3c00f6d801e
-    network: grpc
-    servername: hcdkfncxzkql.ap-northeast-1.clawcloudrun.com
-    udp: true
-    tls: true
-    client-fingerprint: chrome
-    grpc-opts:
-      grpc-service-name: grpc
   - name: US_Claw_vless_grpc_100G
     server: ytsbgugjyatk.us-east-1.clawcloudrun.com
     type: vless
@@ -749,8 +744,8 @@ proxy-groups:
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Singapore.png
     proxies:
       - SGP_tuic
+      - SGP_Claw_tuic_100G
       - SGP_any_tls
-      - SGP_Claw_vless_grpc_100G
       - SGP_reality_vision
       - SGP_vless_tls_vision
       - SGP_vless_tls_grpc
@@ -767,8 +762,8 @@ proxy-groups:
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Japan.png
     proxies:
       - JP_tuic
+      - JP_Claw_tuic_100G
       - JP_any_tls
-      - JP_Claw_vless_grpc_100G
       - JP_reality_vision
       - JP_vless_tls_vision
       - JP_vless_tls_grpc

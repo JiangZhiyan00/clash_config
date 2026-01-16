@@ -60,24 +60,36 @@ const skipIps = [
 
 // 初始规则
 const rules = [
-  "RULE-SET,applications,下载软件",
-  "PROCESS-NAME,SunloginClient,DIRECT",
-  "PROCESS-NAME,SunloginClient.exe,DIRECT",
-  "PROCESS-NAME,AnyDesk,DIRECT",
-  "PROCESS-NAME,AnyDesk.exe,DIRECT",
-  "PROCESS-NAME,节点小宝,DIRECT",
-  "PROCESS-NAME,nblink.exe,DIRECT",
-  "PROCESS-NAME,NodeBabyLinkBackup,DIRECT",
-  "PROCESS-NAME,NodeBabyLinkClient,DIRECT",
-  "PROCESS-NAME,NodeBabyLinkRfile,DIRECT",
-  "PROCESS-NAME,NodeBabyLinkBackup.exe,DIRECT",
-  "PROCESS-NAME,NodeBabyLinkClient.exe,DIRECT",
-  "PROCESS-NAME,NodeBabyLinkDevice.exe,DIRECT",
-  "PROCESS-NAME,NodeBabyLinkOwjdxb.exe,DIRECT",
-  "PROCESS-NAME,NodeBabyLinkRfile.exe,DIRECT",
-  "PROCESS-NAME,NodeBabyLinkService.exe,DIRECT",
-  "DOMAIN-SUFFIX,iepose.com,DIRECT",
-  "DOMAIN-SUFFIX,ionewu.com,DIRECT",
+  'RULE-SET,applications,下载软件',
+  'PROCESS-NAME-REGEX,(?i).*Oray.*,DIRECT',
+  'PROCESS-NAME-REGEX,(?i).*Sunlogin.*,DIRECT',
+  'PROCESS-NAME-REGEX,(?i).*AweSun.*,DIRECT',
+  'PROCESS-NAME-REGEX,(?i).*NodeBaby.*,DIRECT',
+  'PROCESS-NAME-REGEX,(?i).*Node Baby.*,DIRECT',
+  'PROCESS-NAME-REGEX,(?i).*nblink.*,DIRECT',
+  'PROCESS-NAME-REGEX,(?i).*vpn.*,DIRECT',
+  'PROCESS-NAME-REGEX,(?i).*vnc.*,DIRECT',
+  'PROCESS-NAME-REGEX,(?i).*tvnserver.*,DIRECT',
+  'PROCESS-NAME-REGEX,(?i).*节点小宝.*,DIRECT',
+  'PROCESS-NAME-REGEX,(?i).*AnyDesk.*,DIRECT',
+  'PROCESS-NAME-REGEX,(?i).*ToDesk.*,DIRECT',
+  'PROCESS-NAME-REGEX,(?i).*RustDesk.*,DIRECT',
+  'PROCESS-NAME-REGEX,(?i).*TeamViewer.*,DIRECT',
+  'PROCESS-NAME-REGEX,(?i).*Zerotier.*,DIRECT',
+  'PROCESS-NAME-REGEX,(?i).*Tailscaled.*,DIRECT',
+  'PROCESS-NAME-REGEX,(?i).*phddns.*,DIRECT',
+  'PROCESS-NAME-REGEX,(?i).*ngrok.*,DIRECT',
+  'PROCESS-NAME-REGEX,(?i).*frpc.*,DIRECT',
+  'PROCESS-NAME-REGEX,(?i).*frps.*,DIRECT',
+  'PROCESS-NAME-REGEX,(?i).*natapp.*,DIRECT',
+  'PROCESS-NAME-REGEX,(?i).*cloudflared.*,DIRECT',
+  'PROCESS-NAME-REGEX,(?i).*xmqtunnel.*,DIRECT',
+  'PROCESS-NAME-REGEX,(?i).*Navicat.*,DIRECT',
+  'DOMAIN-SUFFIX,iepose.com,DIRECT',
+  'DOMAIN-SUFFIX,iepose.cn,DIRECT',
+  'DOMAIN-SUFFIX,nblink.cc,DIRECT',
+  'DOMAIN-SUFFIX,ionewu.com,DIRECT',
+  'DOMAIN-SUFFIX,vicp.net,DIRECT',
 ];
 
 // 地区定义 (Icons 更新为 GitHub Raw)
@@ -89,7 +101,7 @@ const regionDefinitions = [
   },
   {
     name: "TW台湾省",
-    regex: /台湾|🇹🇼|tw|taiwan|tai wan/i,
+    regex: /台湾|台灣|🇹🇼|tw|taiwan|tai wan/i,
     icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/China.png",
   },
   {
@@ -175,29 +187,33 @@ const foreignDNS = [
 ];
 const dnsConfig = {
   enable: true,
-  listen: "0.0.0.0:1053",
-  ipv6: true,
+  listen: ":53",
+  ipv6: false,
   "prefer-h3": true,
   "use-hosts": true,
   "use-system-hosts": true,
   "respect-rules": true,
   "enhanced-mode": "fake-ip",
   "fake-ip-range": "198.18.0.1/16",
-  "fake-ip-filter-mode": "whitelist",
+  "fake-ip-filter-mode": "blacklist", // 代表geosite:cn不使用fake ip
   "fake-ip-filter": [
-    "geosite:gfw",
-    "geosite:jetbrains-ai",
-    "geosite:category-ai-!cn",
-    "geosite:category-ai-chat-!cn",
-    "geosite:category-games-!cn",
-    "geosite:google@!cn",
-    "geosite:telegram",
-    "geosite:facebook",
-    "geosite:google",
-    "geosite:amazon",
-    "geosite:category-bank-jp",
-    "geosite:category-bank-cn@!cn",
+    "geosite:cn",
   ],
+  // "fake-ip-filter": [
+  //   "geosite:cn",
+  //   "geosite:gfw",
+  //   "geosite:jetbrains-ai",
+  //   "geosite:category-ai-!cn",
+  //   "geosite:category-ai-chat-!cn",
+  //   "geosite:category-games-!cn",
+  //   "geosite:google@!cn",
+  //   "geosite:telegram",
+  //   "geosite:facebook",
+  //   "geosite:google",
+  //   "geosite:amazon",
+  //   "geosite:category-bank-jp",
+  //   "geosite:category-bank-cn@!cn",
+  // ],
   "default-nameserver": defaultDNS,
   nameserver: chinaDNS,
   fallback: foreignDNS,
@@ -207,13 +223,13 @@ const dnsConfig = {
   },
   "proxy-server-nameserver": ["223.5.5.5", "1.1.1.1", ...foreignDNS],
   "nameserver-policy": {
-    "geosite:private": ["system"],
+    "geosite:private": ["system", ...chinaDNS],
     "geosite:cn": chinaDNS,
     "geosite:tld-cn": chinaDNS,
     "geosite:microsoft@cn": chinaDNS,
     "geosite:apple@cn": chinaDNS,
     "geosite:steam@cn": chinaDNS,
-    "geisite:category-games@cn": chinaDNS,
+    "geosite:category-games@cn": chinaDNS,
   },
 };
 
@@ -261,6 +277,8 @@ const serviceConfigs = [
       "GEOSITE,category-ai-chat-!cn,国外AI",
       "DOMAIN-SUFFIX,meta.ai,国外AI",
       "DOMAIN-SUFFIX,meta.com,国外AI",
+      'PROCESS-NAME-REGEX,(?i).*Antigravity.*,国外AI',
+      'PROCESS-NAME-REGEX,(?i).*language_server_.*,国外AI',
     ],
   },
   {
@@ -481,6 +499,7 @@ function main(config) {
   config["allow-lan"] = true;
   config["bind-address"] = "*";
   config["mode"] = "rule";
+  config["ipv6"] = false;
   config["dns"] = dnsConfig;
   config["profile"] = {
     "store-selected": true,
@@ -555,10 +574,10 @@ function main(config) {
   const regionGroups = {};
   regionDefinitions.forEach(
     (r) =>
-      (regionGroups[r.name] = {
-        ...r,
-        proxies: [],
-      })
+    (regionGroups[r.name] = {
+      ...r,
+      proxies: [],
+    })
   );
   const otherProxies = [];
 

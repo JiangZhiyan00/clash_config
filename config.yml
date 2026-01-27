@@ -7,7 +7,7 @@ ipv6: false
 find-process-mode: strict
 unified-delay: true
 tcp-concurrent: true
-global-client-fingerprint: chrome
+client-fingerprint: chrome
 profile:
   store-selected: true
   store-fake-ip: true

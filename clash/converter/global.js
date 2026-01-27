@@ -49,10 +49,12 @@ const ruleOptions = {
 
 const skipIps = [
   "10.0.0.0/8",
+  "100.64.0.0/10",
+  "127.0.0.0/8",
+  "169.254.0.0/16",
   "172.16.0.0/12",
   "192.168.0.0/16",
-  "169.254.0.0/16",
-  "127.0.0.0/8",
+  "198.18.0.0/16",
   "FC00::/7",
   "FE80::/10",
   "::1/128",
@@ -499,6 +501,7 @@ function main(config) {
   config["allow-lan"] = true;
   config["bind-address"] = "*";
   config["mode"] = "rule";
+  config["client-fingerprint"] = "chrome";
   config["ipv6"] = false;
   config["dns"] = dnsConfig;
   config["profile"] = {

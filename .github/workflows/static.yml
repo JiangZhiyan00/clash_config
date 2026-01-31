@@ -4,12 +4,12 @@ name: Deploy static content to Pages
 on:
   # Runs on pushes targeting the default branch
   push:
-    branches: ["main"]
-  paths:
-    - 'README.md'             # 文档变化时触发
-    - 'index.html'            # 网页入口变化时触发
-    - 'images/**'             # 图片变化时触发
-    - '.github/workflows/static.yml'  # 工作流文件发生变化时也触发
+      branches: ["main"]
+      paths:
+        - 'README.md'
+        - 'index.html'
+        - 'images/**'
+        - '.github/workflows/static.yml'
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 

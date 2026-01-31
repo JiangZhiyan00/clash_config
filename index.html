@@ -8,11 +8,35 @@
   <link rel="icon" href="data:image/x-icon;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAAsTAAALEwEAmpwYAAAE5ElEQVR4nO2VbUxTdxTGK7IPi4ruLcuyZGPTUmQgxmJUTAo6BRVFIiJDfBlOivgyMEolYOwYbswPikLdouwDxCiLkdKXS21vC7eF3uqEuMnikGWZUepiZvbBuX1Yluy33M0OxqxStmRZ4pP8c+9z7nnOc+65//yvSvUY/yfEbkMTW8q+2FI8saUMxJby4/018PJ23LGlGF7ZQdy/bqzRk6LR06nRczNOT2OcnmVxeuJnbWCSspT7uGKWa0owaUoY0pTgiS9F+4+NtXqeSCzGlFjMUJKerXl5THyUJs1IdNJWihO3EkwqpkHh4zJPKuWplCK6tEVYU7cwJVK9otEWYdMW4UnezLSI33zBZroWbKJBZSRKNV4YiVqwmcbUTXjS0iKYxKJCTOkbsBqNROWdZWK5zMUyGX9ZgPLdAZ4MK4QJZRfILwvQUSYzuMvPdKVGeiG2RYUcG5P5kjdIyShgKPv+2Cv8pBhkru71k2HwYzfI3DT4aTfIfG3wc7fCz08GP8EKGdEg02uQ+azCT75B5pN9MjuUGssKickoIJhZyJxHNrByHZ2r8nkrxKt6WLW/B0uIV/vQVfvJr+wmzniRmD0uJhl7eKnKR9b+btYa+eOTVXdTVd3DwZBuVT76lfm4H2qel4cmN5ebI3f7QT8ptd30qyJEbTdNNT52hriyB3JzCa5ZgzqsqCCHyvU5NIyMHfLSeMjLqUgb+MDHzkM+LgETQrH1ORwvyKEirOjN1biLclge4o1unqmX+P6wk6cjbUAxru/i8hGJJaHYlmyyilYjhhXpV/JVSdbwiEydrDjeiVM1Thzv4l1TJzUhvi0bjT6La2EFby/n3vY0Jod4k5v8Jjet423gpIfyJjdHQ1yprXiEFexZyg8V2cOnXrOLjBY3rvE20CJS2yJyIMR3LSNm71LuhhVULWaw8vXhv9mp87zQ6uSOcpiMp4EzTlynneSE+P4lzKxazEBYQc0i3DWLhzehArOTC+bz5EVqfk5EbXbyncNBzJ/108mqSX/IRN/TYXhfh2lkTBDQ2R18a3Uwa6zmDgfP2c9zWXCwe2S8TsdHdTr2hBXWp6I5vJAhYxrRLgGdS6DJ5WCtKLDO1cEdUcAk2smUbDz7ANOY3zUd1Lg6uK1cRz5Xah5ZSPCo7iEHkYLGeXhM8yiWBDZKdn6VBH6W7Bz0WHnea8cgCXR7BZDswwZegTVeO79Idq4quZKNeNUomOZT0jh/DBu6aR7ak3MJfpzKFNnGRtnGbdnKUMBKuXSWyUosYCUwWidbORKwUvugmie0TD0xl1sn5zJbNRY0z6GhWYvNqCKq14Knz8KHvVZ8vVbu9Vm5dslG7mjNJQvZfZbhn1YISo0WLUKzlnrVWCGlEX0mGc+Z2TT2tTL9Sjs3+i3Y+i1UXmmn7vP2vzfwhZmMK5a/jlgxb52NqTUZUampigTtyUxrS8TTloQ9UMKLA2a2DLZRN2jGf82McXT+wDkyB83Dx/ZZLVPNSQjmJESllmo8kNKItidwTEggKCSgV/j1Nt5R1ujcb86Reb0Np5IjJFAivMYtIYH6iN/8QfDEM0fU4BbjCcor6O0v57SoZqaUwGRlKfd9GznwaR43lBxRg+hKGOOGiwTeV1H71FT41Ii+GQz4ZnDv/vrSq8blU7NXms6MiIo+huo/xm/5lRjIlLv2EgAAAABJRU5ErkJggg==" />
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
   <style>
+    /* 优化中文字体 */
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC", "Microsoft YaHei", "微软雅黑", "PingFang SC", "Hiragino Sans GB", "Source Han Sans CN", "WenQuanYi Micro Hei", sans-serif;
+    }
+    
+    /* 代码字体 */
+    code, pre {
+      font-family: "Consolas", "Monaco", "Courier New", "Source Code Pro", monospace;
+    }
+    
     /* 针对图片的优化，防止图片过大撑破页面 */
     .markdown-section img {
       max-width: 100%; 
       border-radius: 8px; /* 给图片加一点圆角，更好看 */
       box-shadow: 0 4px 6px rgba(0,0,0,0.1); /* 给图片加一点阴影 */
+    }
+    
+    /* 优化中文排版 */
+    .markdown-section {
+      line-height: 1.8;
+      letter-spacing: 0.02em;
+    }
+    
+    /* 标题字体加粗 */
+    .markdown-section h1,
+    .markdown-section h2,
+    .markdown-section h3,
+    .markdown-section h4 {
+      font-weight: 600;
     }
   </style>
 </head>

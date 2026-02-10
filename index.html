@@ -66,21 +66,20 @@
         color: rgb(180, 180, 180) !important;
       }
 
-      /* 1. 调整logo大小 */
-      .sidebar .app-name img {
-        width: 50px;
-        object-fit: contain;
+      /* 主题切换按钮：右上角，位于字数统计右侧 */
+      #docsify-darklight-theme {
+        right: 20px;
+        top: 20px;
+        bottom: auto;
+        left: auto;
+        width: 25px;
+        height: 25px;
+        z-index: 100;
       }
 
-      /* 2. 将主题切换按钮移动到左侧菜单底部 */
-      #docsify-darklight-theme {
-        right: auto;
-        left: 20px;
-        top: auto;
-        bottom: 20px;
-        z-index: 100;
-        width: 30px;
-        height: 30px;
+      /* 调整字数统计位置，防止与按钮重叠 */
+      .markdown-section > div:first-child {
+        margin-right: 40px;
       }
     </style>
   </head>
@@ -100,7 +99,7 @@
     <script>
       window.$docsify = {
         name: "Clash配置指南",
-        logo: "/images/github_logo.png",
+        // logo: "/images/github_logo.png",
         repo: "https://github.com/jiangzhiyan00",
         loadSidebar: false,
         subMaxLevel: 3,

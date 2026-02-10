@@ -66,20 +66,25 @@
         color: rgb(180, 180, 180) !important;
       }
 
-      /* 主题切换按钮：右上角，位于字数统计右侧 */
+      /* 主题切换按钮：页面左上角（内容区左侧），位于字数统计同行 */
       #docsify-darklight-theme {
-        right: 20px;
+        right: auto;
+        left: 320px;
         top: 20px;
         bottom: auto;
-        left: auto;
         width: 25px;
         height: 25px;
         z-index: 100;
       }
 
-      /* 调整字数统计位置，防止与按钮重叠 */
-      .markdown-section > div:first-child {
-        margin-right: 40px;
+      /* 移动端适配 */
+      @media screen and (max-width: 768px) {
+        #docsify-darklight-theme {
+          left: 60px;
+          right: auto;
+          top: 10px;
+          z-index: 15;
+        }
       }
     </style>
   </head>

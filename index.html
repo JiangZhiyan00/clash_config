@@ -1,124 +1,170 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-CN">
-<head>
-  <meta charset="UTF-8">
-  <title>Clash配置指南</title>
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
-  <link rel="icon" href="data:image/x-icon;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAAsTAAALEwEAmpwYAAAE5ElEQVR4nO2VbUxTdxTGK7IPi4ruLcuyZGPTUmQgxmJUTAo6BRVFIiJDfBlOivgyMEolYOwYbswPikLdouwDxCiLkdKXS21vC7eF3uqEuMnikGWZUepiZvbBuX1Yluy33M0OxqxStmRZ4pP8c+9z7nnOc+65//yvSvUY/yfEbkMTW8q+2FI8saUMxJby4/018PJ23LGlGF7ZQdy/bqzRk6LR06nRczNOT2OcnmVxeuJnbWCSspT7uGKWa0owaUoY0pTgiS9F+4+NtXqeSCzGlFjMUJKerXl5THyUJs1IdNJWihO3EkwqpkHh4zJPKuWplCK6tEVYU7cwJVK9otEWYdMW4UnezLSI33zBZroWbKJBZSRKNV4YiVqwmcbUTXjS0iKYxKJCTOkbsBqNROWdZWK5zMUyGX9ZgPLdAZ4MK4QJZRfILwvQUSYzuMvPdKVGeiG2RYUcG5P5kjdIyShgKPv+2Cv8pBhkru71k2HwYzfI3DT4aTfIfG3wc7fCz08GP8EKGdEg02uQ+azCT75B5pN9MjuUGssKickoIJhZyJxHNrByHZ2r8nkrxKt6WLW/B0uIV/vQVfvJr+wmzniRmD0uJhl7eKnKR9b+btYa+eOTVXdTVd3DwZBuVT76lfm4H2qel4cmN5ebI3f7QT8ptd30qyJEbTdNNT52hriyB3JzCa5ZgzqsqCCHyvU5NIyMHfLSeMjLqUgb+MDHzkM+LgETQrH1ORwvyKEirOjN1biLclge4o1unqmX+P6wk6cjbUAxru/i8hGJJaHYlmyyilYjhhXpV/JVSdbwiEydrDjeiVM1Thzv4l1TJzUhvi0bjT6La2EFby/n3vY0Jod4k5v8Jjet423gpIfyJjdHQ1yprXiEFexZyg8V2cOnXrOLjBY3rvE20CJS2yJyIMR3LSNm71LuhhVULWaw8vXhv9mp87zQ6uSOcpiMp4EzTlynneSE+P4lzKxazEBYQc0i3DWLhzehArOTC+bz5EVqfk5EbXbyncNBzJ/108mqSX/IRN/TYXhfh2lkTBDQ2R18a3Uwa6zmDgfP2c9zWXCwe2S8TsdHdTr2hBXWp6I5vJAhYxrRLgGdS6DJ5WCtKLDO1cEdUcAk2smUbDz7ANOY3zUd1Lg6uK1cRz5Xah5ZSPCo7iEHkYLGeXhM8yiWBDZKdn6VBH6W7Bz0WHnea8cgCXR7BZDswwZegTVeO79Idq4quZKNeNUomOZT0jh/DBu6aR7ak3MJfpzKFNnGRtnGbdnKUMBKuXSWyUosYCUwWidbORKwUvugmie0TD0xl1sn5zJbNRY0z6GhWYvNqCKq14Knz8KHvVZ8vVbu9Vm5dslG7mjNJQvZfZbhn1YISo0WLUKzlnrVWCGlEX0mGc+Z2TT2tTL9Sjs3+i3Y+i1UXmmn7vP2vzfwhZmMK5a/jlgxb52NqTUZUampigTtyUxrS8TTloQ9UMKLA2a2DLZRN2jGf82McXT+wDkyB83Dx/ZZLVPNSQjmJESllmo8kNKItidwTEggKCSgV/j1Nt5R1ujcb86Reb0Np5IjJFAivMYtIYH6iN/8QfDEM0fU4BbjCcor6O0v57SoZqaUwGRlKfd9GznwaR43lBxRg+hKGOOGiwTeV1H71FT41Ii+GQz4ZnDv/vrSq8blU7NXms6MiIo+huo/xm/5lRjIlLv2EgAAAABJRU5ErkJggg==" />
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
-  <style>
-    /* 优化中文字体 */
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC", "Microsoft YaHei", "微软雅黑", "PingFang SC", "Hiragino Sans GB", "Source Han Sans CN", "WenQuanYi Micro Hei", sans-serif;
-    }
-    
-    /* 代码字体 */
-    code, pre {
-      font-family: "Consolas", "Monaco", "Courier New", "Source Code Pro", monospace;
-    }
-    
-    /* 针对图片的优化，防止图片过大撑破页面 */
-    .markdown-section img {
-      max-width: 100%; 
-      border-radius: 8px; /* 给图片加一点圆角，更好看 */
-      box-shadow: 0 4px 6px rgba(0,0,0,0.1); /* 给图片加一点阴影 */
-    }
-    
-    /* 优化中文排版 */
-    .markdown-section {
-      line-height: 1.8;
-      letter-spacing: 0.02em;
-    }
-    
-    /* 标题字体加粗 */
-    .markdown-section h1,
-    .markdown-section h2,
-    .markdown-section h3,
-    .markdown-section h4 {
-      font-weight: 600;
-    }
-  </style>
-</head>
-<body>
-  <div id="app">加载中...</div>
-  <script>
-    window.$docsify = {
-      name: 'Clash配置指南',
-      repo: 'https://github.com/jiangzhiyan00',
-      loadSidebar: false, 
-      subMaxLevel: 3,
-      auto2top: true,
-      
-      // 封面页
-      coverpage: false,
-      
-      // 右侧目录
-      toc: {
-        scope: '.markdown-section',
-        headings: 'h2, h3, h4',
-        title: '目录',
-      },
-      
-      // 搜索配置
-      search: {
-        placeholder: '🔍 搜索',
-        noData: '😞 找不到结果',
-        depth: 6,
-        maxAge: 86400000, // 缓存一天
-      },
-      
-      // 复制代码
-      copyCode: {
-        buttonText: '复制',
-        errorText: '错误',
-        successText: '已复制'
-      },
-      
-      // 分页导航
-      pagination: {
-        previousText: '上一页',
-        nextText: '下一页',
-        crossChapter: true,
-      },
-      
-      // 字数统计
-      count: {
-        countable: true,
-        fontsize: '0.9em',
-        color: 'rgb(90,90,90)',
-        language: 'chinese'
-      },
-      
-      // 外链在新标签打开
-      externalLinkTarget: '_blank',
-      
-      // 回到顶部按钮
-      scrollToTop: {
-        auto: true,
-        text: '↑',
-        right: 15,
-        bottom: 15,
-        offset: 500
+  <head>
+    <meta charset="UTF-8" />
+    <title>Clash配置指南</title>
+    <meta name="description" content="Clash客户端配置与使用指南" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, minimum-scale=1.0"
+    />
+    <link
+      rel="icon"
+      href="data:image/x-icon;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAAB8ElEQVR4nLWQ30tTcRjGjxSBaxldeBG0i0jQDXLlajMvnOGKfsxy0CDc0iQc7AfEzgQLpNPORs6WVETBoLzRq/VjW8ax0rWa86S3gf07n/gKG8s6FEEPPLwP7/M+D3y/kvQ/cDCEyRLlkiWKbIkRF1rs/iJKi22CmDVE0hrC1R1kr6DQ1hCqLURU3BiGXdeZdY5jN6o/OcYx5ziZ35Z4gsTOBrHLX5ETOtnJGhMJnZi8zs2Ezpis80BeJzl4leODASI/hb1eTD4/SaHvVEmJOV2j83aV9ltrHFCq2MROWSMt5vAVVL+f1kZB8DJDo8M4lQq7sxXmjJ6Q/YyaWWF/wEdvwMfFhhG+wGTEjTlX5sizMteMCnKrnM59wi1uw+eRG8aUh4Tixryg0bb4kYRRweIKIwvLdCrnaJs6Q7xhpPsZSg7gErq4zMNikX07w/k8e4oaT/J5dt3r51R6oOkJOQemx32o5XdktrlEenWJmQ8lDlc12oUWfF/AIu4f9ZGa6236RIH5E0RejeDZLFHZLHF/o8TTbUOSpI23KHU976DnhYOwtBNItOS7yXyJc2OrQPL7G2br3laBu2K+PkrPSzsz4vaXgnqJ1kVEs6J+m+Z5xYZZUGiti5RmJWwYboZ+iNZqB95aB3FBocXuj8F/wQ+txRU3wE799gAAAABJRU5ErkJggg=="
+    />
+    <link
+      rel="stylesheet"
+      href="//cdn.jsdelivr.net/npm/docsify-darklight-theme@latest/dist/style.min.css"
+      title="docsify-darklight-theme"
+      type="text/css"
+    />
+    <style>
+      /* 优化中文字体 */
+      body {
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC",
+          "Microsoft YaHei", "微软雅黑", "PingFang SC", "Hiragino Sans GB",
+          "Source Han Sans CN", "WenQuanYi Micro Hei", sans-serif;
       }
-    }
-  </script>
-  
-  <script src="//cdn.jsdelivr.net/npm/docsify@4/lib/docsify.min.js"></script>
-  <!-- 搜索插件 -->
-  <script src="//cdn.jsdelivr.net/npm/docsify@4/lib/plugins/search.min.js"></script>
-  <!-- 图片缩放 -->
-  <script src="//cdn.jsdelivr.net/npm/docsify@4/lib/plugins/zoom-image.min.js"></script>
-  <!-- 复制代码 -->
-  <script src="//cdn.jsdelivr.net/npm/docsify-copy-code/dist/docsify-copy-code.min.js"></script>
-  <!-- 右侧目录 -->
-  <script src="//cdn.jsdelivr.net/npm/docsify-plugin-toc@1.3.1/dist/docsify-plugin-toc.min.js"></script>
-  <!-- 分页导航 -->
-  <script src="//cdn.jsdelivr.net/npm/docsify-pagination/dist/docsify-pagination.min.js"></script>
-  <!-- 字数统计 -->
-  <script src="//cdn.jsdelivr.net/npm/docsify-count/dist/countable.min.js"></script>
-  <!-- 回到顶部 -->
-  <script src="//cdn.jsdelivr.net/npm/docsify-scroll-to-top/dist/docsify-scroll-to-top.min.js"></script>
-  
+
+      /* 代码字体 */
+      code,
+      pre {
+        font-family:
+          "Consolas", "Monaco", "Courier New", "Source Code Pro", monospace;
+      }
+
+      /* 针对图片的优化，防止图片过大撑破页面 */
+      .markdown-section img {
+        max-width: 100%;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      /* 暗色主题下图片阴影适配 */
+      [data-theme="dark"] .markdown-section img {
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+      }
+
+      /* 优化中文排版 */
+      .markdown-section {
+        line-height: 1.8;
+        letter-spacing: 0.02em;
+      }
+
+      /* 标题字体加粗 */
+      .markdown-section h1,
+      .markdown-section h2,
+      .markdown-section h3,
+      .markdown-section h4 {
+        font-weight: 600;
+      }
+
+      /* 暗色主题下字数统计颜色适配 */
+      [data-theme="dark"] .word-count {
+        color: rgb(180, 180, 180) !important;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <div
+        style="
+          text-align: center;
+          padding-top: 30vh;
+          font-size: 1.2em;
+          color: #999;
+        "
+      >
+        加载中...
+      </div>
+    </div>
+    <script>
+      window.$docsify = {
+        name: "Clash配置指南",
+        logo: "/images/github_logo.png",
+        repo: "https://github.com/jiangzhiyan00",
+        loadSidebar: false,
+        subMaxLevel: 3,
+        auto2top: true,
+
+        // 封面页
+        coverpage: false,
+
+        // 右侧目录
+        toc: {
+          scope: ".markdown-section",
+          headings: "h2, h3, h4",
+          title: "目录",
+        },
+
+        // 搜索配置
+        search: {
+          placeholder: "🔍 搜索",
+          noData: "😞 找不到结果",
+          depth: 6,
+          maxAge: 86400000, // 缓存一天
+        },
+
+        // 复制代码
+        copyCode: {
+          buttonText: "复制",
+          errorText: "错误",
+          successText: "已复制",
+        },
+
+        // 分页导航
+        pagination: {
+          previousText: "上一页",
+          nextText: "下一页",
+          crossChapter: true,
+        },
+
+        // 字数统计
+        count: {
+          countable: true,
+          fontsize: "0.9em",
+          color: "rgb(90,90,90)",
+          language: "chinese",
+        },
+
+        // 外链在新标签打开
+        externalLinkTarget: "_blank",
+
+        // 回到顶部按钮
+        scrollToTop: {
+          auto: true,
+          text: "↑",
+          right: 15,
+          bottom: 15,
+          offset: 500,
+        },
+
+        // 文档更新日期
+        formatUpdated: "{YYYY}年{MM}月{DD}日",
+      };
+    </script>
+
+    <script src="//cdn.jsdelivr.net/npm/docsify@4/lib/docsify.min.js"></script>
+    <!-- 搜索插件 -->
+    <script src="//cdn.jsdelivr.net/npm/docsify@4/lib/plugins/search.min.js"></script>
+    <!-- 图片缩放 -->
+    <script src="//cdn.jsdelivr.net/npm/docsify@4/lib/plugins/zoom-image.min.js"></script>
+    <!-- 复制代码 -->
+    <script src="//cdn.jsdelivr.net/npm/docsify-copy-code/dist/docsify-copy-code.min.js"></script>
+    <!-- 右侧目录 -->
+    <script src="//cdn.jsdelivr.net/npm/docsify-plugin-toc@1.3.1/dist/docsify-plugin-toc.min.js"></script>
+    <!-- 分页导航 -->
+    <script src="//cdn.jsdelivr.net/npm/docsify-pagination/dist/docsify-pagination.min.js"></script>
+    <!-- 字数统计 -->
+    <script src="//cdn.jsdelivr.net/npm/docsify-count/dist/countable.min.js"></script>
+    <!-- 回到顶部 -->
+    <script src="//cdn.jsdelivr.net/npm/docsify-scroll-to-top/dist/docsify-scroll-to-top.min.js"></script>
+    <!-- 暗色/亮色主题切换 -->
+    <script
+      src="//cdn.jsdelivr.net/npm/docsify-darklight-theme@latest/dist/index.min.js"
+      type="text/javascript"
+    ></script>
   </body>
 </html>

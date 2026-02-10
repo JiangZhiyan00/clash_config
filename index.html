@@ -66,6 +66,13 @@
         color: rgb(180, 180, 180) !important;
       }
 
+      /* 暗色主题下回到顶部按钮适配 */
+      [data-theme="dark"] .scroll-to-top {
+        background-color: #3a3a3a !important;
+        color: #e0e0e0 !important;
+        border-color: #555 !important;
+      }
+
       /* 主题切换按钮：页面左上角（内容区左侧），位于字数统计同行 */
       #docsify-darklight-theme {
         left: auto;
@@ -82,7 +89,7 @@
         #docsify-darklight-theme {
           left: 15px;
           right: auto;
-          top: 15px;
+          top: 20px;
           z-index: 15;
         }
       }

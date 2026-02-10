@@ -65,6 +65,23 @@
       [data-theme="dark"] .word-count {
         color: rgb(180, 180, 180) !important;
       }
+
+      /* 1. 调整logo大小 */
+      .sidebar .app-name img {
+        width: 50px;
+        object-fit: contain;
+      }
+
+      /* 2. 将主题切换按钮移动到左侧菜单底部 */
+      #docsify-darklight-theme {
+        right: auto;
+        left: 20px;
+        top: auto;
+        bottom: 20px;
+        z-index: 100;
+        width: 30px;
+        height: 30px;
+      }
     </style>
   </head>
   <body>

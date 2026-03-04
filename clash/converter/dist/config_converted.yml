@@ -81,34 +81,34 @@ dns:
       - https://doh.360.cn/dns-query
 proxies:
   - name: SGP_Wasmer_vless_ws
-    server: earth-environment.wasmer.app
+    server: wasmer.jzy88.top
     port: 443
     type: vless
     uuid: 60156344-dbc3-4614-8177-fd337539a473
     tls: true
     tfo: false
     skip-cert-verify: false
-    servername: earth-environment.wasmer.app
+    servername: wasmer.jzy88.top
     client-fingerprint: chrome
     network: ws
     ws-opts:
       path: /60156344
       headers:
-        Host: earth-environment.wasmer.app
+        Host: wasmer.jzy88.top
   - name: SGP_Wasmer_trojan_ws
-    server: earth-environment.wasmer.app
+    server: wasmer.jzy88.top
     port: 443
     type: trojan
     password: 60156344-dbc3-4614-8177-fd337539a473
-    sni: earth-environment.wasmer.app
+    sni: wasmer.jzy88.top
     skip-cert-verify: false
     network: ws
     ws-opts:
       path: /60156344
       headers:
-        Host: earth-environment.wasmer.app
+        Host: wasmer.jzy88.top
   - name: SGP_Wasmer_ss_ws
-    server: earth-environment.wasmer.app
+    server: wasmer.jzy88.top
     port: 443
     type: ss
     cipher: none
@@ -116,7 +116,7 @@ proxies:
     plugin: v2ray-plugin
     plugin-opts:
       mode: websocket
-      host: earth-environment.wasmer.app
+      host: wasmer.jzy88.top
       path: /60156344
       tls: true
       mux: true

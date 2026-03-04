@@ -80,35 +80,35 @@ dns:
       - https://120.53.53.53/dns-query
       - https://doh.360.cn/dns-query
 proxies:
-  - name: SGP_Wasmer_vless_ws
-    server: wasmer.jzy88.top
+  - name: Wasmer_earth_vless_ws
+    server: wasmer-earth.jzy88.top
     port: 443
     type: vless
     uuid: 60156344-dbc3-4614-8177-fd337539a473
     tls: true
     tfo: false
     skip-cert-verify: false
-    servername: wasmer.jzy88.top
+    servername: wasmer-earth.jzy88.top
     client-fingerprint: chrome
     network: ws
     ws-opts:
       path: /60156344
       headers:
-        Host: wasmer.jzy88.top
-  - name: SGP_Wasmer_trojan_ws
-    server: wasmer.jzy88.top
+        Host: wasmer-earth.jzy88.top
+  - name: Wasmer_earth_trojan_ws
+    server: wasmer-earth.jzy88.top
     port: 443
     type: trojan
     password: 60156344-dbc3-4614-8177-fd337539a473
-    sni: wasmer.jzy88.top
+    sni: wasmer-earth.jzy88.top
     skip-cert-verify: false
     network: ws
     ws-opts:
       path: /60156344
       headers:
-        Host: wasmer.jzy88.top
-  - name: SGP_Wasmer_ss_ws
-    server: wasmer.jzy88.top
+        Host: wasmer-earth.jzy88.top
+  - name: Wasmer_earth_ss_ws
+    server: wasmer-earth.jzy88.top
     port: 443
     type: ss
     cipher: none
@@ -116,7 +116,48 @@ proxies:
     plugin: v2ray-plugin
     plugin-opts:
       mode: websocket
-      host: wasmer.jzy88.top
+      host: wasmer-earth.jzy88.top
+      path: /60156344
+      tls: true
+      mux: true
+      skip-cert-verify: false
+  - name: Wasmer_protect_vless_ws
+    server: wasmer-protect.jzy88.top
+    port: 443
+    type: vless
+    uuid: 60156344-dbc3-4614-8177-fd337539a473
+    tls: true
+    tfo: false
+    skip-cert-verify: false
+    servername: wasmer-protect.jzy88.top
+    client-fingerprint: chrome
+    network: ws
+    ws-opts:
+      path: /60156344
+      headers:
+        Host: wasmer-protect.jzy88.top
+  - name: Wasmer_protect_trojan_ws
+    server: wasmer-protect.jzy88.top
+    port: 443
+    type: trojan
+    password: 60156344-dbc3-4614-8177-fd337539a473
+    sni: wasmer-protect.jzy88.top
+    skip-cert-verify: false
+    network: ws
+    ws-opts:
+      path: /60156344
+      headers:
+        Host: wasmer-protect.jzy88.top
+  - name: Wasmer_protect_ss_ws
+    server: wasmer-protect.jzy88.top
+    port: 443
+    type: ss
+    cipher: none
+    password: 60156344-dbc3-4614-8177-fd337539a473
+    plugin: v2ray-plugin
+    plugin-opts:
+      mode: websocket
+      host: wasmer-protect.jzy88.top
       path: /60156344
       tls: true
       mux: true
@@ -349,6 +390,7 @@ proxy-groups:
       - SG新加坡
       - JP日本
       - US美国
+      - Wasmer
       - CN中国大陆
       - 直连
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Proxy.png
@@ -365,6 +407,7 @@ proxy-groups:
       - SG新加坡
       - JP日本
       - US美国
+      - Wasmer
       - CN中国大陆
       - 直连
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/ChatGPT.png
@@ -381,6 +424,7 @@ proxy-groups:
       - SG新加坡
       - JP日本
       - US美国
+      - Wasmer
       - CN中国大陆
       - 直连
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/YouTube.png
@@ -397,6 +441,7 @@ proxy-groups:
       - SG新加坡
       - JP日本
       - US美国
+      - Wasmer
       - CN中国大陆
       - 直连
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/TVB.png
@@ -414,6 +459,7 @@ proxy-groups:
       - SG新加坡
       - JP日本
       - US美国
+      - Wasmer
       - CN中国大陆
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Bahamut.png
   - interval: 300
@@ -429,6 +475,7 @@ proxy-groups:
       - SG新加坡
       - JP日本
       - US美国
+      - Wasmer
       - CN中国大陆
       - 直连
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Disney+.png
@@ -445,6 +492,7 @@ proxy-groups:
       - SG新加坡
       - JP日本
       - US美国
+      - Wasmer
       - CN中国大陆
       - 直连
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Netflix.png
@@ -461,6 +509,7 @@ proxy-groups:
       - SG新加坡
       - JP日本
       - US美国
+      - Wasmer
       - CN中国大陆
       - 直连
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/TikTok.png
@@ -477,6 +526,7 @@ proxy-groups:
       - SG新加坡
       - JP日本
       - US美国
+      - Wasmer
       - CN中国大陆
       - 直连
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Spotify.png
@@ -493,6 +543,7 @@ proxy-groups:
       - SG新加坡
       - JP日本
       - US美国
+      - Wasmer
       - CN中国大陆
       - 直连
     icon: https://play-lh.googleusercontent.com/8pFuLOHF62ADcN0ISUAyEueA5G8IF49mX_6Az6pQNtokNVHxIVbS1L2NM62H-k02rLM=w240-h480-rw
@@ -509,6 +560,7 @@ proxy-groups:
       - SG新加坡
       - JP日本
       - US美国
+      - Wasmer
       - CN中国大陆
       - 直连
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/HBO.png
@@ -525,6 +577,7 @@ proxy-groups:
       - SG新加坡
       - JP日本
       - US美国
+      - Wasmer
       - CN中国大陆
       - 直连
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/TVB.png
@@ -541,6 +594,7 @@ proxy-groups:
       - SG新加坡
       - JP日本
       - US美国
+      - Wasmer
       - CN中国大陆
       - 直连
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Prime_Video.png
@@ -557,6 +611,7 @@ proxy-groups:
       - SG新加坡
       - JP日本
       - US美国
+      - Wasmer
       - CN中国大陆
       - 直连
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Hulu.png
@@ -573,6 +628,7 @@ proxy-groups:
       - SG新加坡
       - JP日本
       - US美国
+      - Wasmer
       - CN中国大陆
       - 直连
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Telegram.png
@@ -589,6 +645,7 @@ proxy-groups:
       - SG新加坡
       - JP日本
       - US美国
+      - Wasmer
       - CN中国大陆
       - 直连
     icon: https://static.whatsapp.net/rsrc.php/v3/yP/r/rYZqPCBaG70.png
@@ -605,6 +662,7 @@ proxy-groups:
       - SG新加坡
       - JP日本
       - US美国
+      - Wasmer
       - CN中国大陆
       - 直连
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Line.png
@@ -620,6 +678,7 @@ proxy-groups:
       - SG新加坡
       - JP日本
       - US美国
+      - Wasmer
       - CN中国大陆
       - 直连
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Game.png
@@ -648,6 +707,7 @@ proxy-groups:
       - SG新加坡
       - JP日本
       - US美国
+      - Wasmer
       - CN中国大陆
       - 直连
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Apple_2.png
@@ -664,6 +724,7 @@ proxy-groups:
       - SG新加坡
       - JP日本
       - US美国
+      - Wasmer
       - CN中国大陆
       - 直连
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Google_Search.png
@@ -680,6 +741,7 @@ proxy-groups:
       - SG新加坡
       - JP日本
       - US美国
+      - Wasmer
       - CN中国大陆
       - 直连
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/GitHub.png
@@ -696,6 +758,7 @@ proxy-groups:
       - SG新加坡
       - JP日本
       - US美国
+      - Wasmer
       - CN中国大陆
       - 直连
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Microsoft.png
@@ -712,6 +775,7 @@ proxy-groups:
       - 默认节点
       - SG新加坡
       - US美国
+      - Wasmer
       - CN中国大陆
       - 直连
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/JP.png
@@ -731,6 +795,7 @@ proxy-groups:
       - SG新加坡
       - JP日本
       - US美国
+      - Wasmer
       - CN中国大陆
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Download.png
   - interval: 300
@@ -747,6 +812,7 @@ proxy-groups:
       - SG新加坡
       - JP日本
       - US美国
+      - Wasmer
       - CN中国大陆
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Streaming!CN.png
   - interval: 300
@@ -763,6 +829,7 @@ proxy-groups:
       - SG新加坡
       - JP日本
       - US美国
+      - Wasmer
       - CN中国大陆
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/StreamingCN.png
   - interval: 300
@@ -776,9 +843,6 @@ proxy-groups:
     tolerance: 50
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Singapore.png
     proxies:
-      - SGP_Wasmer_vless_ws
-      - SGP_Wasmer_trojan_ws
-      - SGP_Wasmer_ss_ws
       - SGP_tuic
       - SGP_Claw_tuic_100G
       - SGP_any_tls
@@ -817,6 +881,23 @@ proxy-groups:
     proxies:
       - US_Claw_tuic_100G
       - US_Claw_vless_grpc_100G
+  - interval: 300
+    timeout: 3000
+    url: http://www.gstatic.com/generate_204
+    lazy: true
+    max-failed-times: 3
+    hidden: false
+    name: Wasmer
+    type: url-test
+    tolerance: 50
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Auto.png
+    proxies:
+      - Wasmer_earth_vless_ws
+      - Wasmer_earth_trojan_ws
+      - Wasmer_earth_ss_ws
+      - Wasmer_protect_vless_ws
+      - Wasmer_protect_trojan_ws
+      - Wasmer_protect_ss_ws
   - interval: 300
     timeout: 3000
     url: http://connectivitycheck.platform.hicloud.com/generate_204

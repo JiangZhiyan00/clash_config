@@ -48,33 +48,33 @@ dns:
     - geosite:cn
 proxies:
   - {
-      name: SGP_Wasmer_vless_ws,
-      server: wasmer.jzy88.top,
+      name: Wasmer_earth_vless_ws,
+      server: wasmer-earth.jzy88.top,
       port: 443,
       type: vless,
       uuid: 60156344-dbc3-4614-8177-fd337539a473,
       tls: true,
       tfo: false,
       skip-cert-verify: false,
-      servername: wasmer.jzy88.top,
+      servername: wasmer-earth.jzy88.top,
       client-fingerprint: chrome,
       network: ws,
-      ws-opts: { path: /60156344, headers: { Host: wasmer.jzy88.top } },
+      ws-opts: { path: /60156344, headers: { Host: wasmer-earth.jzy88.top } },
     }
   - {
-      name: SGP_Wasmer_trojan_ws,
-      server: wasmer.jzy88.top,
+      name: Wasmer_earth_trojan_ws,
+      server: wasmer-earth.jzy88.top,
       port: 443,
       type: trojan,
       password: 60156344-dbc3-4614-8177-fd337539a473,
-      sni: wasmer.jzy88.top,
+      sni: wasmer-earth.jzy88.top,
       skip-cert-verify: false,
       network: ws,
-      ws-opts: { path: /60156344, headers: { Host: wasmer.jzy88.top } },
+      ws-opts: { path: /60156344, headers: { Host: wasmer-earth.jzy88.top } },
     }
   - {
-      name: SGP_Wasmer_ss_ws,
-      server: wasmer.jzy88.top,
+      name: Wasmer_earth_ss_ws,
+      server: wasmer-earth.jzy88.top,
       port: 443,
       type: ss,
       cipher: none,
@@ -83,7 +83,50 @@ proxies:
       plugin-opts:
         {
           mode: websocket,
-          host: wasmer.jzy88.top,
+          host: wasmer-earth.jzy88.top,
+          path: /60156344,
+          tls: true,
+          mux: true,
+          skip-cert-verify: false,
+        },
+    }
+  - {
+      name: Wasmer_protect_vless_ws,
+      server: wasmer-protect.jzy88.top,
+      port: 443,
+      type: vless,
+      uuid: 60156344-dbc3-4614-8177-fd337539a473,
+      tls: true,
+      tfo: false,
+      skip-cert-verify: false,
+      servername: wasmer-protect.jzy88.top,
+      client-fingerprint: chrome,
+      network: ws,
+      ws-opts: { path: /60156344, headers: { Host: wasmer-protect.jzy88.top } },
+    }
+  - {
+      name: Wasmer_protect_trojan_ws,
+      server: wasmer-protect.jzy88.top,
+      port: 443,
+      type: trojan,
+      password: 60156344-dbc3-4614-8177-fd337539a473,
+      sni: wasmer-protect.jzy88.top,
+      skip-cert-verify: false,
+      network: ws,
+      ws-opts: { path: /60156344, headers: { Host: wasmer-protect.jzy88.top } },
+    }
+  - {
+      name: Wasmer_protect_ss_ws,
+      server: wasmer-protect.jzy88.top,
+      port: 443,
+      type: ss,
+      cipher: none,
+      password: 60156344-dbc3-4614-8177-fd337539a473,
+      plugin: v2ray-plugin,
+      plugin-opts:
+        {
+          mode: websocket,
+          host: wasmer-protect.jzy88.top,
           path: /60156344,
           tls: true,
           mux: true,
@@ -335,9 +378,12 @@ proxy-groups:
       - JP_vless_tls_grpc
       - JP_vless_tls_vision
 
-      - SGP_Wasmer_vless_ws
-      - SGP_Wasmer_trojan_ws
-      - SGP_Wasmer_ss_ws
+      - Wasmer_earth_vless_ws
+      - Wasmer_earth_trojan_ws
+      - Wasmer_earth_ss_ws
+      - Wasmer_protect_vless_ws
+      - Wasmer_protect_trojan_ws
+      - Wasmer_protect_ss_ws
 
       - US_Claw_tuic_100G
       - SGP_Claw_tuic_100G
@@ -364,9 +410,12 @@ proxy-groups:
       - JP_vless_tls_grpc
       - JP_vless_tls_vision
 
-      - SGP_Wasmer_vless_ws
-      - SGP_Wasmer_trojan_ws
-      - SGP_Wasmer_ss_ws
+      - Wasmer_earth_vless_ws
+      - Wasmer_earth_trojan_ws
+      - Wasmer_earth_ss_ws
+      - Wasmer_protect_vless_ws
+      - Wasmer_protect_trojan_ws
+      - Wasmer_protect_ss_ws
 
       - US_Claw_tuic_100G
       - SGP_Claw_tuic_100G
@@ -444,9 +493,12 @@ proxy-groups:
       - JP_vless_tls_grpc
       - JP_vless_tls_vision
 
-      - SGP_Wasmer_vless_ws
-      - SGP_Wasmer_trojan_ws
-      - SGP_Wasmer_ss_ws
+      - Wasmer_earth_vless_ws
+      - Wasmer_earth_trojan_ws
+      - Wasmer_earth_ss_ws
+      - Wasmer_protect_vless_ws
+      - Wasmer_protect_trojan_ws
+      - Wasmer_protect_ss_ws
 
       - US_Claw_tuic_100G
       - SGP_Claw_tuic_100G

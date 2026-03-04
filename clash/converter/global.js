@@ -62,36 +62,36 @@ const skipIps = [
 
 // 初始规则
 const rules = [
-  'RULE-SET,applications,下载软件',
-  'PROCESS-NAME-REGEX,(?i).*Oray.*,DIRECT',
-  'PROCESS-NAME-REGEX,(?i).*Sunlogin.*,DIRECT',
-  'PROCESS-NAME-REGEX,(?i).*AweSun.*,DIRECT',
-  'PROCESS-NAME-REGEX,(?i).*NodeBaby.*,DIRECT',
-  'PROCESS-NAME-REGEX,(?i).*Node Baby.*,DIRECT',
-  'PROCESS-NAME-REGEX,(?i).*nblink.*,DIRECT',
-  'PROCESS-NAME-REGEX,(?i).*vpn.*,DIRECT',
-  'PROCESS-NAME-REGEX,(?i).*vnc.*,DIRECT',
-  'PROCESS-NAME-REGEX,(?i).*tvnserver.*,DIRECT',
-  'PROCESS-NAME-REGEX,(?i).*节点小宝.*,DIRECT',
-  'PROCESS-NAME-REGEX,(?i).*AnyDesk.*,DIRECT',
-  'PROCESS-NAME-REGEX,(?i).*ToDesk.*,DIRECT',
-  'PROCESS-NAME-REGEX,(?i).*RustDesk.*,DIRECT',
-  'PROCESS-NAME-REGEX,(?i).*TeamViewer.*,DIRECT',
-  'PROCESS-NAME-REGEX,(?i).*Zerotier.*,DIRECT',
-  'PROCESS-NAME-REGEX,(?i).*Tailscaled.*,DIRECT',
-  'PROCESS-NAME-REGEX,(?i).*phddns.*,DIRECT',
-  'PROCESS-NAME-REGEX,(?i).*ngrok.*,DIRECT',
-  'PROCESS-NAME-REGEX,(?i).*frpc.*,DIRECT',
-  'PROCESS-NAME-REGEX,(?i).*frps.*,DIRECT',
-  'PROCESS-NAME-REGEX,(?i).*natapp.*,DIRECT',
-  'PROCESS-NAME-REGEX,(?i).*cloudflared.*,DIRECT',
-  'PROCESS-NAME-REGEX,(?i).*xmqtunnel.*,DIRECT',
-  'PROCESS-NAME-REGEX,(?i).*Navicat.*,DIRECT',
-  'DOMAIN-SUFFIX,iepose.com,DIRECT',
-  'DOMAIN-SUFFIX,iepose.cn,DIRECT',
-  'DOMAIN-SUFFIX,nblink.cc,DIRECT',
-  'DOMAIN-SUFFIX,ionewu.com,DIRECT',
-  'DOMAIN-SUFFIX,vicp.net,DIRECT',
+  "RULE-SET,applications,下载软件",
+  "PROCESS-NAME-REGEX,(?i).*Oray.*,DIRECT",
+  "PROCESS-NAME-REGEX,(?i).*Sunlogin.*,DIRECT",
+  "PROCESS-NAME-REGEX,(?i).*AweSun.*,DIRECT",
+  "PROCESS-NAME-REGEX,(?i).*NodeBaby.*,DIRECT",
+  "PROCESS-NAME-REGEX,(?i).*Node Baby.*,DIRECT",
+  "PROCESS-NAME-REGEX,(?i).*nblink.*,DIRECT",
+  "PROCESS-NAME-REGEX,(?i).*vpn.*,DIRECT",
+  "PROCESS-NAME-REGEX,(?i).*vnc.*,DIRECT",
+  "PROCESS-NAME-REGEX,(?i).*tvnserver.*,DIRECT",
+  "PROCESS-NAME-REGEX,(?i).*节点小宝.*,DIRECT",
+  "PROCESS-NAME-REGEX,(?i).*AnyDesk.*,DIRECT",
+  "PROCESS-NAME-REGEX,(?i).*ToDesk.*,DIRECT",
+  "PROCESS-NAME-REGEX,(?i).*RustDesk.*,DIRECT",
+  "PROCESS-NAME-REGEX,(?i).*TeamViewer.*,DIRECT",
+  "PROCESS-NAME-REGEX,(?i).*Zerotier.*,DIRECT",
+  "PROCESS-NAME-REGEX,(?i).*Tailscaled.*,DIRECT",
+  "PROCESS-NAME-REGEX,(?i).*phddns.*,DIRECT",
+  "PROCESS-NAME-REGEX,(?i).*ngrok.*,DIRECT",
+  "PROCESS-NAME-REGEX,(?i).*frpc.*,DIRECT",
+  "PROCESS-NAME-REGEX,(?i).*frps.*,DIRECT",
+  "PROCESS-NAME-REGEX,(?i).*natapp.*,DIRECT",
+  "PROCESS-NAME-REGEX,(?i).*cloudflared.*,DIRECT",
+  "PROCESS-NAME-REGEX,(?i).*xmqtunnel.*,DIRECT",
+  "PROCESS-NAME-REGEX,(?i).*Navicat.*,DIRECT",
+  "DOMAIN-SUFFIX,iepose.com,DIRECT",
+  "DOMAIN-SUFFIX,iepose.cn,DIRECT",
+  "DOMAIN-SUFFIX,nblink.cc,DIRECT",
+  "DOMAIN-SUFFIX,ionewu.com,DIRECT",
+  "DOMAIN-SUFFIX,vicp.net,DIRECT",
 ];
 
 // 地区定义 (Icons 更新为 GitHub Raw)
@@ -157,6 +157,11 @@ const regionDefinitions = [
     icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Australia.png",
   },
   {
+    name: "Wasmer",
+    regex: /Wasmer/i,
+    icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Auto.png",
+  },
+  {
     name: "CN中国大陆",
     regex: /中国|🇨🇳|cn|china|shanghai|beijing/i,
     icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/China_Map.png",
@@ -198,9 +203,7 @@ const dnsConfig = {
   "enhanced-mode": "fake-ip",
   "fake-ip-range": "198.18.0.1/16",
   "fake-ip-filter-mode": "blacklist", // 代表geosite:cn不使用fake ip
-  "fake-ip-filter": [
-    "geosite:cn",
-  ],
+  "fake-ip-filter": ["geosite:cn"],
   // "fake-ip-filter": [
   //   "geosite:cn",
   //   "geosite:gfw",
@@ -279,8 +282,8 @@ const serviceConfigs = [
       "GEOSITE,category-ai-chat-!cn,国外AI",
       "DOMAIN-SUFFIX,meta.ai,国外AI",
       "DOMAIN-SUFFIX,meta.com,国外AI",
-      'PROCESS-NAME-REGEX,(?i).*Antigravity.*,国外AI',
-      'PROCESS-NAME-REGEX,(?i).*language_server_.*,国外AI',
+      "PROCESS-NAME-REGEX,(?i).*Antigravity.*,国外AI",
+      "PROCESS-NAME-REGEX,(?i).*language_server_.*,国外AI",
     ],
   },
   {
@@ -577,10 +580,10 @@ function main(config) {
   const regionGroups = {};
   regionDefinitions.forEach(
     (r) =>
-    (regionGroups[r.name] = {
-      ...r,
-      proxies: [],
-    })
+      (regionGroups[r.name] = {
+        ...r,
+        proxies: [],
+      }),
   );
   const otherProxies = [];
 
@@ -653,7 +656,7 @@ function main(config) {
     name: "默认节点",
     type: "select",
     proxies: [...regionGroupNames, "其他节点", "直连"].filter(
-      (n) => n !== "其他节点" || otherProxies.length > 0
+      (n) => n !== "其他节点" || otherProxies.length > 0,
     ),
     icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Proxy.png",
   });
@@ -704,7 +707,7 @@ function main(config) {
     "GEOIP,private,DIRECT,no-resolve",
     "GEOSITE,cn,国内网站",
     "GEOIP,cn,国内网站,no-resolve",
-    "MATCH,其他外网"
+    "MATCH,其他外网",
   );
 
   functionalGroups.push(
@@ -729,7 +732,7 @@ function main(config) {
       proxies: ["直连", "默认节点", ...regionGroupNames],
       url: "http://connectivitycheck.platform.hicloud.com/generate_204",
       icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/StreamingCN.png",
-    }
+    },
   );
 
   // 3.5 组装最终结果

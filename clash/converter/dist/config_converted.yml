@@ -80,6 +80,47 @@ dns:
       - https://120.53.53.53/dns-query
       - https://doh.360.cn/dns-query
 proxies:
+  - name: SGP_Wasmer_vless_ws
+    server: earth-environment.wasmer.app
+    port: 443
+    type: vless
+    uuid: 60156344-dbc3-4614-8177-fd337539a473
+    tls: true
+    tfo: false
+    skip-cert-verify: false
+    servername: earth-environment.wasmer.app
+    client-fingerprint: chrome
+    network: ws
+    ws-opts:
+      path: /60156344
+      headers:
+        Host: earth-environment.wasmer.app
+  - name: SGP_Wasmer_trojan_ws
+    server: earth-environment.wasmer.app
+    port: 443
+    type: trojan
+    password: 60156344-dbc3-4614-8177-fd337539a473
+    sni: earth-environment.wasmer.app
+    skip-cert-verify: false
+    network: ws
+    ws-opts:
+      path: /60156344
+      headers:
+        Host: earth-environment.wasmer.app
+  - name: SGP_Wasmer_ss_ws
+    server: earth-environment.wasmer.app
+    port: 443
+    type: ss
+    cipher: none
+    password: 60156344-dbc3-4614-8177-fd337539a473
+    plugin: v2ray-plugin
+    plugin-opts:
+      mode: websocket
+      host: earth-environment.wasmer.app
+      path: /60156344
+      tls: true
+      mux: true
+      skip-cert-verify: false
   - name: JP_tuic
     server: jp3xui.jzy88.top
     type: tuic
@@ -735,6 +776,9 @@ proxy-groups:
     tolerance: 50
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Singapore.png
     proxies:
+      - SGP_Wasmer_vless_ws
+      - SGP_Wasmer_trojan_ws
+      - SGP_Wasmer_ss_ws
       - SGP_tuic
       - SGP_Claw_tuic_100G
       - SGP_any_tls

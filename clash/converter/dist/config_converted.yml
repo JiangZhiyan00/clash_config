@@ -80,6 +80,157 @@ dns:
       - https://120.53.53.53/dns-query
       - https://doh.360.cn/dns-query
 proxies:
+  - name: SGP_reality_vision
+    server: sgp3xui.jzy88.top
+    type: vless
+    port: 54322
+    uuid: 83661b8b-9e05-48a1-adee-4ec84da9fb82
+    network: tcp
+    servername: xt2qmu.aliwork.com
+    flow: xtls-rprx-vision
+    udp: true
+    tls: true
+    reality-opts:
+      public-key: 1w1R9FYNIhdyesNYxGpXmkLGqS9wgLu4sRd5sl6XDjE
+      short-id: b4dc4a
+    client-fingerprint: chrome
+  - name: SGP_tuic
+    server: sgp3xui.jzy88.top
+    type: tuic
+    port: 2097
+    password: JV74ivV30k
+    uuid: 2d1d8df2-597e-4b59-c878-262fa1be80b5
+    congestion-controller: bbr
+    alpn:
+      - http/1.1
+      - h2
+      - h3
+    skip-cert-verify: true
+    tls: true
+  - name: SGP_hysteria2
+    server: sgp3xui.jzy88.top
+    servername: sgp3xui.jzy88.top
+    port: 54325
+    type: hysteria2
+    password: JV74ivV30k
+    skip-cert-verify: true
+    alpn:
+      - http/1.1
+      - h2
+      - h3
+    down: 9999999999
+    up: 9999999999
+    tls: true
+  - name: SGP_any_tls
+    server: sgp3xui.jzy88.top
+    type: anytls
+    port: 54327
+    password: JV74ivV30k
+    client-fingerprint: chrome
+    alpn:
+      - http/1.1
+      - h2
+      - h3
+    skip-cert-verify: true
+    tls: true
+  - name: SGP_vless_tls_vision
+    server: sgp3xui.jzy88.top
+    type: vless
+    port: 54323
+    uuid: 700084b6-a1d2-4199-842b-3229c1b2e50c
+    network: tcp
+    servername: sgp3xui.jzy88.top
+    flow: xtls-rprx-vision
+    udp: true
+    tls: true
+    client-fingerprint: chrome
+  - name: SGP_vless_tls_grpc
+    server: sgp3xui.jzy88.top
+    type: vless
+    port: 54324
+    uuid: cdd37253-5f9b-4dcb-8b01-ad60a29384b8
+    network: grpc
+    servername: sgp3xui.jzy88.top
+    udp: true
+    tls: true
+    client-fingerprint: chrome
+    grpc-opts:
+      grpc-service-name: grpc
+  - name: JP_reality_vision
+    server: jp3xui.jzy88.top
+    type: vless
+    port: 54322
+    uuid: 0f4617f1-0b46-4fe2-8599-561fa16ebf1f
+    network: tcp
+    servername: travelsky-etrip.com
+    flow: xtls-rprx-vision
+    udp: true
+    tls: true
+    reality-opts:
+      public-key: rsBEuijeVZpfTqXZK0bcnAMdDLeuGMkWVmmRJN1uT3A
+      short-id: a9c117813348
+    client-fingerprint: chrome
+  - name: JP_tuic
+    server: jp3xui.jzy88.top
+    type: tuic
+    port: 2097
+    password: vls2gynYgL
+    uuid: 794c4308-8944-429e-ae62-f7af5e461fd0
+    congestion-controller: bbr
+    alpn:
+      - http/1.1
+      - h2
+      - h3
+    skip-cert-verify: true
+    tls: true
+  - name: JP_hysteria2
+    server: jp3xui.jzy88.top
+    servername: sgp3xui.jzy88.top
+    port: 54325
+    type: hysteria2
+    password: vls2gynYgL
+    skip-cert-verify: true
+    alpn:
+      - http/1.1
+      - h2
+      - h3
+    down: 9999999999
+    up: 9999999999
+    tls: true
+  - name: JP_any_tls
+    server: jp3xui.jzy88.top
+    type: anytls
+    port: 54327
+    password: vls2gynYgL
+    alpn:
+      - http/1.1
+      - h2
+      - h3
+    skip-cert-verify: true
+    tls: true
+  - name: JP_vless_tls_vision
+    server: jp3xui.jzy88.top
+    type: vless
+    port: 54323
+    uuid: 5360517f-1a97-4219-9399-8e6357ac1cbb
+    network: tcp
+    servername: jp3xui.jzy88.top
+    flow: xtls-rprx-vision
+    udp: true
+    tls: true
+    client-fingerprint: chrome
+  - name: JP_vless_tls_grpc
+    server: jp3xui.jzy88.top
+    type: vless
+    port: 54324
+    uuid: d246bb5b-d834-4d1e-9966-226067e2b8d3
+    network: grpc
+    servername: jp3xui.jzy88.top
+    udp: true
+    tls: true
+    client-fingerprint: chrome
+    grpc-opts:
+      grpc-service-name: grpc
   - name: Wasmer_earth_vless_ws
     server: wasmer-earth.jzy88.top
     port: 443
@@ -119,7 +270,7 @@ proxies:
       host: wasmer-earth.jzy88.top
       path: /60156344
       tls: true
-      mux: true
+      mux: false
       skip-cert-verify: false
   - name: Wasmer_protect_vless_ws
     server: wasmer-protect.jzy88.top
@@ -160,47 +311,8 @@ proxies:
       host: wasmer-protect.jzy88.top
       path: /60156344
       tls: true
-      mux: true
+      mux: false
       skip-cert-verify: false
-  - name: JP_tuic
-    server: jp3xui.jzy88.top
-    type: tuic
-    port: 2097
-    password: vls2gynYgL
-    uuid: 794c4308-8944-429e-ae62-f7af5e461fd0
-    congestion-controller: bbr
-    alpn:
-      - http/1.1
-      - h2
-      - h3
-    skip-cert-verify: true
-    tls: true
-  - name: SGP_tuic
-    server: sgp3xui.jzy88.top
-    type: tuic
-    port: 2097
-    password: JV74ivV30k
-    uuid: 2d1d8df2-597e-4b59-c878-262fa1be80b5
-    congestion-controller: bbr
-    alpn:
-      - http/1.1
-      - h2
-      - h3
-    skip-cert-verify: true
-    tls: true
-  - name: US_Claw_tuic_100G
-    server: udp.us-east-1.clawcloudrun.com
-    type: tuic
-    port: 37494
-    password: icST67YucQ
-    uuid: a13a2a85-ffef-4ab8-8ec7-7806847fb0f8
-    congestion-controller: bbr
-    alpn:
-      - http/1.1
-      - h2
-      - h3
-    skip-cert-verify: true
-    tls: true
   - name: SGP_Claw_tuic_100G
     server: udp.ap-southeast-1.clawcloudrun.com
     type: tuic
@@ -227,23 +339,13 @@ proxies:
       - h3
     skip-cert-verify: true
     tls: true
-  - name: JP_any_tls
-    server: jp3xui.jzy88.top
-    type: anytls
-    port: 54327
-    password: vls2gynYgL
-    alpn:
-      - http/1.1
-      - h2
-      - h3
-    skip-cert-verify: true
-    tls: true
-  - name: SGP_any_tls
-    server: sgp3xui.jzy88.top
-    type: anytls
-    port: 54327
-    password: JV74ivV30k
-    client-fingerprint: chrome
+  - name: US_Claw_tuic_100G
+    server: udp.us-east-1.clawcloudrun.com
+    type: tuic
+    port: 37494
+    password: icST67YucQ
+    uuid: a13a2a85-ffef-4ab8-8ec7-7806847fb0f8
+    congestion-controller: bbr
     alpn:
       - http/1.1
       - h2
@@ -262,108 +364,6 @@ proxies:
     client-fingerprint: chrome
     grpc-opts:
       grpc-service-name: grpc
-  - name: JP_reality_vision
-    server: jp3xui.jzy88.top
-    type: vless
-    port: 54322
-    uuid: 0f4617f1-0b46-4fe2-8599-561fa16ebf1f
-    network: tcp
-    servername: travelsky-etrip.com
-    flow: xtls-rprx-vision
-    udp: true
-    tls: true
-    reality-opts:
-      public-key: rsBEuijeVZpfTqXZK0bcnAMdDLeuGMkWVmmRJN1uT3A
-      short-id: a9c117813348
-    client-fingerprint: chrome
-  - name: JP_vless_tls_vision
-    server: jp3xui.jzy88.top
-    type: vless
-    port: 54323
-    uuid: 5360517f-1a97-4219-9399-8e6357ac1cbb
-    network: tcp
-    servername: jp3xui.jzy88.top
-    flow: xtls-rprx-vision
-    udp: true
-    tls: true
-    client-fingerprint: chrome
-  - name: JP_vless_tls_grpc
-    server: jp3xui.jzy88.top
-    type: vless
-    port: 54324
-    uuid: d246bb5b-d834-4d1e-9966-226067e2b8d3
-    network: grpc
-    servername: jp3xui.jzy88.top
-    udp: true
-    tls: true
-    client-fingerprint: chrome
-    grpc-opts:
-      grpc-service-name: grpc
-  - name: SGP_reality_vision
-    server: sgp3xui.jzy88.top
-    type: vless
-    port: 54322
-    uuid: 83661b8b-9e05-48a1-adee-4ec84da9fb82
-    network: tcp
-    servername: xt2qmu.aliwork.com
-    flow: xtls-rprx-vision
-    udp: true
-    tls: true
-    reality-opts:
-      public-key: 1w1R9FYNIhdyesNYxGpXmkLGqS9wgLu4sRd5sl6XDjE
-      short-id: b4dc4a
-    client-fingerprint: chrome
-  - name: SGP_vless_tls_vision
-    server: sgp3xui.jzy88.top
-    type: vless
-    port: 54323
-    uuid: 700084b6-a1d2-4199-842b-3229c1b2e50c
-    network: tcp
-    servername: sgp3xui.jzy88.top
-    flow: xtls-rprx-vision
-    udp: true
-    tls: true
-    client-fingerprint: chrome
-  - name: SGP_vless_tls_grpc
-    server: sgp3xui.jzy88.top
-    type: vless
-    port: 54324
-    uuid: cdd37253-5f9b-4dcb-8b01-ad60a29384b8
-    network: grpc
-    servername: sgp3xui.jzy88.top
-    udp: true
-    tls: true
-    client-fingerprint: chrome
-    grpc-opts:
-      grpc-service-name: grpc
-  - name: JP_hysteria2
-    server: jp3xui.jzy88.top
-    servername: sgp3xui.jzy88.top
-    port: 54325
-    type: hysteria2
-    password: vls2gynYgL
-    skip-cert-verify: true
-    alpn:
-      - http/1.1
-      - h2
-      - h3
-    down: 9999999999
-    up: 9999999999
-    tls: true
-  - name: SGP_hysteria2
-    server: sgp3xui.jzy88.top
-    servername: sgp3xui.jzy88.top
-    port: 54325
-    type: hysteria2
-    password: JV74ivV30k
-    skip-cert-verify: true
-    alpn:
-      - http/1.1
-      - h2
-      - h3
-    down: 9999999999
-    up: 9999999999
-    tls: true
   - name: Shanghai_direct
     server: 115.159.35.169
     type: vless
@@ -843,13 +843,13 @@ proxy-groups:
     tolerance: 50
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Singapore.png
     proxies:
-      - SGP_tuic
-      - SGP_Claw_tuic_100G
-      - SGP_any_tls
       - SGP_reality_vision
+      - SGP_tuic
+      - SGP_hysteria2
+      - SGP_any_tls
       - SGP_vless_tls_vision
       - SGP_vless_tls_grpc
-      - SGP_hysteria2
+      - SGP_Claw_tuic_100G
   - interval: 300
     timeout: 3000
     url: http://www.gstatic.com/generate_204
@@ -861,13 +861,13 @@ proxy-groups:
     tolerance: 50
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Japan.png
     proxies:
-      - JP_tuic
-      - JP_Claw_tuic_100G
-      - JP_any_tls
       - JP_reality_vision
+      - JP_tuic
+      - JP_hysteria2
+      - JP_any_tls
       - JP_vless_tls_vision
       - JP_vless_tls_grpc
-      - JP_hysteria2
+      - JP_Claw_tuic_100G
   - interval: 300
     timeout: 3000
     url: http://www.gstatic.com/generate_204

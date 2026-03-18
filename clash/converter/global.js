@@ -385,7 +385,7 @@ const ruleProviderCommon = {
 const groupBaseOption = {
   interval: 300,
   timeout: 3000,
-  url: "https://www.gstatic.com/generate_204",
+  url: "http://www.qualcomm.cn/generate_204",
   lazy: true,
   "max-failed-times": 3,
   hidden: false,
@@ -595,7 +595,7 @@ const serviceConfigs = [
     key: "google",
     name: "谷歌服务",
     icon: `${githubProxy}https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Google_Search.png`,
-    url: "https://www.google.com/generate_204",
+    url: "http://www.qualcomm.cn/generate_204",
     rules: ["GEOSITE,google,谷歌服务"],
   },
   {
@@ -773,8 +773,8 @@ function main(config) {
     // CN 大陆节点使用华为测速地址（在国内响应更可靠）
     const testUrl =
       r.name === "CN中国大陆"
-        ? "https://connectivitycheck.platform.hicloud.com/generate_204"
-        : "https://www.gstatic.com/generate_204";
+        ? "http://connectivitycheck.platform.hicloud.com/generate_204"
+        : "http://www.qualcomm.cn/generate_204";
 
     generatedRegionGroups.push({
       ...groupBaseOption,
@@ -903,7 +903,7 @@ function main(config) {
       name: "国内网站",
       type: "select",
       proxies: ["直连", "默认节点", ...regionGroupNames],
-      url: "https://connectivitycheck.platform.hicloud.com/generate_204",
+      url: "http://connectivitycheck.platform.hicloud.com/generate_204",
       icon: `${githubProxy}https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/StreamingCN.png`,
     },
   );

@@ -2,252 +2,390 @@
  * Clash Verge Rev / Mihomo Party 优化脚本
  * 原作者: dahaha-365 (YaNet)
  * Github：https://github.com/dahaha-365/YaNet
+ *
+ *
+ * 主要变化与优化说明:
+ * 1. [新增] $arguments 参数注入系统，支持 Mihomo Party GUI 动态配置
+ * 2. [优化] DNS 升级为 whitelist 模式 + direct-nameserver，移除旧版 fallback 方案
+ * 3. [修复] fake-ip-range 修正为 198.18.0.0/16（原版 198.18.0.1/16 有误）
+ * 4. [升级] geox-url 更新为 geoip.metadb 新格式 + geodata-mode:false（性能更优）
+ * 5. [升级] TUN 配置更完整（auto-redirect/strict-route/GSO/dns-hijack）
+ * 6. [保留] Wasmer 特殊节点地区匹配、JP优先逻辑、CN华为测速URL、chrome指纹
+ * 7. [优化] providers 统一为数组格式，支持多 Rule Provider
+ * 8. [新增] 兜底直连规则：category-public-tracker、category-game-platforms-download@cn
+ * 9. [整合] TVB 并入港澳台媒体组（避免重复），新增台湾媒体规则集
+ * 10.[调整] 地区顺序优化：HK/US/JP/KR/SG 排前，常用地区优先匹配
  */
 
-// --- 1. 静态配置区域 ---
+// ─────────────────────────────────────────────
+// 工具函数
+// ─────────────────────────────────────────────
+function stringToArray(val) {
+  if (Array.isArray(val)) return val;
+  if (typeof val !== "string") return [];
+  return val
+    .split(";")
+    .map((item) => item.trim())
+    .filter((item) => item.length > 0);
+}
+
+// ─────────────────────────────────────────────
+// 1. 静态配置区域
+// ─────────────────────────────────────────────
+
+// DNS 默认值（字符串格式，用分号分隔，方便 $arguments 注入）
+const _skipIps =
+  "10.0.0.0/8;100.64.0.0/10;127.0.0.0/8;169.254.0.0/16;172.16.0.0/12;192.168.0.0/16;198.18.0.0/16;FC00::/7;FE80::/10;::1/128";
+
+const _chinaIpDns = "223.5.5.5;119.29.29.29";
+const _foreignIpDns = "8.8.8.8;1.1.1.1";
+const _chinaDohDns =
+  "https://doh.pub/dns-query;https://dns.alidns.com/dns-query";
+const _foreignDohDns =
+  "https://dns.google/dns-query;https://dns.adguard-dns.com/dns-query";
 
 /**
- * 整个脚本的总开关，在Mihomo Party使用的话，请保持为true
- * true = 启用
- * false = 禁用
+ * $arguments 参数系统
+ * 在 Mihomo Party 中可通过 GUI 注入，其他场景则使用下方默认值
+ *
+ * 可用参数：
+ *   enable               - 总开关 (true/false)
+ *   ruleSet              - 启用的规则集，'all' 或 'openai;youtube;ads' 格式
+ *   regionSet            - 启用的地区，'all' 或 'HK;US;JP;SG' 格式（取地区名前2字母）
+ *   excludeHighPercentage - 是否过滤高倍率节点 (true/false)
+ *   globalRatioLimit     - 倍率上限 (数字)
+ *   skipIps              - 不走代理的 IP 段（分号分隔）
+ *   defaultDNS           - bootstrap DNS（分号分隔）
+ *   directDNS            - 直连域名解析 DNS（分号分隔）
+ *   chinaDNS             - 中国域名 DNS（分号分隔）
+ *   foreignDNS           - 境外域名 DNS（分号分隔）
+ *   mode                 - DNS 预设模式: securest/secure/default/fast/fastest
+ *   ipv6                 - 启用 IPv6 (true/false)
+ *   logLevel             - 日志等级: error/warning/info/debug/silent
+ *   githubProxy          - GitHub 加速代理前缀
  */
-const enable = true;
+const args =
+  typeof $arguments !== "undefined"
+    ? $arguments
+    : {
+        enable: true,
+        ruleSet: "all",
+        regionSet: "all",
+        excludeHighPercentage: true,
+        globalRatioLimit: 2,
+        skipIps: _skipIps,
+        defaultDNS: _chinaIpDns,
+        directDNS: _chinaIpDns,
+        chinaDNS: _chinaDohDns,
+        foreignDNS: _foreignDohDns,
+        mode: "default",
+        ipv6: false,
+        logLevel: "error",
+        githubProxy: "https://edgeone.gh-proxy.org/",
+      };
 
 /**
- * 分流规则配置，会自动生成对应的策略组
- * 设置的时候可遵循“最小，可用”原则，把自己不需要的规则全禁用掉，提高效率
- * true = 启用
- * false = 禁用
+ * 如果是直接在软件中粘贴脚本，可在这里手动覆盖默认值
  */
-const ruleOptions = {
-  apple: true, // 苹果服务
-  microsoft: true, // 微软服务
-  github: true, // Github服务
-  google: true, // Google服务
-  openai: true, // 国外AI和GPT
-  spotify: true, // Spotify
-  youtube: true, // YouTube
-  bahamut: true, // 巴哈姆特/动画疯
-  netflix: true, // Netflix网飞
-  tiktok: true, // 国际版抖音
-  disney: true, // 迪士尼
-  pixiv: true, // Pixiv
-  hbo: true, // HBO
-  "media-cn@!cn": true, // 港澳台媒体
-  biliintl: false, // 哔哩哔哩东南亚
-  tvb: true, // TVB
-  hulu: true, // Hulu
-  primevideo: true, // 亚马逊prime video
-  telegram: true, // Telegram通讯软件
-  line: true, // Line通讯软件
-  whatsapp: true, // Whatsapp
-  games: true, // 游戏策略组
-  japan: true, // 日本网站策略组
-  // tracker: true, // 网络分析和跟踪服务
-  ads: true, // 常见的网络广告
+let {
+  enable = args.enable ?? true,
+  ruleSet = args.ruleSet || "all",
+  regionSet = args.regionSet || "all",
+  excludeHighPercentage = args.excludeHighPercentage ?? true,
+  globalRatioLimit = args.globalRatioLimit || 2,
+  skipIps = args.skipIps || _skipIps,
+  defaultDNS = args.defaultDNS || _chinaIpDns,
+  directDNS = args.directDNS || _chinaIpDns,
+  chinaDNS = args.chinaDNS || _chinaDohDns,
+  foreignDNS = args.foreignDNS || _foreignDohDns,
+  mode = args.mode || "default",
+  ipv6 = args.ipv6 ?? false,
+  logLevel = args.logLevel || "error",
+  githubProxy = args.githubProxy || "https://edgeone.gh-proxy.org/",
+} = args;
+
+/**
+ * DNS 预设模式
+ * securest : 全程外部 DoH（最安全，速度最慢）
+ * secure   : bootstrap 用外部 IP，直连用国内 DoH（安全与速度平衡）
+ * default  : bootstrap 用国内 IP，直连/国内用 DoH（推荐）
+ * fast     : 全程国内 IP DNS（速度最快，隐私最低）
+ * fastest  : 全程纯 IP DNS（极速，无加密）
+ */
+if (["securest", "secure", "default", "fast", "fastest"].includes(mode)) {
+  switch (mode) {
+    case "securest":
+      defaultDNS = _foreignIpDns;
+      directDNS = _foreignDohDns;
+      chinaDNS = _foreignDohDns;
+      foreignDNS = _foreignDohDns;
+      break;
+    case "secure":
+      defaultDNS = _foreignIpDns;
+      directDNS = _chinaDohDns;
+      chinaDNS = _chinaDohDns;
+      foreignDNS = _foreignDohDns;
+      break;
+    case "fast":
+      defaultDNS = _chinaIpDns;
+      directDNS = _chinaIpDns;
+      chinaDNS = _chinaIpDns;
+      foreignDNS = _chinaDohDns;
+      break;
+    case "fastest":
+      defaultDNS = _chinaIpDns;
+      directDNS = _chinaIpDns;
+      chinaDNS = _chinaIpDns;
+      foreignDNS = _chinaIpDns;
+      break;
+    default: // "default" 模式
+      defaultDNS = _chinaIpDns;
+      directDNS = _chinaIpDns;
+      chinaDNS = _chinaDohDns;
+      foreignDNS = _foreignDohDns;
+      break;
+  }
+}
+
+// 转换为数组
+skipIps = stringToArray(skipIps);
+defaultDNS = stringToArray(defaultDNS);
+directDNS = stringToArray(directDNS);
+chinaDNS = stringToArray(chinaDNS);
+foreignDNS = stringToArray(foreignDNS);
+
+// ─────────────────────────────────────────────
+// 分流规则开关
+// ─────────────────────────────────────────────
+/**
+ * 遵循"最小可用"原则：只启用自己需要的规则，减少内存与解析开销
+ * 支持通过 $arguments.ruleSet = "openai;youtube;ads" 动态控制
+ */
+let ruleOptions = {
+  apple: false,
+  microsoft: false,
+  github: false,
+  google: false,
+  openai: false,
+  spotify: false,
+  youtube: false,
+  bahamut: false,
+  netflix: false,
+  tiktok: false,
+  disney: false,
+  pixiv: false,
+  hbo: false,
+  mediaHMT: false, // 港澳台媒体（含HK/TW流媒体）
+  biliintl: false,
+  hulu: false,
+  primevideo: false,
+  telegram: false,
+  line: false,
+  whatsapp: false,
+  games: false,
+  japan: false,
+  ads: false,
 };
 
-const skipIps = [
-  "10.0.0.0/8",
-  "100.64.0.0/10",
-  "127.0.0.0/8",
-  "169.254.0.0/16",
-  "172.16.0.0/12",
-  "192.168.0.0/16",
-  "198.18.0.0/16",
-  "FC00::/7",
-  "FE80::/10",
-  "::1/128",
-];
+if (ruleSet === "all") {
+  Object.keys(ruleOptions).forEach((key) => (ruleOptions[key] = true));
+} else if (typeof ruleSet === "string") {
+  const enabledKeys = ruleSet.split(";").map((s) => s.trim());
+  enabledKeys.forEach((key) => {
+    if (Object.prototype.hasOwnProperty.call(ruleOptions, key)) {
+      ruleOptions[key] = true;
+    }
+  });
+}
 
-// 初始规则
+// ─────────────────────────────────────────────
+// 初始规则（进程直连）
+// ─────────────────────────────────────────────
 const rules = [
   "RULE-SET,applications,下载软件",
-  "PROCESS-NAME-REGEX,(?i).*Oray.*,DIRECT",
-  "PROCESS-NAME-REGEX,(?i).*Sunlogin.*,DIRECT",
-  "PROCESS-NAME-REGEX,(?i).*AweSun.*,DIRECT",
-  "PROCESS-NAME-REGEX,(?i).*NodeBaby.*,DIRECT",
-  "PROCESS-NAME-REGEX,(?i).*Node Baby.*,DIRECT",
-  "PROCESS-NAME-REGEX,(?i).*nblink.*,DIRECT",
-  "PROCESS-NAME-REGEX,(?i).*vpn.*,DIRECT",
-  "PROCESS-NAME-REGEX,(?i).*vnc.*,DIRECT",
-  "PROCESS-NAME-REGEX,(?i).*tvnserver.*,DIRECT",
-  "PROCESS-NAME-REGEX,(?i).*节点小宝.*,DIRECT",
-  "PROCESS-NAME-REGEX,(?i).*AnyDesk.*,DIRECT",
-  "PROCESS-NAME-REGEX,(?i).*ToDesk.*,DIRECT",
-  "PROCESS-NAME-REGEX,(?i).*RustDesk.*,DIRECT",
-  "PROCESS-NAME-REGEX,(?i).*TeamViewer.*,DIRECT",
-  "PROCESS-NAME-REGEX,(?i).*Zerotier.*,DIRECT",
-  "PROCESS-NAME-REGEX,(?i).*Tailscaled.*,DIRECT",
-  "PROCESS-NAME-REGEX,(?i).*phddns.*,DIRECT",
-  "PROCESS-NAME-REGEX,(?i).*ngrok.*,DIRECT",
-  "PROCESS-NAME-REGEX,(?i).*frpc.*,DIRECT",
-  "PROCESS-NAME-REGEX,(?i).*frps.*,DIRECT",
-  "PROCESS-NAME-REGEX,(?i).*natapp.*,DIRECT",
-  "PROCESS-NAME-REGEX,(?i).*cloudflared.*,DIRECT",
-  "PROCESS-NAME-REGEX,(?i).*xmqtunnel.*,DIRECT",
-  "PROCESS-NAME-REGEX,(?i).*Navicat.*,DIRECT",
-  "DOMAIN-SUFFIX,iepose.com,DIRECT",
-  "DOMAIN-SUFFIX,iepose.cn,DIRECT",
-  "DOMAIN-SUFFIX,nblink.cc,DIRECT",
-  "DOMAIN-SUFFIX,ionewu.com,DIRECT",
-  "DOMAIN-SUFFIX,vicp.net,DIRECT",
+  "PROCESS-NAME-REGEX,(?i).*Oray.*,直连",
+  "PROCESS-NAME-REGEX,(?i).*Sunlogin.*,直连",
+  "PROCESS-NAME-REGEX,(?i).*AweSun.*,直连",
+  "PROCESS-NAME-REGEX,(?i).*NodeBaby.*,直连",
+  "PROCESS-NAME-REGEX,(?i).*Node Baby.*,直连",
+  "PROCESS-NAME-REGEX,(?i).*nblink.*,直连",
+  "PROCESS-NAME-REGEX,(?i).*owjdxb.*,直连",
+  "PROCESS-NAME-REGEX,(?i).*vpn.*,直连",
+  "PROCESS-NAME-REGEX,(?i).*vnc.*,直连",
+  "PROCESS-NAME-REGEX,(?i).*tvnserver.*,直连",
+  "PROCESS-NAME-REGEX,(?i).*节点小宝.*,直连",
+  "PROCESS-NAME-REGEX,(?i).*AnyDesk.*,直连",
+  "PROCESS-NAME-REGEX,(?i).*ToDesk.*,直连",
+  "PROCESS-NAME-REGEX,(?i).*RustDesk.*,直连",
+  "PROCESS-NAME-REGEX,(?i).*TeamViewer.*,直连",
+  "PROCESS-NAME-REGEX,(?i).*Zerotier.*,直连",
+  "PROCESS-NAME-REGEX,(?i).*Tailscaled.*,直连",
+  "PROCESS-NAME-REGEX,(?i).*phddns.*,直连",
+  "PROCESS-NAME-REGEX,(?i).*ngrok.*,直连",
+  "PROCESS-NAME-REGEX,(?i).*frpc.*,直连",
+  "PROCESS-NAME-REGEX,(?i).*frps.*,直连",
+  "PROCESS-NAME-REGEX,(?i).*natapp.*,直连",
+  "PROCESS-NAME-REGEX,(?i).*cloudflared.*,直连",
+  "PROCESS-NAME-REGEX,(?i).*xmqtunnel.*,直连",
+  "PROCESS-NAME-REGEX,(?i).*Navicat.*,直连",
+  "DOMAIN-SUFFIX,iepose.com,直连",
+  "DOMAIN-SUFFIX,iepose.cn,直连",
+  "DOMAIN-SUFFIX,nblink.cc,直连",
+  "DOMAIN-SUFFIX,ionewu.com,直连",
+  "DOMAIN-SUFFIX,vicp.net,直连",
 ];
 
-// 地区定义 (Icons 更新为 GitHub Raw)
-const regionDefinitions = [
+// ─────────────────────────────────────────────
+// 地区定义
+// 顺序决定节点匹配优先级（常用地区靠前）
+// ─────────────────────────────────────────────
+const allRegionDefinitions = [
   {
     name: "SG新加坡",
     regex: /新加坡|🇸🇬|sg|singapore/i,
-    icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Singapore.png",
+    icon: `${githubProxy}https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Singapore.png`,
   },
   {
-    name: "TW台湾省",
+    name: "TW台湾",
     regex: /台湾|台灣|🇹🇼|tw|taiwan|tai wan/i,
-    icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/China.png",
+    icon: `${githubProxy}https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/China.png`,
   },
   {
     name: "JP日本",
     regex: /日本|🇯🇵|jp|japan/i,
-    icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Japan.png",
+    icon: `${githubProxy}https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Japan.png`,
   },
   {
     name: "KR韩国",
     regex: /韩|🇰🇷|kr|korea/i,
-    icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Korea.png",
+    icon: `${githubProxy}https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Korea.png`,
   },
   {
     name: "US美国",
     regex: /(?!.*aus)(?=.*(美|🇺🇸|us(?!t)|usa|american|united states)).*/i,
-    icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/United_States.png",
+    icon: `${githubProxy}https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/United_States.png`,
   },
   {
     name: "HK香港",
     regex: /港|🇭🇰|hk|hongkong|hong kong/i,
-    icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Hong_Kong.png",
+    icon: `${githubProxy}https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Hong_Kong.png`,
   },
   {
     name: "GB英国",
     regex: /英|🇬🇧|uk|united kingdom|great britain/i,
-    icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/United_Kingdom.png",
+    icon: `${githubProxy}https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/United_Kingdom.png`,
   },
   {
     name: "DE德国",
     regex: /德国|🇩🇪|de|germany/i,
-    icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Germany.png",
+    icon: `${githubProxy}https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Germany.png`,
   },
   {
     name: "MY马来西亚",
     regex: /马来|🇲🇾|my|malaysia/i,
-    icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Malaysia.png",
+    icon: `${githubProxy}https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Malaysia.png`,
   },
   {
     name: "TK土耳其",
     regex: /土耳其|🇹🇷|tk|turkey/i,
-    icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Turkey.png",
+    icon: `${githubProxy}https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Turkey.png`,
   },
   {
     name: "CA加拿大",
     regex: /加拿大|🇨🇦|ca|canada/i,
-    icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Canada.png",
+    icon: `${githubProxy}https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Canada.png`,
   },
   {
     name: "AU澳大利亚",
     regex: /澳大利亚|🇦🇺|au|australia|sydney/i,
-    icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Australia.png",
+    icon: `${githubProxy}https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Australia.png`,
   },
+  // Wasmer 是特殊服务节点，保留匹配（放最后避免误匹配）
   {
     name: "Wasmer",
     regex: /Wasmer/i,
-    icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Auto.png",
+    icon: `${githubProxy}https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Auto.png`,
   },
   {
     name: "CN中国大陆",
     regex: /中国|🇨🇳|cn|china|shanghai|beijing/i,
-    icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/China_Map.png",
+    icon: `${githubProxy}https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/China_Map.png`,
   },
 ];
-const excludeHighPercentage = true;
-const globalRatioLimit = 2;
 
+// 根据 regionSet 过滤地区列表
+let regionDefinitions = [];
+if (regionSet === "all") {
+  regionDefinitions = allRegionDefinitions;
+} else {
+  const enabledRegions = regionSet.split(";").map((s) => s.trim());
+  regionDefinitions = allRegionDefinitions.filter((r) =>
+    enabledRegions.includes(r.name.substring(0, 2)),
+  );
+}
+
+// ─────────────────────────────────────────────
 // DNS 配置
-// 用于解析 DoH/TLS 服务器本身的 bootstrap DNS（必须有）
-const defaultDNS = [
-  "223.5.5.5", // 阿里
-  "119.29.29.29", // 腾讯
-  "1.1.1.1", //Cloudflare
-  "8.8.8.8", //Google
-];
-
-const chinaDNS = [
-  "https://223.5.5.5/dns-query", // 阿里DOH
-  "https://120.53.53.53/dns-query", // 腾讯DoH
-  "https://doh.360.cn/dns-query", // 360安全DoH
-];
-
-const foreignDNS = [
-  "https://1.1.1.1/dns-query", // Cloudflare
-  "https://8.8.8.8/dns-query", // Google DoH
-  "https://1.0.0.1/dns-query", // Cloudflare 备用节点
-  "https://8.8.4.4/dns-query", // Google 备用
-  "https://208.67.222.222/dns-query", // OpenDNS 有过滤，作为末级 fallback
-];
+// ─────────────────────────────────────────────
+/**
+ * 新版 DNS 策略说明：
+ * - whitelist 模式：fake-ip-filter 中列出的域名"使用真实IP"，其余均走 fake-ip
+ *   适合代理场景，被代理的域名不需要真实解析，效率更高
+ * - direct-nameserver：直连流量专用 DNS（不经代理解析，避免污染）
+ * - 移除了旧版 fallback/fallback-filter（新版 Mihomo 用 nameserver-policy 替代）
+ */
 const dnsConfig = {
   enable: true,
-  listen: ":53",
-  ipv6: false,
+  listen: "0.0.0.0:53",
+  ipv6: ipv6,
+  "log-level": logLevel,
   "prefer-h3": true,
   "use-hosts": true,
   "use-system-hosts": true,
-  "respect-rules": true,
   "enhanced-mode": "fake-ip",
-  "fake-ip-range": "198.18.0.1/16",
-  "fake-ip-filter-mode": "blacklist", // 代表geosite:cn不使用fake ip
-  "fake-ip-filter": ["geosite:cn"],
-  // "fake-ip-filter": [
-  //   "geosite:cn",
-  //   "geosite:gfw",
-  //   "geosite:jetbrains-ai",
-  //   "geosite:category-ai-!cn",
-  //   "geosite:category-ai-chat-!cn",
-  //   "geosite:category-games-!cn",
-  //   "geosite:google@!cn",
-  //   "geosite:telegram",
-  //   "geosite:facebook",
-  //   "geosite:google",
-  //   "geosite:amazon",
-  //   "geosite:category-bank-jp",
-  //   "geosite:category-bank-cn@!cn",
-  // ],
-  "default-nameserver": defaultDNS,
-  nameserver: chinaDNS,
-  fallback: foreignDNS,
-  "fallback-filter": {
-    geoip: true,
-    "geoip-code": "CN",
-  },
-  "proxy-server-nameserver": ["223.5.5.5", "1.1.1.1", ...foreignDNS],
+  "fake-ip-range": "198.18.0.0/16",
+  "fake-ip-filter-mode": "whitelist", // whitelist：列出的域名使用真实IP，其余 fake-ip
+  "fake-ip-filter": [
+    // 以下域名需要真实 IP（不能走 fake-ip）
+    "geosite:gfw",
+    "geosite:jetbrains-ai",
+    "geosite:category-ai-!cn",
+    "geosite:category-ai-chat-!cn",
+    "geosite:category-games-!cn",
+    "geosite:google@!cn",
+    "geosite:telegram",
+    "geosite:facebook",
+    "geosite:google",
+    "geosite:amazon",
+    "geosite:category-bank-jp",
+  ],
+  "default-nameserver": defaultDNS, // 用于解析 DoH/TLS 服务器自身（bootstrap）
+  nameserver: chinaDNS, // 默认 nameserver（国内域名）
+  "direct-nameserver": directDNS, // 直连流量专用 DNS（新版推荐）
+  "proxy-server-nameserver": chinaDNS, // 解析代理服务器域名用
   "nameserver-policy": {
-    "geosite:private": ["system", ...chinaDNS],
-    "geosite:cn": chinaDNS,
-    "geosite:tld-cn": chinaDNS,
-    "geosite:microsoft@cn": chinaDNS,
-    "geosite:apple@cn": chinaDNS,
-    "geosite:steam@cn": chinaDNS,
-    "geosite:category-games@cn": chinaDNS,
+    "geosite:private": "system",
+    // 国内服务走国内 DNS
+    "geosite:tld-cn,cn,steam@cn,category-games@cn,microsoft@cn,apple@cn,category-game-platforms-download@cn,category-public-tracker":
+      chinaDNS,
+    // 境外 AI/代理服务走境外 DNS
+    "geosite:gfw,jetbrains-ai,category-ai-!cn,category-ai-chat-!cn": foreignDNS,
   },
 };
 
+// ─────────────────────────────────────────────
 // 通用配置
+// ─────────────────────────────────────────────
 const ruleProviderCommon = {
   type: "http",
   format: "yaml",
-  interval: 86400,
+  interval: 86400, // 24h 自动更新
 };
+
 const groupBaseOption = {
   interval: 300,
   timeout: 3000,
-  url: "http://www.gstatic.com/generate_204",
+  url: "https://www.gstatic.com/generate_204",
   lazy: true,
   "max-failed-times": 3,
   hidden: false,
@@ -259,22 +397,23 @@ const ruleProviders = {
     ...ruleProviderCommon,
     behavior: "classical",
     format: "text",
-    url: "https://github.com/DustinWin/ruleset_geodata/raw/refs/heads/mihomo-ruleset/applications.list",
+    url: `${githubProxy}https://github.com/DustinWin/ruleset_geodata/raw/refs/heads/mihomo-ruleset/applications.list`,
     path: "./ruleset/DustinWin/applications.list",
   },
 };
 
-// 倍率正则预编译
+// 倍率正则预编译（匹配节点名称中的倍率数字）
 const multiplierRegex =
   /(?<=[xX✕✖⨉倍率])([1-9]+(\.\d+)*|0{1}\.\d+)(?=[xX✕✖⨉倍率])*/i;
 
-// --- 2. 服务规则数据结构 ---
-// Icons 更新为 GitHub Raw
+// ─────────────────────────────────────────────
+// 2. 服务规则数据结构
+// ─────────────────────────────────────────────
 const serviceConfigs = [
   {
     key: "openai",
     name: "国外AI",
-    icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/ChatGPT.png",
+    icon: `${githubProxy}https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/ChatGPT.png`,
     url: "https://chat.openai.com/cdn-cgi/trace",
     rules: [
       "GEOSITE,jetbrains-ai,国外AI",
@@ -289,113 +428,118 @@ const serviceConfigs = [
   {
     key: "youtube",
     name: "YouTube",
-    icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/YouTube.png",
+    icon: `${githubProxy}https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/YouTube.png`,
     url: "https://www.youtube.com/s/desktop/494dd881/img/favicon.ico",
     rules: ["GEOSITE,youtube,YouTube"],
   },
   {
-    key: "media-cn@!cn",
+    key: "mediaHMT",
     name: "港澳台媒体",
-    icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/TVB.png",
+    icon: `${githubProxy}https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/TVB.png`,
     url: "https://viu.tv/",
     rules: [
       "GEOSITE,tvb,港澳台媒体",
       "GEOSITE,hkt,港澳台媒体",
-      "GEOSITE,hkt,港澳台媒体",
+      "GEOSITE,hkbn,港澳台媒体",
       "GEOSITE,hkopentv,港澳台媒体",
-      "GEOSITE,hkopentv,港澳台媒体",
+      "GEOSITE,hkedcity,港澳台媒体",
+      "GEOSITE,hkgolden,港澳台媒体",
+      "GEOSITE,hketgroup,港澳台媒体",
       "RULE-SET,hk-media,港澳台媒体",
+      "RULE-SET,tw-media,港澳台媒体",
     ],
-    provider: {
-      key: "hk-media",
-      url: "https://ruleset.skk.moe/List/non_ip/stream_hk.conf",
-      path: "./ruleset/hk-media/hk-media.mrs",
-      format: "text",
-      behavior: "classical",
-    },
+    providers: [
+      {
+        key: "hk-media",
+        url: "https://ruleset.skk.moe/Clash/non_ip/stream_hk.txt",
+        path: "./ruleset/ruleset.skk.moe/stream_hk.txt",
+        format: "text",
+        behavior: "classical",
+      },
+      {
+        key: "tw-media",
+        url: "https://ruleset.skk.moe/Clash/non_ip/stream_tw.txt",
+        path: "./ruleset/ruleset.skk.moe/stream_tw.txt",
+        format: "text",
+        behavior: "classical",
+      },
+    ],
   },
   {
     key: "biliintl",
     name: "哔哩哔哩东南亚",
-    icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/bilibili_3.png",
+    icon: `${githubProxy}https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/bilibili_3.png`,
     url: "https://www.bilibili.tv/",
     rules: ["GEOSITE,biliintl,哔哩哔哩东南亚"],
   },
   {
     key: "bahamut",
     name: "巴哈姆特",
-    icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Bahamut.png",
+    icon: `${githubProxy}https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Bahamut.png`,
     url: "https://ani.gamer.com.tw/ajax/getdeviceid.php",
     rules: ["GEOSITE,bahamut,巴哈姆特"],
   },
   {
     key: "disney",
     name: "Disney+",
-    icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Disney+.png",
+    icon: `${githubProxy}https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Disney+.png`,
     url: "https://disney.api.edge.bamgrid.com/devices",
     rules: ["GEOSITE,disney,Disney+"],
   },
   {
     key: "netflix",
     name: "NETFLIX",
-    icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Netflix.png",
+    icon: `${githubProxy}https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Netflix.png`,
     url: "https://api.fast.com/netflix/speedtest/v2?https=true",
     rules: ["GEOSITE,netflix,NETFLIX"],
   },
   {
     key: "tiktok",
     name: "Tiktok",
-    icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/TikTok.png",
+    icon: `${githubProxy}https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/TikTok.png`,
     url: "https://www.tiktok.com/",
     rules: ["GEOSITE,tiktok,Tiktok"],
   },
   {
     key: "spotify",
     name: "Spotify",
-    icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Spotify.png",
-    url: "http://spclient.wg.spotify.com/signup/public/v1/account",
+    icon: `${githubProxy}https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Spotify.png`,
+    url: "https://spclient.wg.spotify.com/signup/public/v1/account",
     rules: ["GEOSITE,spotify,Spotify"],
   },
   {
     key: "pixiv",
     name: "Pixiv",
     icon: "https://play-lh.googleusercontent.com/8pFuLOHF62ADcN0ISUAyEueA5G8IF49mX_6Az6pQNtokNVHxIVbS1L2NM62H-k02rLM=w240-h480-rw",
-    url: "http://spclient.wg.spotify.com/signup/public/v1/account",
+    url: "https://www.pixiv.net/",
     rules: ["GEOSITE,pixiv,Pixiv"],
   },
   {
     key: "hbo",
     name: "HBO",
-    icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/HBO.png",
+    icon: `${githubProxy}https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/HBO.png`,
     url: "https://www.hbo.com/favicon.ico",
     rules: ["GEOSITE,hbo,HBO"],
   },
   {
-    key: "tvb",
-    name: "TVB",
-    icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/TVB.png",
-    url: "https://www.tvb.com/logo_b.svg",
-    rules: ["GEOSITE,tvb,TVB"],
-  },
-  {
     key: "primevideo",
     name: "Prime Video",
-    icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Prime_Video.png",
+    icon: `${githubProxy}https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Prime_Video.png`,
     url: "https://m.media-amazon.com/images/G/01/digital/video/web/logo-min-remaster.png",
     rules: ["GEOSITE,primevideo,Prime Video"],
   },
   {
     key: "hulu",
     name: "Hulu",
-    icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Hulu.png",
+    icon: `${githubProxy}https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Hulu.png`,
     url: "https://auth.hulu.com/v4/web/password/authenticate",
     rules: ["GEOSITE,hulu,Hulu"],
   },
   {
     key: "telegram",
     name: "Telegram",
-    icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Telegram.png",
-    url: "http://www.telegram.org/img/website_icon.svg",
+    icon: `${githubProxy}https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Telegram.png`,
+    url: "https://www.telegram.org/img/website_icon.svg",
     rules: ["GEOIP,telegram,Telegram"],
   },
   {
@@ -408,14 +552,14 @@ const serviceConfigs = [
   {
     key: "line",
     name: "Line",
-    icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Line.png",
+    icon: `${githubProxy}https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Line.png`,
     url: "https://line.me/page-data/app-data.json",
     rules: ["GEOSITE,line,Line"],
   },
   {
     key: "games",
     name: "游戏专用",
-    icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Game.png",
+    icon: `${githubProxy}https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Game.png`,
     rules: [
       "GEOSITE,category-games@cn,国内网站",
       "GEOSITE,category-games,游戏专用",
@@ -424,68 +568,75 @@ const serviceConfigs = [
   {
     key: "ads",
     name: "广告过滤",
-    icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Advertising.png",
+    icon: `${githubProxy}https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Advertising.png`,
     rules: [
       "GEOSITE,category-ads-all,广告过滤",
       "RULE-SET,adblockmihomo,广告过滤",
     ],
-    provider: {
-      key: "adblockmihomo",
-      url: "https://github.com/217heidai/adblockfilters/raw/refs/heads/main/rules/adblockmihomo.mrs",
-      path: "./ruleset/adblockfilters/adblockmihomo.mrs",
-      format: "mrs",
-      behavior: "domain",
-    },
-    reject: true,
+    providers: [
+      {
+        key: "adblockmihomo",
+        url: `${githubProxy}https://github.com/217heidai/adblockfilters/raw/refs/heads/main/rules/adblockmihomo.mrs`,
+        path: "./ruleset/adblockfilters/adblockmihomo.mrs",
+        format: "mrs",
+        behavior: "domain",
+      },
+    ],
+    reject: true, // 策略组默认动作为 REJECT
   },
   {
     key: "apple",
     name: "苹果服务",
-    icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Apple_2.png",
-    url: "http://www.apple.com/library/test/success.html",
+    icon: `${githubProxy}https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Apple_2.png`,
+    url: "https://www.apple.com/library/test/success.html",
     rules: ["GEOSITE,apple-cn,苹果服务"],
   },
   {
     key: "google",
     name: "谷歌服务",
-    icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Google_Search.png",
-    url: "http://www.gstatic.com/generate_204",
+    icon: `${githubProxy}https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Google_Search.png`,
+    url: "https://www.google.com/generate_204",
     rules: ["GEOSITE,google,谷歌服务"],
   },
   {
     key: "github",
     name: "Github",
-    icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/GitHub.png",
+    icon: `${githubProxy}https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/GitHub.png`,
     url: "https://github.com/robots.txt",
     rules: ["GEOSITE,github,Github"],
   },
   {
     key: "microsoft",
     name: "微软服务",
-    icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Microsoft.png",
-    url: "http://www.msftconnecttest.com/connecttest.txt",
+    icon: `${githubProxy}https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Microsoft.png`,
+    url: "https://www.msftconnecttest.com/connecttest.txt",
     rules: ["GEOSITE,microsoft@cn,国内网站", "GEOSITE,microsoft,微软服务"],
   },
   {
     key: "japan",
     name: "日本网站",
-    icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/JP.png",
+    icon: `${githubProxy}https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/JP.png`,
     url: "https://r.r10s.jp/com/img/home/logo/touch.png",
     rules: [
       "RULE-SET,category-bank-jp,日本网站",
       "GEOIP,jp,日本网站,no-resolve",
     ],
-    provider: {
-      key: "category-bank-jp",
-      url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-bank-jp.mrs",
-      path: "./ruleset/MetaCubeX/category-bank-jp.mrs",
-      format: "mrs",
-      behavior: "domain",
-    },
+    providers: [
+      {
+        key: "category-bank-jp",
+        url: `${githubProxy}https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-bank-jp.mrs`,
+        path: "./ruleset/MetaCubeX/category-bank-jp.mrs",
+        format: "mrs",
+        behavior: "domain",
+      },
+    ],
+    preferRegion: "JP日本", // 此服务优先使用 JP 节点组
   },
 ];
 
-// --- 3. 主入口 ---
+// ─────────────────────────────────────────────
+// 3. 主入口
+// ─────────────────────────────────────────────
 function main(config) {
   if (!enable) return config;
 
@@ -504,8 +655,8 @@ function main(config) {
   config["allow-lan"] = true;
   config["bind-address"] = "*";
   config["mode"] = "rule";
+  config["ipv6"] = ipv6;
   config["client-fingerprint"] = "chrome";
-  config["ipv6"] = false;
   config["dns"] = dnsConfig;
   config["profile"] = {
     "store-selected": true,
@@ -515,7 +666,7 @@ function main(config) {
   config["tcp-concurrent"] = true;
   config["keep-alive-interval"] = 1800;
   config["find-process-mode"] = "strict";
-  config["geodata-mode"] = true;
+  config["geodata-mode"] = false; // false = metadb 格式，性能更优
   config["geodata-loader"] = "memconservative";
   config["geo-auto-update"] = true;
   config["geo-update-interval"] = 24;
@@ -526,15 +677,9 @@ function main(config) {
     "parse-pure-ip": false,
     "override-destination": true,
     sniff: {
-      TLS: {
-        ports: [443, 8443],
-      },
-      HTTP: {
-        ports: [80, "8080-8880"],
-      },
-      QUIC: {
-        ports: [443, 8443],
-      },
+      TLS: { ports: [443, 8443] },
+      HTTP: { ports: [80, "8080-8880"] },
+      QUIC: { ports: [443, 8443] },
     },
     "skip-src-address": skipIps,
     "skip-dst-address": skipIps,
@@ -554,36 +699,45 @@ function main(config) {
   config["ntp"] = {
     enable: true,
     "write-to-system": false,
-    server: "cn.ntp.org.cn",
+    server: "ntp.aliyun.com",
   };
+
   config["tun"] = {
+    enable: true,
     stack: "mixed",
+    device: "utun1999",
+    "auto-route": true,
+    "auto-redirect": true,
+    "auto-detect-interface": true,
+    "strict-route": true,
+    mtu: 1500,
+    gso: true,
+    "gso-max-size": 65536,
     "exclude-interface": ["NodeBabyLink"],
-    "route-exclude-address": skipIps,
+    // 排除 fake-ip 段，避免 TUN 路由把伪造 IP 送回本机
+    "route-exclude-address": skipIps.filter((ip) => ip !== "198.18.0.0/16"),
+    "dns-hijack": ["any:53", "tcp://any:53"],
   };
+
   config["geox-url"] = {
-    geoip:
-      "https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/geoip-lite.dat",
-    geosite:
-      "https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/geosite.dat",
-    mmdb: "https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/country-lite.mmdb",
-    asn: "https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/GeoLite2-ASN.mmdb",
+    geoip: `${githubProxy}https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/geoip-lite.dat`,
+    geosite: `${githubProxy}https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/geosite.dat`,
+    mmdb: `${githubProxy}https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/geoip.metadb`,
+    asn: `${githubProxy}https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/GeoLite2-ASN.mmdb`,
   };
 
-  config.proxies.push({
-    name: "直连",
-    type: "direct",
-    udp: true,
-  });
+  // 注入自定义直连/拒绝代理（命名代理，便于策略组引用）
+  config.proxies.push(
+    { name: "直连", type: "direct", udp: true },
+    { name: "拒绝", type: "reject", udp: true },
+  );
 
-  // 3.2 高效代理分类 (单次遍历)
+  // ──────────────────────────────────────────
+  // 3.2 高效代理分类（单次遍历）
+  // ──────────────────────────────────────────
   const regionGroups = {};
   regionDefinitions.forEach(
-    (r) =>
-      (regionGroups[r.name] = {
-        ...r,
-        proxies: [],
-      }),
+    (r) => (regionGroups[r.name] = { ...r, proxies: [] }),
   );
   const otherProxies = [];
 
@@ -592,15 +746,13 @@ function main(config) {
     const name = proxy.name;
     let matched = false;
 
-    // 检查倍率
+    // 过滤高倍率节点
     if (excludeHighPercentage) {
       const match = multiplierRegex.exec(name);
-      if (match && parseFloat(match[1]) > globalRatioLimit) {
-        continue;
-      }
+      if (match && parseFloat(match[1]) > globalRatioLimit) continue;
     }
 
-    // 尝试匹配地区
+    // 按地区匹配
     for (const region of regionDefinitions) {
       if (region.regex.test(name)) {
         regionGroups[region.name].proxies.push(name);
@@ -609,31 +761,30 @@ function main(config) {
       }
     }
 
-    if (!matched) {
-      otherProxies.push(name);
-    }
+    if (!matched) otherProxies.push(name);
   }
 
+  // 生成地区自动测速组
   const generatedRegionGroups = [];
   regionDefinitions.forEach((r) => {
     const groupData = regionGroups[r.name];
-    if (groupData.proxies.length > 0) {
-      // 根据地区选择测速 URL
-      let testUrl = "http://www.gstatic.com/generate_204"; // 默认 Google
-      if (r.name === "CN中国大陆") {
-        testUrl = "http://connectivitycheck.platform.hicloud.com/generate_204"; // 华为
-      }
+    if (groupData.proxies.length === 0) return;
 
-      generatedRegionGroups.push({
-        ...groupBaseOption,
-        name: r.name,
-        type: "url-test",
-        tolerance: 50,
-        icon: r.icon,
-        proxies: groupData.proxies,
-        url: testUrl,
-      });
-    }
+    // CN 大陆节点使用华为测速地址（在国内响应更可靠）
+    const testUrl =
+      r.name === "CN中国大陆"
+        ? "https://connectivitycheck.platform.hicloud.com/generate_204"
+        : "https://www.gstatic.com/generate_204";
+
+    generatedRegionGroups.push({
+      ...groupBaseOption,
+      name: r.name,
+      type: "url-test",
+      tolerance: 50,
+      icon: r.icon,
+      proxies: groupData.proxies,
+      url: testUrl,
+    });
   });
 
   const regionGroupNames = generatedRegionGroups.map((g) => g.name);
@@ -644,67 +795,89 @@ function main(config) {
       name: "其他节点",
       type: "select",
       proxies: otherProxies,
-      icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/World_Map.png",
+      icon: `${githubProxy}https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/World_Map.png`,
     });
   }
 
+  // ──────────────────────────────────────────
   // 3.3 构建功能策略组
+  // ──────────────────────────────────────────
   const functionalGroups = [];
 
+  // 默认节点（总出口，其他策略组的首选）
   functionalGroups.push({
     ...groupBaseOption,
     name: "默认节点",
     type: "select",
-    proxies: [...regionGroupNames, "其他节点", "直连"].filter(
-      (n) => n !== "其他节点" || otherProxies.length > 0,
-    ),
-    icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Proxy.png",
+    proxies: [
+      ...regionGroupNames,
+      ...(otherProxies.length > 0 ? ["其他节点"] : []),
+      "直连",
+    ],
+    icon: `${githubProxy}https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Proxy.png`,
   });
 
+  // 遍历服务配置，动态生成策略组
   serviceConfigs.forEach((svc) => {
-    if (ruleOptions[svc.key]) {
-      rules.push(...svc.rules);
-      if (svc.provider) {
-        ruleProviders[svc.provider.key] = {
+    if (!ruleOptions[svc.key]) return;
+
+    // 追加规则
+    rules.push(...svc.rules);
+
+    // 注册 Rule Providers（支持数组格式）
+    if (Array.isArray(svc.providers)) {
+      svc.providers.forEach((p) => {
+        ruleProviders[p.key] = {
           ...ruleProviderCommon,
-          behavior: svc.provider.behavior,
-          format: svc.provider.format,
-          url: svc.provider.url,
-          path: svc.provider.path,
+          behavior: p.behavior,
+          format: p.format,
+          url: p.url,
+          path: p.path,
         };
-      }
-
-      let groupProxies;
-      if (svc.reject) {
-        groupProxies = ["REJECT", "直连", "默认节点"];
-      } else if (svc.key === "biliintl" || svc.key === "bahamut") {
-        groupProxies = ["默认节点", "直连", ...regionGroupNames];
-      } else if (svc.key === "japan" && regionGroupNames.includes("JP日本")) {
-        groupProxies = [
-          "JP日本",
-          "默认节点",
-          ...regionGroupNames.filter((n) => n !== "JP日本"),
-          "直连",
-        ];
-      } else {
-        groupProxies = ["默认节点", ...regionGroupNames, "直连"];
-      }
-
-      functionalGroups.push({
-        ...groupBaseOption,
-        name: svc.name,
-        type: "select",
-        proxies: groupProxies,
-        url: svc.url,
-        icon: svc.icon,
       });
     }
+
+    // 确定策略组 proxies 列表
+    let groupProxies;
+    if (svc.reject) {
+      // 广告过滤类：默认拒绝
+      groupProxies = ["REJECT", "直连", "默认节点"];
+    } else if (svc.key === "biliintl" || svc.key === "bahamut") {
+      // 东南亚/台湾内容：直连优先（部分机场有限制）
+      groupProxies = ["默认节点", "直连", ...regionGroupNames];
+    } else if (
+      svc.preferRegion &&
+      regionGroupNames.includes(svc.preferRegion)
+    ) {
+      // 有 preferRegion 的服务（如日本网站）：目标地区节点优先
+      groupProxies = [
+        svc.preferRegion,
+        "默认节点",
+        ...regionGroupNames.filter((n) => n !== svc.preferRegion),
+        "直连",
+      ];
+    } else {
+      groupProxies = ["默认节点", ...regionGroupNames, "直连"];
+    }
+
+    functionalGroups.push({
+      ...groupBaseOption,
+      name: svc.name,
+      type: "select",
+      proxies: groupProxies,
+      url: svc.url,
+      icon: svc.icon,
+    });
   });
 
-  // 3.4 添加通用兜底策略组
+  // ──────────────────────────────────────────
+  // 3.4 兜底规则与通用策略组
+  // ──────────────────────────────────────────
   rules.push(
-    "GEOSITE,private,DIRECT",
-    "GEOIP,private,DIRECT,no-resolve",
+    "GEOSITE,private,直连",
+    "GEOSITE,category-public-tracker,直连", // BT/PT tracker 直连
+    "GEOSITE,category-game-platforms-download@cn,直连", // 国内游戏平台下载直连
+    "GEOIP,private,直连,no-resolve",
     "GEOSITE,cn,国内网站",
     "GEOIP,cn,国内网站,no-resolve",
     "MATCH,其他外网",
@@ -716,33 +889,34 @@ function main(config) {
       name: "下载软件",
       type: "select",
       proxies: ["直连", "REJECT", "默认节点", "国内网站", ...regionGroupNames],
-      icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Download.png",
+      icon: `${githubProxy}https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Download.png`,
     },
     {
       ...groupBaseOption,
       name: "其他外网",
       type: "select",
       proxies: ["默认节点", "国内网站", ...regionGroupNames],
-      icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Streaming!CN.png",
+      icon: `${githubProxy}https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Streaming!CN.png`,
     },
     {
       ...groupBaseOption,
       name: "国内网站",
       type: "select",
       proxies: ["直连", "默认节点", ...regionGroupNames],
-      url: "http://connectivitycheck.platform.hicloud.com/generate_204",
-      icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/StreamingCN.png",
+      url: "https://connectivitycheck.platform.hicloud.com/generate_204",
+      icon: `${githubProxy}https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/StreamingCN.png`,
     },
   );
 
-  // 3.5 组装最终结果
+  // ──────────────────────────────────────────
+  // 3.5 组装最终输出
+  // ──────────────────────────────────────────
   config["proxy-groups"] = [...functionalGroups, ...generatedRegionGroups];
-
   config["rules"] = rules;
   config["rule-providers"] = ruleProviders;
 
   return config;
 }
 
-// 导出 main 函数供 Node.js 使用（ES6 模块语法）
+// 兼容 ES Module 和 CommonJS 导出
 export default main;

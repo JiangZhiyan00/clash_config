@@ -12,73 +12,47 @@ profile:
   store-fake-ip: true
 dns:
   enable: true
-  listen: ':53'
+  listen: 0.0.0.0:53
   ipv6: false
+  log-level: error
   prefer-h3: true
   use-hosts: true
   use-system-hosts: true
-  respect-rules: true
   enhanced-mode: fake-ip
-  fake-ip-range: 198.18.0.1/16
-  fake-ip-filter-mode: blacklist
+  fake-ip-range: 198.18.0.0/16
+  fake-ip-filter-mode: whitelist
   fake-ip-filter:
-    - geosite:cn
+    - geosite:gfw
+    - geosite:jetbrains-ai
+    - geosite:category-ai-!cn
+    - geosite:category-ai-chat-!cn
+    - geosite:category-games-!cn
+    - geosite:google@!cn
+    - geosite:telegram
+    - geosite:facebook
+    - geosite:google
+    - geosite:amazon
+    - geosite:category-bank-jp
   default-nameserver:
     - 223.5.5.5
     - 119.29.29.29
-    - 1.1.1.1
-    - 8.8.8.8
   nameserver:
-    - https://223.5.5.5/dns-query
-    - https://120.53.53.53/dns-query
-    - https://doh.360.cn/dns-query
-  fallback:
-    - https://1.1.1.1/dns-query
-    - https://8.8.8.8/dns-query
-    - https://1.0.0.1/dns-query
-    - https://8.8.4.4/dns-query
-    - https://208.67.222.222/dns-query
-  fallback-filter:
-    geoip: true
-    geoip-code: CN
-  proxy-server-nameserver:
+    - https://doh.pub/dns-query
+    - https://dns.alidns.com/dns-query
+  direct-nameserver:
     - 223.5.5.5
-    - 1.1.1.1
-    - https://1.1.1.1/dns-query
-    - https://8.8.8.8/dns-query
-    - https://1.0.0.1/dns-query
-    - https://8.8.4.4/dns-query
-    - https://208.67.222.222/dns-query
+    - 119.29.29.29
+  proxy-server-nameserver:
+    - https://doh.pub/dns-query
+    - https://dns.alidns.com/dns-query
   nameserver-policy:
-    geosite:private:
-      - system
-      - https://223.5.5.5/dns-query
-      - https://120.53.53.53/dns-query
-      - https://doh.360.cn/dns-query
-    geosite:cn:
-      - https://223.5.5.5/dns-query
-      - https://120.53.53.53/dns-query
-      - https://doh.360.cn/dns-query
-    geosite:tld-cn:
-      - https://223.5.5.5/dns-query
-      - https://120.53.53.53/dns-query
-      - https://doh.360.cn/dns-query
-    geosite:microsoft@cn:
-      - https://223.5.5.5/dns-query
-      - https://120.53.53.53/dns-query
-      - https://doh.360.cn/dns-query
-    geosite:apple@cn:
-      - https://223.5.5.5/dns-query
-      - https://120.53.53.53/dns-query
-      - https://doh.360.cn/dns-query
-    geosite:steam@cn:
-      - https://223.5.5.5/dns-query
-      - https://120.53.53.53/dns-query
-      - https://doh.360.cn/dns-query
-    geosite:category-games@cn:
-      - https://223.5.5.5/dns-query
-      - https://120.53.53.53/dns-query
-      - https://doh.360.cn/dns-query
+    geosite:private: system
+    geosite:tld-cn,cn,steam@cn,category-games@cn,microsoft@cn,apple@cn,category-game-platforms-download@cn,category-public-tracker:
+      - https://doh.pub/dns-query
+      - https://dns.alidns.com/dns-query
+    geosite:gfw,jetbrains-ai,category-ai-!cn,category-ai-chat-!cn:
+      - https://dns.google/dns-query
+      - https://dns.adguard-dns.com/dns-query
 proxies:
   - name: SGP_reality_vision
     server: sgp3xui.jzy88.top
@@ -377,10 +351,13 @@ proxies:
   - name: 直连
     type: direct
     udp: true
+  - name: 拒绝
+    type: reject
+    udp: true
 proxy-groups:
   - interval: 300
     timeout: 3000
-    url: http://www.gstatic.com/generate_204
+    url: https://www.gstatic.com/generate_204
     lazy: true
     max-failed-times: 3
     hidden: false
@@ -393,7 +370,7 @@ proxy-groups:
       - Wasmer
       - CN中国大陆
       - 直连
-    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Proxy.png
+    icon: https://edgeone.gh-proxy.org/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Proxy.png
   - interval: 300
     timeout: 3000
     url: https://chat.openai.com/cdn-cgi/trace
@@ -410,7 +387,7 @@ proxy-groups:
       - Wasmer
       - CN中国大陆
       - 直连
-    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/ChatGPT.png
+    icon: https://edgeone.gh-proxy.org/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/ChatGPT.png
   - interval: 300
     timeout: 3000
     url: https://www.youtube.com/s/desktop/494dd881/img/favicon.ico
@@ -427,7 +404,7 @@ proxy-groups:
       - Wasmer
       - CN中国大陆
       - 直连
-    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/YouTube.png
+    icon: https://edgeone.gh-proxy.org/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/YouTube.png
   - interval: 300
     timeout: 3000
     url: https://viu.tv/
@@ -444,7 +421,24 @@ proxy-groups:
       - Wasmer
       - CN中国大陆
       - 直连
-    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/TVB.png
+    icon: https://edgeone.gh-proxy.org/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/TVB.png
+  - interval: 300
+    timeout: 3000
+    url: https://www.bilibili.tv/
+    lazy: true
+    max-failed-times: 3
+    hidden: false
+    name: 哔哩哔哩东南亚
+    type: select
+    proxies:
+      - 默认节点
+      - 直连
+      - SG新加坡
+      - JP日本
+      - US美国
+      - Wasmer
+      - CN中国大陆
+    icon: https://edgeone.gh-proxy.org/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/bilibili_3.png
   - interval: 300
     timeout: 3000
     url: https://ani.gamer.com.tw/ajax/getdeviceid.php
@@ -461,7 +455,7 @@ proxy-groups:
       - US美国
       - Wasmer
       - CN中国大陆
-    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Bahamut.png
+    icon: https://edgeone.gh-proxy.org/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Bahamut.png
   - interval: 300
     timeout: 3000
     url: https://disney.api.edge.bamgrid.com/devices
@@ -478,7 +472,7 @@ proxy-groups:
       - Wasmer
       - CN中国大陆
       - 直连
-    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Disney+.png
+    icon: https://edgeone.gh-proxy.org/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Disney+.png
   - interval: 300
     timeout: 3000
     url: https://api.fast.com/netflix/speedtest/v2?https=true
@@ -495,7 +489,7 @@ proxy-groups:
       - Wasmer
       - CN中国大陆
       - 直连
-    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Netflix.png
+    icon: https://edgeone.gh-proxy.org/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Netflix.png
   - interval: 300
     timeout: 3000
     url: https://www.tiktok.com/
@@ -512,10 +506,10 @@ proxy-groups:
       - Wasmer
       - CN中国大陆
       - 直连
-    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/TikTok.png
+    icon: https://edgeone.gh-proxy.org/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/TikTok.png
   - interval: 300
     timeout: 3000
-    url: http://spclient.wg.spotify.com/signup/public/v1/account
+    url: https://spclient.wg.spotify.com/signup/public/v1/account
     lazy: true
     max-failed-times: 3
     hidden: false
@@ -529,10 +523,10 @@ proxy-groups:
       - Wasmer
       - CN中国大陆
       - 直连
-    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Spotify.png
+    icon: https://edgeone.gh-proxy.org/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Spotify.png
   - interval: 300
     timeout: 3000
-    url: http://spclient.wg.spotify.com/signup/public/v1/account
+    url: https://www.pixiv.net/
     lazy: true
     max-failed-times: 3
     hidden: false
@@ -563,24 +557,7 @@ proxy-groups:
       - Wasmer
       - CN中国大陆
       - 直连
-    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/HBO.png
-  - interval: 300
-    timeout: 3000
-    url: https://www.tvb.com/logo_b.svg
-    lazy: true
-    max-failed-times: 3
-    hidden: false
-    name: TVB
-    type: select
-    proxies:
-      - 默认节点
-      - SG新加坡
-      - JP日本
-      - US美国
-      - Wasmer
-      - CN中国大陆
-      - 直连
-    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/TVB.png
+    icon: https://edgeone.gh-proxy.org/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/HBO.png
   - interval: 300
     timeout: 3000
     url: https://m.media-amazon.com/images/G/01/digital/video/web/logo-min-remaster.png
@@ -597,7 +574,7 @@ proxy-groups:
       - Wasmer
       - CN中国大陆
       - 直连
-    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Prime_Video.png
+    icon: https://edgeone.gh-proxy.org/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Prime_Video.png
   - interval: 300
     timeout: 3000
     url: https://auth.hulu.com/v4/web/password/authenticate
@@ -614,10 +591,10 @@ proxy-groups:
       - Wasmer
       - CN中国大陆
       - 直连
-    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Hulu.png
+    icon: https://edgeone.gh-proxy.org/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Hulu.png
   - interval: 300
     timeout: 3000
-    url: http://www.telegram.org/img/website_icon.svg
+    url: https://www.telegram.org/img/website_icon.svg
     lazy: true
     max-failed-times: 3
     hidden: false
@@ -631,7 +608,7 @@ proxy-groups:
       - Wasmer
       - CN中国大陆
       - 直连
-    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Telegram.png
+    icon: https://edgeone.gh-proxy.org/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Telegram.png
   - interval: 300
     timeout: 3000
     url: https://web.whatsapp.com/data/manifest.json
@@ -665,7 +642,7 @@ proxy-groups:
       - Wasmer
       - CN中国大陆
       - 直连
-    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Line.png
+    icon: https://edgeone.gh-proxy.org/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Line.png
   - interval: 300
     timeout: 3000
     lazy: true
@@ -681,7 +658,7 @@ proxy-groups:
       - Wasmer
       - CN中国大陆
       - 直连
-    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Game.png
+    icon: https://edgeone.gh-proxy.org/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Game.png
   - interval: 300
     timeout: 3000
     lazy: true
@@ -693,10 +670,10 @@ proxy-groups:
       - REJECT
       - 直连
       - 默认节点
-    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Advertising.png
+    icon: https://edgeone.gh-proxy.org/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Advertising.png
   - interval: 300
     timeout: 3000
-    url: http://www.apple.com/library/test/success.html
+    url: https://www.apple.com/library/test/success.html
     lazy: true
     max-failed-times: 3
     hidden: false
@@ -710,10 +687,10 @@ proxy-groups:
       - Wasmer
       - CN中国大陆
       - 直连
-    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Apple_2.png
+    icon: https://edgeone.gh-proxy.org/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Apple_2.png
   - interval: 300
     timeout: 3000
-    url: http://www.gstatic.com/generate_204
+    url: https://www.google.com/generate_204
     lazy: true
     max-failed-times: 3
     hidden: false
@@ -727,7 +704,7 @@ proxy-groups:
       - Wasmer
       - CN中国大陆
       - 直连
-    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Google_Search.png
+    icon: https://edgeone.gh-proxy.org/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Google_Search.png
   - interval: 300
     timeout: 3000
     url: https://github.com/robots.txt
@@ -744,10 +721,10 @@ proxy-groups:
       - Wasmer
       - CN中国大陆
       - 直连
-    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/GitHub.png
+    icon: https://edgeone.gh-proxy.org/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/GitHub.png
   - interval: 300
     timeout: 3000
-    url: http://www.msftconnecttest.com/connecttest.txt
+    url: https://www.msftconnecttest.com/connecttest.txt
     lazy: true
     max-failed-times: 3
     hidden: false
@@ -761,7 +738,7 @@ proxy-groups:
       - Wasmer
       - CN中国大陆
       - 直连
-    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Microsoft.png
+    icon: https://edgeone.gh-proxy.org/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Microsoft.png
   - interval: 300
     timeout: 3000
     url: https://r.r10s.jp/com/img/home/logo/touch.png
@@ -778,10 +755,10 @@ proxy-groups:
       - Wasmer
       - CN中国大陆
       - 直连
-    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/JP.png
+    icon: https://edgeone.gh-proxy.org/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/JP.png
   - interval: 300
     timeout: 3000
-    url: http://www.gstatic.com/generate_204
+    url: https://www.gstatic.com/generate_204
     lazy: true
     max-failed-times: 3
     hidden: false
@@ -797,10 +774,10 @@ proxy-groups:
       - US美国
       - Wasmer
       - CN中国大陆
-    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Download.png
+    icon: https://edgeone.gh-proxy.org/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Download.png
   - interval: 300
     timeout: 3000
-    url: http://www.gstatic.com/generate_204
+    url: https://www.gstatic.com/generate_204
     lazy: true
     max-failed-times: 3
     hidden: false
@@ -814,10 +791,10 @@ proxy-groups:
       - US美国
       - Wasmer
       - CN中国大陆
-    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Streaming!CN.png
+    icon: https://edgeone.gh-proxy.org/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Streaming!CN.png
   - interval: 300
     timeout: 3000
-    url: http://connectivitycheck.platform.hicloud.com/generate_204
+    url: https://connectivitycheck.platform.hicloud.com/generate_204
     lazy: true
     max-failed-times: 3
     hidden: false
@@ -831,17 +808,17 @@ proxy-groups:
       - US美国
       - Wasmer
       - CN中国大陆
-    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/StreamingCN.png
+    icon: https://edgeone.gh-proxy.org/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/StreamingCN.png
   - interval: 300
     timeout: 3000
-    url: http://www.gstatic.com/generate_204
+    url: https://www.gstatic.com/generate_204
     lazy: true
     max-failed-times: 3
     hidden: false
     name: SG新加坡
     type: url-test
     tolerance: 50
-    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Singapore.png
+    icon: https://edgeone.gh-proxy.org/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Singapore.png
     proxies:
       - SGP_reality_vision
       - SGP_tuic
@@ -852,14 +829,14 @@ proxy-groups:
       - SGP_Claw_tuic_100G
   - interval: 300
     timeout: 3000
-    url: http://www.gstatic.com/generate_204
+    url: https://www.gstatic.com/generate_204
     lazy: true
     max-failed-times: 3
     hidden: false
     name: JP日本
     type: url-test
     tolerance: 50
-    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Japan.png
+    icon: https://edgeone.gh-proxy.org/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Japan.png
     proxies:
       - JP_reality_vision
       - JP_tuic
@@ -870,27 +847,27 @@ proxy-groups:
       - JP_Claw_tuic_100G
   - interval: 300
     timeout: 3000
-    url: http://www.gstatic.com/generate_204
+    url: https://www.gstatic.com/generate_204
     lazy: true
     max-failed-times: 3
     hidden: false
     name: US美国
     type: url-test
     tolerance: 50
-    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/United_States.png
+    icon: https://edgeone.gh-proxy.org/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/United_States.png
     proxies:
       - US_Claw_tuic_100G
       - US_Claw_vless_grpc_100G
   - interval: 300
     timeout: 3000
-    url: http://www.gstatic.com/generate_204
+    url: https://www.gstatic.com/generate_204
     lazy: true
     max-failed-times: 3
     hidden: false
     name: Wasmer
     type: url-test
     tolerance: 50
-    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Auto.png
+    icon: https://edgeone.gh-proxy.org/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Auto.png
     proxies:
       - Wasmer_earth_vless_ws
       - Wasmer_earth_trojan_ws
@@ -900,47 +877,48 @@ proxy-groups:
       - Wasmer_protect_ss_ws
   - interval: 300
     timeout: 3000
-    url: http://connectivitycheck.platform.hicloud.com/generate_204
+    url: https://connectivitycheck.platform.hicloud.com/generate_204
     lazy: true
     max-failed-times: 3
     hidden: false
     name: CN中国大陆
     type: url-test
     tolerance: 50
-    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/China_Map.png
+    icon: https://edgeone.gh-proxy.org/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/China_Map.png
     proxies:
       - Shanghai_direct
 rules:
   - RULE-SET,applications,下载软件
-  - PROCESS-NAME-REGEX,(?i).*Oray.*,DIRECT
-  - PROCESS-NAME-REGEX,(?i).*Sunlogin.*,DIRECT
-  - PROCESS-NAME-REGEX,(?i).*AweSun.*,DIRECT
-  - PROCESS-NAME-REGEX,(?i).*NodeBaby.*,DIRECT
-  - PROCESS-NAME-REGEX,(?i).*Node Baby.*,DIRECT
-  - PROCESS-NAME-REGEX,(?i).*nblink.*,DIRECT
-  - PROCESS-NAME-REGEX,(?i).*vpn.*,DIRECT
-  - PROCESS-NAME-REGEX,(?i).*vnc.*,DIRECT
-  - PROCESS-NAME-REGEX,(?i).*tvnserver.*,DIRECT
-  - PROCESS-NAME-REGEX,(?i).*节点小宝.*,DIRECT
-  - PROCESS-NAME-REGEX,(?i).*AnyDesk.*,DIRECT
-  - PROCESS-NAME-REGEX,(?i).*ToDesk.*,DIRECT
-  - PROCESS-NAME-REGEX,(?i).*RustDesk.*,DIRECT
-  - PROCESS-NAME-REGEX,(?i).*TeamViewer.*,DIRECT
-  - PROCESS-NAME-REGEX,(?i).*Zerotier.*,DIRECT
-  - PROCESS-NAME-REGEX,(?i).*Tailscaled.*,DIRECT
-  - PROCESS-NAME-REGEX,(?i).*phddns.*,DIRECT
-  - PROCESS-NAME-REGEX,(?i).*ngrok.*,DIRECT
-  - PROCESS-NAME-REGEX,(?i).*frpc.*,DIRECT
-  - PROCESS-NAME-REGEX,(?i).*frps.*,DIRECT
-  - PROCESS-NAME-REGEX,(?i).*natapp.*,DIRECT
-  - PROCESS-NAME-REGEX,(?i).*cloudflared.*,DIRECT
-  - PROCESS-NAME-REGEX,(?i).*xmqtunnel.*,DIRECT
-  - PROCESS-NAME-REGEX,(?i).*Navicat.*,DIRECT
-  - DOMAIN-SUFFIX,iepose.com,DIRECT
-  - DOMAIN-SUFFIX,iepose.cn,DIRECT
-  - DOMAIN-SUFFIX,nblink.cc,DIRECT
-  - DOMAIN-SUFFIX,ionewu.com,DIRECT
-  - DOMAIN-SUFFIX,vicp.net,DIRECT
+  - PROCESS-NAME-REGEX,(?i).*Oray.*,直连
+  - PROCESS-NAME-REGEX,(?i).*Sunlogin.*,直连
+  - PROCESS-NAME-REGEX,(?i).*AweSun.*,直连
+  - PROCESS-NAME-REGEX,(?i).*NodeBaby.*,直连
+  - PROCESS-NAME-REGEX,(?i).*Node Baby.*,直连
+  - PROCESS-NAME-REGEX,(?i).*nblink.*,直连
+  - PROCESS-NAME-REGEX,(?i).*owjdxb.*,直连
+  - PROCESS-NAME-REGEX,(?i).*vpn.*,直连
+  - PROCESS-NAME-REGEX,(?i).*vnc.*,直连
+  - PROCESS-NAME-REGEX,(?i).*tvnserver.*,直连
+  - PROCESS-NAME-REGEX,(?i).*节点小宝.*,直连
+  - PROCESS-NAME-REGEX,(?i).*AnyDesk.*,直连
+  - PROCESS-NAME-REGEX,(?i).*ToDesk.*,直连
+  - PROCESS-NAME-REGEX,(?i).*RustDesk.*,直连
+  - PROCESS-NAME-REGEX,(?i).*TeamViewer.*,直连
+  - PROCESS-NAME-REGEX,(?i).*Zerotier.*,直连
+  - PROCESS-NAME-REGEX,(?i).*Tailscaled.*,直连
+  - PROCESS-NAME-REGEX,(?i).*phddns.*,直连
+  - PROCESS-NAME-REGEX,(?i).*ngrok.*,直连
+  - PROCESS-NAME-REGEX,(?i).*frpc.*,直连
+  - PROCESS-NAME-REGEX,(?i).*frps.*,直连
+  - PROCESS-NAME-REGEX,(?i).*natapp.*,直连
+  - PROCESS-NAME-REGEX,(?i).*cloudflared.*,直连
+  - PROCESS-NAME-REGEX,(?i).*xmqtunnel.*,直连
+  - PROCESS-NAME-REGEX,(?i).*Navicat.*,直连
+  - DOMAIN-SUFFIX,iepose.com,直连
+  - DOMAIN-SUFFIX,iepose.cn,直连
+  - DOMAIN-SUFFIX,nblink.cc,直连
+  - DOMAIN-SUFFIX,ionewu.com,直连
+  - DOMAIN-SUFFIX,vicp.net,直连
   - GEOSITE,jetbrains-ai,国外AI
   - GEOSITE,category-ai-!cn,国外AI
   - GEOSITE,category-ai-chat-!cn,国外AI
@@ -951,10 +929,14 @@ rules:
   - GEOSITE,youtube,YouTube
   - GEOSITE,tvb,港澳台媒体
   - GEOSITE,hkt,港澳台媒体
-  - GEOSITE,hkt,港澳台媒体
+  - GEOSITE,hkbn,港澳台媒体
   - GEOSITE,hkopentv,港澳台媒体
-  - GEOSITE,hkopentv,港澳台媒体
+  - GEOSITE,hkedcity,港澳台媒体
+  - GEOSITE,hkgolden,港澳台媒体
+  - GEOSITE,hketgroup,港澳台媒体
   - RULE-SET,hk-media,港澳台媒体
+  - RULE-SET,tw-media,港澳台媒体
+  - GEOSITE,biliintl,哔哩哔哩东南亚
   - GEOSITE,bahamut,巴哈姆特
   - GEOSITE,disney,Disney+
   - GEOSITE,netflix,NETFLIX
@@ -962,7 +944,6 @@ rules:
   - GEOSITE,spotify,Spotify
   - GEOSITE,pixiv,Pixiv
   - GEOSITE,hbo,HBO
-  - GEOSITE,tvb,TVB
   - GEOSITE,primevideo,Prime Video
   - GEOSITE,hulu,Hulu
   - GEOIP,telegram,Telegram
@@ -979,14 +960,16 @@ rules:
   - GEOSITE,microsoft,微软服务
   - RULE-SET,category-bank-jp,日本网站
   - GEOIP,jp,日本网站,no-resolve
-  - GEOSITE,private,DIRECT
-  - GEOIP,private,DIRECT,no-resolve
+  - GEOSITE,private,直连
+  - GEOSITE,category-public-tracker,直连
+  - GEOSITE,category-game-platforms-download@cn,直连
+  - GEOIP,private,直连,no-resolve
   - GEOSITE,cn,国内网站
   - GEOIP,cn,国内网站,no-resolve
   - MATCH,其他外网
 bind-address: '*'
 keep-alive-interval: 1800
-geodata-mode: true
+geodata-mode: false
 geodata-loader: memconservative
 geo-auto-update: true
 geo-update-interval: 24
@@ -1045,9 +1028,18 @@ sniffer:
 ntp:
   enable: true
   write-to-system: false
-  server: cn.ntp.org.cn
+  server: ntp.aliyun.com
 tun:
+  enable: true
   stack: mixed
+  device: utun1999
+  auto-route: true
+  auto-redirect: true
+  auto-detect-interface: true
+  strict-route: true
+  mtu: 1500
+  gso: true
+  gso-max-size: 65536
   exclude-interface:
     - NodeBabyLink
   route-exclude-address:
@@ -1057,41 +1049,50 @@ tun:
     - 169.254.0.0/16
     - 172.16.0.0/12
     - 192.168.0.0/16
-    - 198.18.0.0/16
     - FC00::/7
     - FE80::/10
     - '::1/128'
+  dns-hijack:
+    - any:53
+    - tcp://any:53
 geox-url:
-  geoip: https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/geoip-lite.dat
-  geosite: https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/geosite.dat
-  mmdb: https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/country-lite.mmdb
-  asn: https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/GeoLite2-ASN.mmdb
+  geoip: https://edgeone.gh-proxy.org/https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/geoip-lite.dat
+  geosite: https://edgeone.gh-proxy.org/https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/geosite.dat
+  mmdb: https://edgeone.gh-proxy.org/https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/geoip.metadb
+  asn: https://edgeone.gh-proxy.org/https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/GeoLite2-ASN.mmdb
 rule-providers:
   applications:
     type: http
     format: text
     interval: 86400
     behavior: classical
-    url: https://github.com/DustinWin/ruleset_geodata/raw/refs/heads/mihomo-ruleset/applications.list
+    url: https://edgeone.gh-proxy.org/https://github.com/DustinWin/ruleset_geodata/raw/refs/heads/mihomo-ruleset/applications.list
     path: ./ruleset/DustinWin/applications.list
   hk-media:
     type: http
     format: text
     interval: 86400
     behavior: classical
-    url: https://ruleset.skk.moe/List/non_ip/stream_hk.conf
-    path: ./ruleset/hk-media/hk-media.mrs
+    url: https://ruleset.skk.moe/Clash/non_ip/stream_hk.txt
+    path: ./ruleset/ruleset.skk.moe/stream_hk.txt
+  tw-media:
+    type: http
+    format: text
+    interval: 86400
+    behavior: classical
+    url: https://ruleset.skk.moe/Clash/non_ip/stream_tw.txt
+    path: ./ruleset/ruleset.skk.moe/stream_tw.txt
   adblockmihomo:
     type: http
     format: mrs
     interval: 86400
     behavior: domain
-    url: https://github.com/217heidai/adblockfilters/raw/refs/heads/main/rules/adblockmihomo.mrs
+    url: https://edgeone.gh-proxy.org/https://github.com/217heidai/adblockfilters/raw/refs/heads/main/rules/adblockmihomo.mrs
     path: ./ruleset/adblockfilters/adblockmihomo.mrs
   category-bank-jp:
     type: http
     format: mrs
     interval: 86400
     behavior: domain
-    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-bank-jp.mrs
+    url: https://edgeone.gh-proxy.org/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-bank-jp.mrs
     path: ./ruleset/MetaCubeX/category-bank-jp.mrs

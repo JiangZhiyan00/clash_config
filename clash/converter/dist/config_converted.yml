@@ -424,23 +424,6 @@ proxy-groups:
     icon: https://edgeone.gh-proxy.org/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/TVB.png
   - interval: 300
     timeout: 3000
-    url: https://www.bilibili.tv/
-    lazy: true
-    max-failed-times: 3
-    hidden: false
-    name: 哔哩哔哩东南亚
-    type: select
-    proxies:
-      - 默认节点
-      - 直连
-      - SG新加坡
-      - JP日本
-      - US美国
-      - Wasmer
-      - CN中国大陆
-    icon: https://edgeone.gh-proxy.org/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/bilibili_3.png
-  - interval: 300
-    timeout: 3000
     url: https://ani.gamer.com.tw/ajax/getdeviceid.php
     lazy: true
     max-failed-times: 3
@@ -936,7 +919,6 @@ rules:
   - GEOSITE,hketgroup,港澳台媒体
   - RULE-SET,hk-media,港澳台媒体
   - RULE-SET,tw-media,港澳台媒体
-  - GEOSITE,biliintl,哔哩哔哩东南亚
   - GEOSITE,bahamut,巴哈姆特
   - GEOSITE,disney,Disney+
   - GEOSITE,netflix,NETFLIX

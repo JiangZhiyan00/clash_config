@@ -176,7 +176,7 @@ let ruleOptions = {
   pixiv: false,
   hbo: false,
   mediaHMT: false, // 港澳台媒体（含HK/TW流媒体）
-  biliintl: false,
+  // biliintl: false,
   hulu: false,
   primevideo: false,
   telegram: false,

@@ -357,7 +357,7 @@ proxies:
 proxy-groups:
   - interval: 300
     timeout: 3000
-    url: https://www.gstatic.com/generate_204
+    url: http://www.qualcomm.cn/generate_204
     lazy: true
     max-failed-times: 3
     hidden: false
@@ -690,7 +690,7 @@ proxy-groups:
     icon: https://edgeone.gh-proxy.org/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Apple_2.png
   - interval: 300
     timeout: 3000
-    url: https://www.google.com/generate_204
+    url: http://www.qualcomm.cn/generate_204
     lazy: true
     max-failed-times: 3
     hidden: false
@@ -758,7 +758,7 @@ proxy-groups:
     icon: https://edgeone.gh-proxy.org/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/JP.png
   - interval: 300
     timeout: 3000
-    url: https://www.gstatic.com/generate_204
+    url: http://www.qualcomm.cn/generate_204
     lazy: true
     max-failed-times: 3
     hidden: false
@@ -777,7 +777,7 @@ proxy-groups:
     icon: https://edgeone.gh-proxy.org/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Download.png
   - interval: 300
     timeout: 3000
-    url: https://www.gstatic.com/generate_204
+    url: http://www.qualcomm.cn/generate_204
     lazy: true
     max-failed-times: 3
     hidden: false
@@ -794,7 +794,7 @@ proxy-groups:
     icon: https://edgeone.gh-proxy.org/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Streaming!CN.png
   - interval: 300
     timeout: 3000
-    url: https://connectivitycheck.platform.hicloud.com/generate_204
+    url: http://connectivitycheck.platform.hicloud.com/generate_204
     lazy: true
     max-failed-times: 3
     hidden: false
@@ -811,7 +811,7 @@ proxy-groups:
     icon: https://edgeone.gh-proxy.org/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/StreamingCN.png
   - interval: 300
     timeout: 3000
-    url: https://www.gstatic.com/generate_204
+    url: http://www.qualcomm.cn/generate_204
     lazy: true
     max-failed-times: 3
     hidden: false
@@ -829,7 +829,7 @@ proxy-groups:
       - SGP_Claw_tuic_100G
   - interval: 300
     timeout: 3000
-    url: https://www.gstatic.com/generate_204
+    url: http://www.qualcomm.cn/generate_204
     lazy: true
     max-failed-times: 3
     hidden: false
@@ -847,7 +847,7 @@ proxy-groups:
       - JP_Claw_tuic_100G
   - interval: 300
     timeout: 3000
-    url: https://www.gstatic.com/generate_204
+    url: http://www.qualcomm.cn/generate_204
     lazy: true
     max-failed-times: 3
     hidden: false
@@ -860,7 +860,7 @@ proxy-groups:
       - US_Claw_vless_grpc_100G
   - interval: 300
     timeout: 3000
-    url: https://www.gstatic.com/generate_204
+    url: http://www.qualcomm.cn/generate_204
     lazy: true
     max-failed-times: 3
     hidden: false
@@ -877,7 +877,7 @@ proxy-groups:
       - Wasmer_protect_ss_ws
   - interval: 300
     timeout: 3000
-    url: https://connectivitycheck.platform.hicloud.com/generate_204
+    url: http://connectivitycheck.platform.hicloud.com/generate_204
     lazy: true
     max-failed-times: 3
     hidden: false

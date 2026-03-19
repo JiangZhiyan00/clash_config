@@ -343,7 +343,7 @@ const dnsConfig = {
   "use-hosts": true,
   "use-system-hosts": true,
   "enhanced-mode": "fake-ip",
-  "fake-ip-range": "198.18.0.0/16",
+  "fake-ip-range": "198.18.0.1/16",
   "fake-ip-filter-mode": "whitelist", // whitelist：列出的域名使用真实IP，其余 fake-ip
   "fake-ip-filter": [
     // 以下域名需要真实 IP（不能走 fake-ip）

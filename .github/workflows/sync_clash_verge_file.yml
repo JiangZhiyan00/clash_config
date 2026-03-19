@@ -27,7 +27,7 @@ jobs:
 
       - name: 恢复上次版本号缓存
         id: cache-restore
-        uses: actions/cache/restore@v4
+        uses: actions/cache/restore@v5
         with:
           path: .last_version
           key: clash-verge-version-${{ github.run_id }}
@@ -115,7 +115,7 @@ jobs:
 
       - name: 保存新版本号到缓存
         if: steps.compare.outputs.changed == 'true'
-        uses: actions/cache/save@v4
+        uses: actions/cache/save@v5
         with:
           path: .last_version
           key: clash-verge-version-${{ github.run_id }}

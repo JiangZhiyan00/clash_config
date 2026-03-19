@@ -300,11 +300,19 @@ const allRegionDefinitions = [
     regex: /澳大利亚|🇦🇺|au|australia|sydney/i,
     icon: `${githubProxy}https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Australia.png`,
   },
-  // Wasmer 是特殊服务节点，保留匹配（放最后避免误匹配）
+  // Wasmer 是特殊服务节点（exclusive: 独占分组，不再归入其他地区组）
   {
     name: "Wasmer",
     regex: /Wasmer/i,
+    exclusive: true,
     icon: `${githubProxy}https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Auto.png`,
+  },
+  // Claw 是特殊服务节点（exclusive: 独占分组，不再归入其他地区组）
+  {
+    name: "Claw",
+    regex: /Claw/i,
+    exclusive: true,
+    icon: `${githubProxy}https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Pig.png`,
   },
   {
     name: "CN中国大陆",
@@ -752,12 +760,24 @@ function main(config) {
       if (match && parseFloat(match[1]) > globalRatioLimit) continue;
     }
 
-    // 按地区匹配
+    // 第一阶段：优先匹配独占分组（如 Claw、Wasmer）
+    // 命中独占分组后不再参与其他地区匹配
     for (const region of regionDefinitions) {
-      if (region.regex.test(name)) {
+      if (region.exclusive && region.regex.test(name)) {
         regionGroups[region.name].proxies.push(name);
         matched = true;
         break;
+      }
+    }
+
+    // 第二阶段：普通地区匹配（仅在未命中独占分组时执行）
+    if (!matched) {
+      for (const region of regionDefinitions) {
+        if (!region.exclusive && region.regex.test(name)) {
+          regionGroups[region.name].proxies.push(name);
+          matched = true;
+          break;
+        }
       }
     }
 

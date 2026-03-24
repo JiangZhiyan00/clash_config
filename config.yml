@@ -160,7 +160,7 @@ proxies:
   - {
       name: JP_hysteria2,
       server: jp3xui.jzy88.top,
-      servername: sgp3xui.jzy88.top,
+      servername: jp3xui.jzy88.top,
       port: 54325,
       type: hysteria2,
       password: vls2gynYgL,

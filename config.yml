@@ -293,55 +293,6 @@ proxies:
         },
     }
   - {
-      name: SGP_Claw_tuic_100G,
-      server: udp.ap-southeast-1.clawcloudrun.com,
-      type: tuic,
-      port: 37527,
-      password: 8RisC5DBVq,
-      uuid: 294da2e0-b1cc-40f7-8451-17ea56658619,
-      congestion-controller: bbr,
-      alpn: [http/1.1, h2, h3],
-      skip-cert-verify: true,
-      tls: true,
-    }
-  - {
-      name: JP_Claw_tuic_100G,
-      server: udp.ap-northeast-1.clawcloudrun.com,
-      type: tuic,
-      port: 41021,
-      password: frgJNNBOMc,
-      uuid: 9b68bac2-545d-4de1-bbb0-cb5f5b27e9f2,
-      congestion-controller: bbr,
-      alpn: [http/1.1, h2, h3],
-      skip-cert-verify: true,
-      tls: true,
-    }
-  - {
-      name: US_Claw_tuic_100G,
-      server: udp.us-east-1.clawcloudrun.com,
-      type: tuic,
-      port: 37494,
-      password: icST67YucQ,
-      uuid: a13a2a85-ffef-4ab8-8ec7-7806847fb0f8,
-      congestion-controller: bbr,
-      alpn: [http/1.1, h2, h3],
-      skip-cert-verify: true,
-      tls: true,
-    }
-  - {
-      name: US_Claw_vless_grpc_100G,
-      server: ytsbgugjyatk.us-east-1.clawcloudrun.com,
-      type: vless,
-      port: 443,
-      uuid: e39631db-8702-4f87-97c7-b2f6903ef103,
-      network: grpc,
-      servername: ytsbgugjyatk.us-east-1.clawcloudrun.com,
-      udp: true,
-      tls: true,
-      client-fingerprint: chrome,
-      grpc-opts: { grpc-service-name: grpc },
-    }
-  - {
       name: Shanghai_direct,
       server: 115.159.35.169,
       type: vless,
@@ -384,11 +335,6 @@ proxy-groups:
       - Wasmer_protect_trojan_ws
       - Wasmer_protect_ss_ws
 
-      - US_Claw_tuic_100G
-      - SGP_Claw_tuic_100G
-      - JP_Claw_tuic_100G
-      - US_Claw_vless_grpc_100G
-
   - name: ♻️ 自动选择
     type: url-test
     url: http://www.gstatic.com/generate_204
@@ -415,11 +361,6 @@ proxy-groups:
       - Wasmer_protect_vless_ws
       - Wasmer_protect_trojan_ws
       - Wasmer_protect_ss_ws
-
-      - SGP_Claw_tuic_100G
-      - JP_Claw_tuic_100G
-      - US_Claw_tuic_100G
-      - US_Claw_vless_grpc_100G
 
   - name: 🛑 广告拦截
     type: select
@@ -498,11 +439,6 @@ proxy-groups:
       - Wasmer_protect_vless_ws
       - Wasmer_protect_trojan_ws
       - Wasmer_protect_ss_ws
-
-      - SGP_Claw_tuic_100G
-      - JP_Claw_tuic_100G
-      - US_Claw_tuic_100G
-      - US_Claw_vless_grpc_100G
 
 rules:
   - DOMAIN-SUFFIX,acl4.ssr,🎯 全球直连

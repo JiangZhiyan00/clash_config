@@ -307,13 +307,6 @@ const allRegionDefinitions = [
     exclusive: true,
     icon: `${githubProxy}https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Auto.png`,
   },
-  // Claw 是特殊服务节点（exclusive: 独占分组，不再归入其他地区组）
-  {
-    name: "Claw",
-    regex: /Claw/i,
-    exclusive: true,
-    icon: `${githubProxy}https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Pig.png`,
-  },
   {
     name: "CN中国大陆",
     regex: /中国|🇨🇳|cn|china|shanghai|beijing/i,
@@ -393,7 +386,7 @@ const ruleProviderCommon = {
 const groupBaseOption = {
   interval: 300,
   timeout: 3000,
-  url: "http://www.qualcomm.cn/generate_204",
+  url: "http://g.cn/generate_204",
   lazy: true,
   "max-failed-times": 3,
   hidden: false,
@@ -603,7 +596,7 @@ const serviceConfigs = [
     key: "google",
     name: "谷歌服务",
     icon: `${githubProxy}https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Google_Search.png`,
-    url: "http://www.qualcomm.cn/generate_204",
+    url: "http://g.cn/generate_204",
     rules: ["GEOSITE,google,谷歌服务"],
   },
   {
@@ -760,7 +753,7 @@ function main(config) {
       if (match && parseFloat(match[1]) > globalRatioLimit) continue;
     }
 
-    // 第一阶段：优先匹配独占分组（如 Claw、Wasmer）
+    // 第一阶段：优先匹配独占分组（如 Wasmer）
     // 命中独占分组后不再参与其他地区匹配
     for (const region of regionDefinitions) {
       if (region.exclusive && region.regex.test(name)) {
@@ -794,7 +787,7 @@ function main(config) {
     const testUrl =
       r.name === "CN中国大陆"
         ? "http://connectivitycheck.platform.hicloud.com/generate_204"
-        : "http://www.qualcomm.cn/generate_204";
+        : "http://g.cn/generate_204";
 
     generatedRegionGroups.push({
       ...groupBaseOption,

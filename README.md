@@ -75,6 +75,5 @@
 
 ### 4.订阅链接
 
-+ 高端线路(CN2 GIA+9929+CMIN2)订阅：<a href="mailto:jiangzhiyan937@gmail.com" target="_blank">联系`jiangzhiyan937@gmail.com`获取</a>；
-+ 免费线路订阅链接：<a href="https://clash.jzy88.top/free" target="_blank">https://clash.jzy88.top/free</a>；
-+ 免费优选ip订阅链接(不保证可用性，报错多试几次)：<a href="https://fuckvvv.ccwu.cc/sub?token=94ff30b2cfacf26c199fbaa492584d86" target="_blank">免费优选ip订阅链接</a>。
++ 美西高端线路(CN2 GIA+9929+CMIN2)订阅：<a href="mailto:jiangzhiyan937@gmail.com" target="_blank">联系`jiangzhiyan937@gmail.com`获取</a>；
++ 免费优选ip订阅链接(不保证可用性，报错多试几次)：<a href="https://60156344-dbc3-4614-8177-fd337539a473.fuckuuu.cc.cd/sub?token=dda108fcd5cacb4d05889ec766ca84fd" target="_blank">免费优选ip订阅链接</a>。

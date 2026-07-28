@@ -54,157 +54,39 @@ dns:
       - https://dns.google/dns-query
       - https://dns.adguard-dns.com/dns-query
 proxies:
-  - name: SGP_reality_vision
-    server: sgp3xui.jzy88.top
-    type: vless
-    port: 54322
-    uuid: 83661b8b-9e05-48a1-adee-4ec84da9fb82
-    network: tcp
-    servername: xt2qmu.aliwork.com
-    flow: xtls-rprx-vision
-    udp: true
-    tls: true
-    reality-opts:
-      public-key: 1w1R9FYNIhdyesNYxGpXmkLGqS9wgLu4sRd5sl6XDjE
-      short-id: b4dc4a
-    client-fingerprint: chrome
-  - name: SGP_tuic
-    server: sgp3xui.jzy88.top
-    type: tuic
-    port: 2097
-    password: JV74ivV30k
-    uuid: 2d1d8df2-597e-4b59-c878-262fa1be80b5
-    congestion-controller: bbr
-    alpn:
-      - http/1.1
-      - h2
-      - h3
-    skip-cert-verify: true
-    tls: true
-  - name: SGP_hysteria2
-    server: sgp3xui.jzy88.top
-    servername: sgp3xui.jzy88.top
-    port: 54325
-    type: hysteria2
-    password: JV74ivV30k
-    skip-cert-verify: true
-    alpn:
-      - http/1.1
-      - h2
-      - h3
-    down: 9999999999
-    up: 9999999999
-    tls: true
-  - name: SGP_any_tls
-    server: sgp3xui.jzy88.top
-    type: anytls
-    port: 54327
-    password: JV74ivV30k
-    client-fingerprint: chrome
-    alpn:
-      - http/1.1
-      - h2
-      - h3
-    skip-cert-verify: true
-    tls: true
-  - name: SGP_vless_tls_vision
-    server: sgp3xui.jzy88.top
-    type: vless
-    port: 54323
-    uuid: 700084b6-a1d2-4199-842b-3229c1b2e50c
-    network: tcp
-    servername: sgp3xui.jzy88.top
-    flow: xtls-rprx-vision
-    udp: true
-    tls: true
-    client-fingerprint: chrome
-  - name: SGP_vless_tls_grpc
-    server: sgp3xui.jzy88.top
-    type: vless
-    port: 54324
-    uuid: cdd37253-5f9b-4dcb-8b01-ad60a29384b8
-    network: grpc
-    servername: sgp3xui.jzy88.top
-    udp: true
-    tls: true
-    client-fingerprint: chrome
-    grpc-opts:
-      grpc-service-name: grpc
-  - name: JP_reality_vision
-    server: jp3xui.jzy88.top
-    type: vless
-    port: 54322
-    uuid: 0f4617f1-0b46-4fe2-8599-561fa16ebf1f
-    network: tcp
-    servername: travelsky-etrip.com
-    flow: xtls-rprx-vision
-    udp: true
-    tls: true
-    reality-opts:
-      public-key: rsBEuijeVZpfTqXZK0bcnAMdDLeuGMkWVmmRJN1uT3A
-      short-id: a9c117813348
-    client-fingerprint: chrome
   - name: JP_tuic
-    server: jp3xui.jzy88.top
+    server: jpsui.jzy88.top
     type: tuic
-    port: 2097
-    password: vls2gynYgL
-    uuid: 794c4308-8944-429e-ae62-f7af5e461fd0
+    port: 54323
+    password: XrgOXIVkpI
+    uuid: b480c132-fd6d-4017-953b-0d90c8c62275
+    sni: jpsui.jzy88.top
     congestion-controller: bbr
     alpn:
-      - http/1.1
-      - h2
       - h3
-    skip-cert-verify: true
     tls: true
-  - name: JP_hysteria2
-    server: jp3xui.jzy88.top
-    servername: jp3xui.jzy88.top
+  - name: JP_hy2
+    server: jpsui.jzy88.top
     port: 54325
     type: hysteria2
-    password: vls2gynYgL
-    skip-cert-verify: true
+    password: XrgOXIVkpI
+    sni: jpsui.jzy88.top
     alpn:
-      - http/1.1
-      - h2
       - h3
-    down: 9999999999
-    up: 9999999999
+    obfs: salamander
+    obfs-password: Jzy@1234...
     tls: true
   - name: JP_any_tls
-    server: jp3xui.jzy88.top
+    server: jpsui.jzy88.top
     type: anytls
-    port: 54327
-    password: vls2gynYgL
+    port: 54324
+    password: XrgOXIVkpI
     alpn:
       - http/1.1
       - h2
       - h3
-    skip-cert-verify: true
+    sni: jpsui.jzy88.top
     tls: true
-  - name: JP_vless_tls_vision
-    server: jp3xui.jzy88.top
-    type: vless
-    port: 54323
-    uuid: 5360517f-1a97-4219-9399-8e6357ac1cbb
-    network: tcp
-    servername: jp3xui.jzy88.top
-    flow: xtls-rprx-vision
-    udp: true
-    tls: true
-    client-fingerprint: chrome
-  - name: JP_vless_tls_grpc
-    server: jp3xui.jzy88.top
-    type: vless
-    port: 54324
-    uuid: d246bb5b-d834-4d1e-9966-226067e2b8d3
-    network: grpc
-    servername: jp3xui.jzy88.top
-    udp: true
-    tls: true
-    client-fingerprint: chrome
-    grpc-opts:
-      grpc-service-name: grpc
   - name: Wasmer_earth_vless_ws
     server: wasmer-earth.jzy88.top
     port: 443
@@ -287,16 +169,6 @@ proxies:
       tls: true
       mux: false
       skip-cert-verify: false
-  - name: Shanghai_direct
-    server: 115.159.35.169
-    type: vless
-    port: 54329
-    uuid: 2060e0a6-11cc-4072-b624-522bb017e4d3
-    network: tcp
-    tls: false
-    tfo: false
-    encryption: mlkem768x25519plus.native.0rtt.nATMEv8HV8BEygytPzGnMsbpYR3wV5lKeZNF7nBsdEk
-    skip-cert-verify: true
   - name: 直连
     type: direct
     udp: true
@@ -313,10 +185,8 @@ proxy-groups:
     name: 默认节点
     type: select
     proxies:
-      - SG新加坡
       - JP日本
       - Wasmer
-      - CN中国大陆
       - 直连
     icon: https://edgeone.gh-proxy.org/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Proxy.png
   - interval: 300
@@ -329,10 +199,8 @@ proxy-groups:
     type: select
     proxies:
       - 默认节点
-      - SG新加坡
       - JP日本
       - Wasmer
-      - CN中国大陆
       - 直连
     icon: https://edgeone.gh-proxy.org/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/ChatGPT.png
   - interval: 300
@@ -345,10 +213,8 @@ proxy-groups:
     type: select
     proxies:
       - 默认节点
-      - SG新加坡
       - JP日本
       - Wasmer
-      - CN中国大陆
       - 直连
     icon: https://edgeone.gh-proxy.org/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/YouTube.png
   - interval: 300
@@ -361,10 +227,8 @@ proxy-groups:
     type: select
     proxies:
       - 默认节点
-      - SG新加坡
       - JP日本
       - Wasmer
-      - CN中国大陆
       - 直连
     icon: https://edgeone.gh-proxy.org/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/TVB.png
   - interval: 300
@@ -378,10 +242,8 @@ proxy-groups:
     proxies:
       - 默认节点
       - 直连
-      - SG新加坡
       - JP日本
       - Wasmer
-      - CN中国大陆
     icon: https://edgeone.gh-proxy.org/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Bahamut.png
   - interval: 300
     timeout: 3000
@@ -393,10 +255,8 @@ proxy-groups:
     type: select
     proxies:
       - 默认节点
-      - SG新加坡
       - JP日本
       - Wasmer
-      - CN中国大陆
       - 直连
     icon: https://edgeone.gh-proxy.org/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Disney+.png
   - interval: 300
@@ -409,10 +269,8 @@ proxy-groups:
     type: select
     proxies:
       - 默认节点
-      - SG新加坡
       - JP日本
       - Wasmer
-      - CN中国大陆
       - 直连
     icon: https://edgeone.gh-proxy.org/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Netflix.png
   - interval: 300
@@ -425,10 +283,8 @@ proxy-groups:
     type: select
     proxies:
       - 默认节点
-      - SG新加坡
       - JP日本
       - Wasmer
-      - CN中国大陆
       - 直连
     icon: https://edgeone.gh-proxy.org/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/TikTok.png
   - interval: 300
@@ -441,10 +297,8 @@ proxy-groups:
     type: select
     proxies:
       - 默认节点
-      - SG新加坡
       - JP日本
       - Wasmer
-      - CN中国大陆
       - 直连
     icon: https://edgeone.gh-proxy.org/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Spotify.png
   - interval: 300
@@ -457,10 +311,8 @@ proxy-groups:
     type: select
     proxies:
       - 默认节点
-      - SG新加坡
       - JP日本
       - Wasmer
-      - CN中国大陆
       - 直连
     icon: https://play-lh.googleusercontent.com/8pFuLOHF62ADcN0ISUAyEueA5G8IF49mX_6Az6pQNtokNVHxIVbS1L2NM62H-k02rLM=w240-h480-rw
   - interval: 300
@@ -473,10 +325,8 @@ proxy-groups:
     type: select
     proxies:
       - 默认节点
-      - SG新加坡
       - JP日本
       - Wasmer
-      - CN中国大陆
       - 直连
     icon: https://edgeone.gh-proxy.org/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/HBO.png
   - interval: 300
@@ -489,10 +339,8 @@ proxy-groups:
     type: select
     proxies:
       - 默认节点
-      - SG新加坡
       - JP日本
       - Wasmer
-      - CN中国大陆
       - 直连
     icon: https://edgeone.gh-proxy.org/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Prime_Video.png
   - interval: 300
@@ -505,10 +353,8 @@ proxy-groups:
     type: select
     proxies:
       - 默认节点
-      - SG新加坡
       - JP日本
       - Wasmer
-      - CN中国大陆
       - 直连
     icon: https://edgeone.gh-proxy.org/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Hulu.png
   - interval: 300
@@ -521,10 +367,8 @@ proxy-groups:
     type: select
     proxies:
       - 默认节点
-      - SG新加坡
       - JP日本
       - Wasmer
-      - CN中国大陆
       - 直连
     icon: https://edgeone.gh-proxy.org/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Telegram.png
   - interval: 300
@@ -537,10 +381,8 @@ proxy-groups:
     type: select
     proxies:
       - 默认节点
-      - SG新加坡
       - JP日本
       - Wasmer
-      - CN中国大陆
       - 直连
     icon: https://static.whatsapp.net/rsrc.php/v3/yP/r/rYZqPCBaG70.png
   - interval: 300
@@ -553,10 +395,8 @@ proxy-groups:
     type: select
     proxies:
       - 默认节点
-      - SG新加坡
       - JP日本
       - Wasmer
-      - CN中国大陆
       - 直连
     icon: https://edgeone.gh-proxy.org/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Line.png
   - interval: 300
@@ -568,10 +408,8 @@ proxy-groups:
     type: select
     proxies:
       - 默认节点
-      - SG新加坡
       - JP日本
       - Wasmer
-      - CN中国大陆
       - 直连
     icon: https://edgeone.gh-proxy.org/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Game.png
   - interval: 300
@@ -596,10 +434,8 @@ proxy-groups:
     type: select
     proxies:
       - 默认节点
-      - SG新加坡
       - JP日本
       - Wasmer
-      - CN中国大陆
       - 直连
     icon: https://edgeone.gh-proxy.org/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Apple_2.png
   - interval: 300
@@ -612,10 +448,8 @@ proxy-groups:
     type: select
     proxies:
       - 默认节点
-      - SG新加坡
       - JP日本
       - Wasmer
-      - CN中国大陆
       - 直连
     icon: https://edgeone.gh-proxy.org/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Google_Search.png
   - interval: 300
@@ -628,10 +462,8 @@ proxy-groups:
     type: select
     proxies:
       - 默认节点
-      - SG新加坡
       - JP日本
       - Wasmer
-      - CN中国大陆
       - 直连
     icon: https://edgeone.gh-proxy.org/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/GitHub.png
   - interval: 300
@@ -644,10 +476,8 @@ proxy-groups:
     type: select
     proxies:
       - 默认节点
-      - SG新加坡
       - JP日本
       - Wasmer
-      - CN中国大陆
       - 直连
     icon: https://edgeone.gh-proxy.org/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Microsoft.png
   - interval: 300
@@ -661,9 +491,7 @@ proxy-groups:
     proxies:
       - JP日本
       - 默认节点
-      - SG新加坡
       - Wasmer
-      - CN中国大陆
       - 直连
     icon: https://edgeone.gh-proxy.org/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/JP.png
   - interval: 300
@@ -679,10 +507,8 @@ proxy-groups:
       - REJECT
       - 默认节点
       - 国内网站
-      - SG新加坡
       - JP日本
       - Wasmer
-      - CN中国大陆
     icon: https://edgeone.gh-proxy.org/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Download.png
   - interval: 300
     timeout: 3000
@@ -695,10 +521,8 @@ proxy-groups:
     proxies:
       - 默认节点
       - 国内网站
-      - SG新加坡
       - JP日本
       - Wasmer
-      - CN中国大陆
     icon: https://edgeone.gh-proxy.org/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Streaming!CN.png
   - interval: 300
     timeout: 3000
@@ -711,28 +535,9 @@ proxy-groups:
     proxies:
       - 直连
       - 默认节点
-      - SG新加坡
       - JP日本
       - Wasmer
-      - CN中国大陆
     icon: https://edgeone.gh-proxy.org/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/StreamingCN.png
-  - interval: 300
-    timeout: 3000
-    url: http://g.cn/generate_204
-    lazy: true
-    max-failed-times: 3
-    hidden: false
-    name: SG新加坡
-    type: url-test
-    tolerance: 50
-    icon: https://edgeone.gh-proxy.org/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Singapore.png
-    proxies:
-      - SGP_reality_vision
-      - SGP_tuic
-      - SGP_hysteria2
-      - SGP_any_tls
-      - SGP_vless_tls_vision
-      - SGP_vless_tls_grpc
   - interval: 300
     timeout: 3000
     url: http://g.cn/generate_204
@@ -744,12 +549,9 @@ proxy-groups:
     tolerance: 50
     icon: https://edgeone.gh-proxy.org/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Japan.png
     proxies:
-      - JP_reality_vision
       - JP_tuic
-      - JP_hysteria2
+      - JP_hy2
       - JP_any_tls
-      - JP_vless_tls_vision
-      - JP_vless_tls_grpc
   - interval: 300
     timeout: 3000
     url: http://g.cn/generate_204
@@ -767,18 +569,6 @@ proxy-groups:
       - Wasmer_protect_vless_ws
       - Wasmer_protect_trojan_ws
       - Wasmer_protect_ss_ws
-  - interval: 300
-    timeout: 3000
-    url: http://connectivitycheck.platform.hicloud.com/generate_204
-    lazy: true
-    max-failed-times: 3
-    hidden: false
-    name: CN中国大陆
-    type: url-test
-    tolerance: 50
-    icon: https://edgeone.gh-proxy.org/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/China_Map.png
-    proxies:
-      - Shanghai_direct
 rules:
   - RULE-SET,applications,下载软件
   - PROCESS-NAME-REGEX,(?i).*Oray.*,直连

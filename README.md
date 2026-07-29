@@ -9,14 +9,8 @@
 > **建议下载安装最新版本**
 
 + `Windows`：[Clash Verge官网下载](https://www.clashverge.dev/install.html#__tabbed_1_1)
-  ，备用下载地址（文件名后缀`_x64.exe`）：[Clash Verge Windows安装包下载](https://webdav.jzy88.top:8011/clash_verge_install/clash_verge_windows.exe)
 + `MacOS`：[Clash Verge官网下载](https://www.clashverge.dev/install.html#__tabbed_1_3)
-    - `Intel 芯片`
-      备用下载地址（文件名后缀`_x64.dmg`）：[Clash Verge MacOS_Intel芯片安装包下载](https://webdav.jzy88.top:8011/clash_verge_install/clash_verge_mac_intel.dmg)
-    - `Apple M 芯片`
-      备用下载地址（文件名后缀`_aarch64.dmg`）：[Clash Verge MacOS_M芯片安装包下载](https://webdav.jzy88.top:8011/clash_verge_install/clash_verge_mac_m.dmg)
 + `Android`（文件名后缀`_arm64-v8a.apk`）：[Karing Github官网下载](https://github.com/KaringX/karing/releases/latest)
-，备用下载地址：[Karing Android安装包下载](https://proxy.jzy88.top/https://github.com/KaringX/karing/releases/latest)
 + `IOS`：
     - [Karing 非中国区App Store下载](https://apps.apple.com/us/app/karing/id6472431552)
     - [Shadowrocket 非中国区App Store下载](https://apps.apple.com/us/app/shadowrocket/id932747118)
@@ -75,5 +69,5 @@
 
 ### 4.订阅链接
 
-+ 美西高端线路(CN2 GIA+9929+CMIN2)订阅：<a href="mailto:jiangzhiyan937@gmail.com" target="_blank">联系`jiangzhiyan937@gmail.com`获取</a>；
++ 美西优化线路(CN2 GIA+9929+CMIN2)订阅：<a href="mailto:jiangzhiyan937@gmail.com" target="_blank">联系`jiangzhiyan937@gmail.com`有偿获取</a>；
 + 免费优选ip订阅链接(不保证可用性，报错多试几次)：<a href="https://60156344-dbc3-4614-8177-fd337539a473.fuckuuu.cc.cd/sub?token=dda108fcd5cacb4d05889ec766ca84fd" target="_blank">免费优选ip订阅链接</a>。

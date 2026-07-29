@@ -69,5 +69,4 @@
 
 ### 4.订阅链接
 
-+ 美西优化线路(CN2 GIA+9929+CMIN2)订阅：<a href="mailto:jiangzhiyan937@gmail.com" target="_blank">联系`jiangzhiyan937@gmail.com`有偿获取</a>；
 + 免费优选ip订阅链接(不保证可用性，报错多试几次)：<a href="https://60156344-dbc3-4614-8177-fd337539a473.fuckuuu.cc.cd/sub?token=dda108fcd5cacb4d05889ec766ca84fd" target="_blank">免费优选ip订阅链接</a>。

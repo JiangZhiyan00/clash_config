@@ -48,40 +48,6 @@ dns:
     - geosite:cn
 proxies:
   - {
-      name: JP_tuic,
-      server: jpsui.jzy88.top,
-      type: tuic,
-      port: 54323,
-      password: XrgOXIVkpI,
-      uuid: b480c132-fd6d-4017-953b-0d90c8c62275,
-      sni: jpsui.jzy88.top,
-      congestion-controller: bbr,
-      alpn: [h3],
-      tls: true,
-    }
-  - {
-      name: JP_hy2,
-      server: jpsui.jzy88.top,
-      port: 54325,
-      type: hysteria2,
-      password: XrgOXIVkpI,
-      sni: jpsui.jzy88.top,
-      alpn: [h3],
-      obfs: salamander,
-      obfs-password: Jzy@1234...,
-      tls: true,
-    }
-  - {
-      name: JP_any_tls,
-      server: jpsui.jzy88.top,
-      type: anytls,
-      port: 54324,
-      password: XrgOXIVkpI,
-      alpn: [http/1.1, h2, h3],
-      sni: jpsui.jzy88.top,
-      tls: true,
-    }
-  - {
       name: Wasmer_earth_vless_ws,
       server: wasmer-earth.jzy88.top,
       port: 443,
@@ -178,10 +144,6 @@ proxy-groups:
   - name: 🚀 手动切换
     type: select
     proxies:
-      - JP_tuic
-      - JP_hy2
-      - JP_any_tls
-
       - Wasmer_earth_vless_ws
       - Wasmer_earth_trojan_ws
       - Wasmer_earth_ss_ws
@@ -195,10 +157,6 @@ proxy-groups:
     interval: 300
     tolerance: 50
     proxies:
-      - JP_tuic
-      - JP_hy2
-      - JP_any_tls
-
       - Wasmer_earth_vless_ws
       - Wasmer_earth_trojan_ws
       - Wasmer_earth_ss_ws
@@ -263,10 +221,6 @@ proxy-groups:
     interval: 300
     tolerance: 50
     proxies:
-      - JP_tuic
-      - JP_hy2
-      - JP_any_tls
-
       - Wasmer_earth_vless_ws
       - Wasmer_earth_trojan_ws
       - Wasmer_earth_ss_ws

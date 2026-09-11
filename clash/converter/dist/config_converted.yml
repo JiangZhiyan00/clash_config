@@ -54,39 +54,6 @@ dns:
       - https://dns.google/dns-query
       - https://dns.adguard-dns.com/dns-query
 proxies:
-  - name: JP_tuic
-    server: jpsui.jzy88.top
-    type: tuic
-    port: 54323
-    password: XrgOXIVkpI
-    uuid: b480c132-fd6d-4017-953b-0d90c8c62275
-    sni: jpsui.jzy88.top
-    congestion-controller: bbr
-    alpn:
-      - h3
-    tls: true
-  - name: JP_hy2
-    server: jpsui.jzy88.top
-    port: 54325
-    type: hysteria2
-    password: XrgOXIVkpI
-    sni: jpsui.jzy88.top
-    alpn:
-      - h3
-    obfs: salamander
-    obfs-password: Jzy@1234...
-    tls: true
-  - name: JP_any_tls
-    server: jpsui.jzy88.top
-    type: anytls
-    port: 54324
-    password: XrgOXIVkpI
-    alpn:
-      - http/1.1
-      - h2
-      - h3
-    sni: jpsui.jzy88.top
-    tls: true
   - name: Wasmer_earth_vless_ws
     server: wasmer-earth.jzy88.top
     port: 443
@@ -185,7 +152,6 @@ proxy-groups:
     name: 默认节点
     type: select
     proxies:
-      - JP日本
       - Wasmer
       - 直连
     icon: https://edgeone.gh-proxy.org/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Proxy.png
@@ -199,7 +165,6 @@ proxy-groups:
     type: select
     proxies:
       - 默认节点
-      - JP日本
       - Wasmer
       - 直连
     icon: https://edgeone.gh-proxy.org/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/ChatGPT.png
@@ -213,7 +178,6 @@ proxy-groups:
     type: select
     proxies:
       - 默认节点
-      - JP日本
       - Wasmer
       - 直连
     icon: https://edgeone.gh-proxy.org/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/YouTube.png
@@ -227,7 +191,6 @@ proxy-groups:
     type: select
     proxies:
       - 默认节点
-      - JP日本
       - Wasmer
       - 直连
     icon: https://edgeone.gh-proxy.org/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/TVB.png
@@ -242,7 +205,6 @@ proxy-groups:
     proxies:
       - 默认节点
       - 直连
-      - JP日本
       - Wasmer
     icon: https://edgeone.gh-proxy.org/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Bahamut.png
   - interval: 300
@@ -255,7 +217,6 @@ proxy-groups:
     type: select
     proxies:
       - 默认节点
-      - JP日本
       - Wasmer
       - 直连
     icon: https://edgeone.gh-proxy.org/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Disney+.png
@@ -269,7 +230,6 @@ proxy-groups:
     type: select
     proxies:
       - 默认节点
-      - JP日本
       - Wasmer
       - 直连
     icon: https://edgeone.gh-proxy.org/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Netflix.png
@@ -283,7 +243,6 @@ proxy-groups:
     type: select
     proxies:
       - 默认节点
-      - JP日本
       - Wasmer
       - 直连
     icon: https://edgeone.gh-proxy.org/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/TikTok.png
@@ -297,7 +256,6 @@ proxy-groups:
     type: select
     proxies:
       - 默认节点
-      - JP日本
       - Wasmer
       - 直连
     icon: https://edgeone.gh-proxy.org/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Spotify.png
@@ -311,7 +269,6 @@ proxy-groups:
     type: select
     proxies:
       - 默认节点
-      - JP日本
       - Wasmer
       - 直连
     icon: https://play-lh.googleusercontent.com/8pFuLOHF62ADcN0ISUAyEueA5G8IF49mX_6Az6pQNtokNVHxIVbS1L2NM62H-k02rLM=w240-h480-rw
@@ -325,7 +282,6 @@ proxy-groups:
     type: select
     proxies:
       - 默认节点
-      - JP日本
       - Wasmer
       - 直连
     icon: https://edgeone.gh-proxy.org/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/HBO.png
@@ -339,7 +295,6 @@ proxy-groups:
     type: select
     proxies:
       - 默认节点
-      - JP日本
       - Wasmer
       - 直连
     icon: https://edgeone.gh-proxy.org/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Prime_Video.png
@@ -353,7 +308,6 @@ proxy-groups:
     type: select
     proxies:
       - 默认节点
-      - JP日本
       - Wasmer
       - 直连
     icon: https://edgeone.gh-proxy.org/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Hulu.png
@@ -367,7 +321,6 @@ proxy-groups:
     type: select
     proxies:
       - 默认节点
-      - JP日本
       - Wasmer
       - 直连
     icon: https://edgeone.gh-proxy.org/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Telegram.png
@@ -381,7 +334,6 @@ proxy-groups:
     type: select
     proxies:
       - 默认节点
-      - JP日本
       - Wasmer
       - 直连
     icon: https://static.whatsapp.net/rsrc.php/v3/yP/r/rYZqPCBaG70.png
@@ -395,7 +347,6 @@ proxy-groups:
     type: select
     proxies:
       - 默认节点
-      - JP日本
       - Wasmer
       - 直连
     icon: https://edgeone.gh-proxy.org/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Line.png
@@ -408,7 +359,6 @@ proxy-groups:
     type: select
     proxies:
       - 默认节点
-      - JP日本
       - Wasmer
       - 直连
     icon: https://edgeone.gh-proxy.org/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Game.png
@@ -434,7 +384,6 @@ proxy-groups:
     type: select
     proxies:
       - 默认节点
-      - JP日本
       - Wasmer
       - 直连
     icon: https://edgeone.gh-proxy.org/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Apple_2.png
@@ -448,7 +397,6 @@ proxy-groups:
     type: select
     proxies:
       - 默认节点
-      - JP日本
       - Wasmer
       - 直连
     icon: https://edgeone.gh-proxy.org/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Google_Search.png
@@ -462,7 +410,6 @@ proxy-groups:
     type: select
     proxies:
       - 默认节点
-      - JP日本
       - Wasmer
       - 直连
     icon: https://edgeone.gh-proxy.org/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/GitHub.png
@@ -476,7 +423,6 @@ proxy-groups:
     type: select
     proxies:
       - 默认节点
-      - JP日本
       - Wasmer
       - 直连
     icon: https://edgeone.gh-proxy.org/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Microsoft.png
@@ -489,7 +435,6 @@ proxy-groups:
     name: 日本网站
     type: select
     proxies:
-      - JP日本
       - 默认节点
       - Wasmer
       - 直连
@@ -507,7 +452,6 @@ proxy-groups:
       - REJECT
       - 默认节点
       - 国内网站
-      - JP日本
       - Wasmer
     icon: https://edgeone.gh-proxy.org/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Download.png
   - interval: 300
@@ -521,7 +465,6 @@ proxy-groups:
     proxies:
       - 默认节点
       - 国内网站
-      - JP日本
       - Wasmer
     icon: https://edgeone.gh-proxy.org/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Streaming!CN.png
   - interval: 300
@@ -535,23 +478,8 @@ proxy-groups:
     proxies:
       - 直连
       - 默认节点
-      - JP日本
       - Wasmer
     icon: https://edgeone.gh-proxy.org/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/StreamingCN.png
-  - interval: 300
-    timeout: 3000
-    url: http://g.cn/generate_204
-    lazy: true
-    max-failed-times: 3
-    hidden: false
-    name: JP日本
-    type: url-test
-    tolerance: 50
-    icon: https://edgeone.gh-proxy.org/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Japan.png
-    proxies:
-      - JP_tuic
-      - JP_hy2
-      - JP_any_tls
   - interval: 300
     timeout: 3000
     url: http://g.cn/generate_204
